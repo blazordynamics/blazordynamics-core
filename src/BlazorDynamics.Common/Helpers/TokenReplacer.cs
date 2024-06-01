@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace BlazorDynamics.Core.Helpers
+namespace BlazorDynamics.Common.Helpers
 {
     public class TokenReplacer
     {

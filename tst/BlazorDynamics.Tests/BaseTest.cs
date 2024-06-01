@@ -1,4 +1,4 @@
-using BlazorDynamics.DynamicUI.JsonSchema.Contracts;
+using BlazorDynamics.Contracts;
 using BlazorDynamics.UISchema.Helpers;
 using BlazorDynamics.UISchema.Implementations;
 using BlazorDynamics.UISchema.Models;
