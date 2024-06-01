@@ -1,10 +1,10 @@
 ﻿using BlazorDynamics.Core.Models;
-using BlazorDynamics.Core.Parser;
 using BlazorDynamics.Forms.Components.Factories;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SharedDemos.Shared;
 using System.Dynamic;
+using BlazorDynamics.Core.Parser;
 
 namespace SharedDemos.Samples.Playground
 {
@@ -49,7 +49,7 @@ namespace SharedDemos.Samples.Playground
 
         private  void loadModel()
         {
-            var newmodel = new DynamicFormModelParser().Deserialize(modelJson);
+            var newmodel = new ModelParser<DynamicFormModel>().Deserialize(modelJson);
             if(newmodel == null)
             {
              hasError = true;

@@ -1,10 +1,9 @@
-﻿//using BlazorDynamics.Core.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace BlazorDynamics.Core.Parser
 {
-    public class DynamicFormModelParser
+    public class ModelParser<T>
     {
         private JsonSerializerSettings settings = new JsonSerializerSettings
         {
@@ -15,23 +14,23 @@ namespace BlazorDynamics.Core.Parser
                 },
             Formatting = Formatting.Indented,
             NullValueHandling = NullValueHandling.Ignore,
-            ContractResolver = new SkipEmptyCollectionsContractResolver()
+            ContractResolver = new SkipEmptyCollectionsContractResolver<T>()
         };
 
-        public string Serialize(DynamicFormModel dynamicFormModel)
+        public string Serialize(T dynamicFormModel)
         {
             return JsonConvert.SerializeObject(dynamicFormModel, settings);
         }
 
-        public DynamicFormModel Deserialize(string jsonModel)
+        public T Deserialize(string jsonModel)
         {
             try
             {
-                return JsonConvert.DeserializeObject<DynamicFormModel>(jsonModel, settings);
+                return JsonConvert.DeserializeObject<T>(jsonModel, settings);
             }
             catch (Exception)
             {
-                return null;
+                return default(T);
             }
         }
     }

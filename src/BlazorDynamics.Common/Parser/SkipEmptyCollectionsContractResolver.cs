@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using System.Reflection;
-using BlazorDynamics.Core.Models;
 using BlazorDynamics.Core.Models.ParameterModels;
+
 
 namespace BlazorDynamics.Core.Parser;
 
-public class SkipEmptyCollectionsContractResolver : DefaultContractResolver
+public class SkipEmptyCollectionsContractResolver<T> : DefaultContractResolver
 {
     protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
     {
@@ -21,12 +21,12 @@ public class SkipEmptyCollectionsContractResolver : DefaultContractResolver
                 return parameterList != null && parameterList.Entries.Any();
             };
         }
-        else if (property.PropertyType == typeof(List<DynamicFormModel>))
+        else if (property.PropertyType == typeof(List<T>))
         {
             property.ShouldSerialize = instance =>
             {
                 var prop = member as PropertyInfo;
-                var elements = prop?.GetValue(instance) as List<DynamicFormModel>;
+                var elements = prop?.GetValue(instance) as List<T>;
                 return elements != null && elements.Any();
             };
         }

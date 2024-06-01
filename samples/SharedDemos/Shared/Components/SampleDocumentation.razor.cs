@@ -49,7 +49,7 @@ namespace SharedDemos.Shared.Components
 
         private void GotoPlayground()
         {
-            userSettingsService.SampleJson = new DynamicFormModelParser().Serialize(FormModel);
+            userSettingsService.SampleJson = new ModelParser<DynamicFormModel>().Serialize(FormModel);
             navigationManager.NavigateTo("/samples/playground/json");
         }
 
