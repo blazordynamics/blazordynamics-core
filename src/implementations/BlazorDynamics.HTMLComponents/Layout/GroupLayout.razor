@@ -1,0 +1,14 @@
+@namespace BlazorDynamics.HTMLComponents.Layout
+@inherits  BlazorDynamics.Forms.Components.Layout.GroupLayoutBase
+
+<BDFormComponentWrapper Class="groupcomponent" FormComponent="@this">
+    <div class="card">
+        <div class="stack-vertical">
+            <div class="bd-label">@Label</div>
+            @foreach (var element in this.FormModel.Elements)
+            {
+                <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element) />
+            }
+        </div>
+    </div>
+</BDFormComponentWrapper>

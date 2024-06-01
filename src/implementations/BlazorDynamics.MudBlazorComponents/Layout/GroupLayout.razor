@@ -1,0 +1,21 @@
+@namespace BlazorDynamics.MudBlazorComponents.Layout
+@inherits BlazorDynamics.Forms.Components.Layout.GroupLayoutBase
+
+<BDFormComponentWrapper Class="groupcomponent" FormComponent="@this">
+    <MudCard>
+        @if (!string.IsNullOrEmpty(Label))
+        {
+            <MudCardHeader>
+                @Label
+            </MudCardHeader>
+        }
+        <MudCardContent>
+            <MudStack>
+                @foreach (var element in this.FormModel.Elements)
+                {
+                    <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element) />
+                }
+            </MudStack>
+        </MudCardContent>
+    </MudCard>
+</BDFormComponentWrapper>

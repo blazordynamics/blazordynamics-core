@@ -1,0 +1,14 @@
+﻿@namespace BlazorDynamics.HTMLComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.DropDownComponentBase
+
+<BDFormComponentWrapper Class="dropdowncomponent" FormComponent="@this">
+    <div class="bd-label">
+        @Label
+    </div>
+    <select @onchange="HandleChange">
+        @foreach (var option in Options)
+        {
+            <option value="@GetUniqueId(option.Key)">@option.Value</option>
+        }
+    </select>
+</BDFormComponentWrapper>

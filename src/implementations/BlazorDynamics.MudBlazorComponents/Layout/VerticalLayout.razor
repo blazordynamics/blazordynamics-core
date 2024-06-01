@@ -1,0 +1,11 @@
+@namespace BlazorDynamics.MudBlazorComponents.Layout
+@inherits BlazorDynamics.Forms.Components.Layout.VerticalLayoutBase
+
+<BDFormComponentWrapper Class="verticalcomponent" FormComponent="@this">
+    <MudStack>
+        @foreach (var element in this.FormModel.Elements)
+        {
+            <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element) />
+        }
+    </MudStack>
+</BDFormComponentWrapper>

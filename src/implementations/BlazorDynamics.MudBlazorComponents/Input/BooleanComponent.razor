@@ -1,0 +1,6 @@
+﻿@namespace BlazorDynamics.MudBlazorComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.BooleanComponentBase
+
+<BDFormComponentWrapper Class="boolcomponent" FormComponent="@this">
+    <MudCheckBox @bind-Checked="@BooleanValue">@Label</MudCheckBox>
+</BDFormComponentWrapper>

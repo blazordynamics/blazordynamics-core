@@ -1,0 +1,6 @@
+﻿@inherits SampleBasePage
+@page "/samples/playground/editor"
+
+<SampleDocumentation MarkDownFile="Samples.Playground.Editor.razor.md" Data="@data" FormModel="@model">
+    <BDForm FormModel=@model Components=@UserSettingsService.Components Value="@data" ValueChanged="@update" EditMode=@EditModeIndicator></BDForm>
+</SampleDocumentation>

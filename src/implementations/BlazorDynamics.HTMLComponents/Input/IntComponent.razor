@@ -1,0 +1,7 @@
+﻿@namespace BlazorDynamics.HTMLComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.IntComponentBase
+
+<BDFormComponentWrapper Class="intcomponent" FormComponent="@this">
+    <div class="bd-label">@Label</div>
+    <input type="number" @bind="NumberValue" />
+</BDFormComponentWrapper>

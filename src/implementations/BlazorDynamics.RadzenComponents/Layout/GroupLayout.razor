@@ -1,0 +1,14 @@
+@namespace BlazorDynamics.RadzenComponents.Layout
+@inherits BlazorDynamics.Forms.Components.Layout.GroupLayoutBase
+
+<BDFormComponentWrapper Class="groupcomponent" FormComponent="@this">
+    <RadzenCard>
+        <RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.Start">
+            <RadzenText>@Label</RadzenText>
+                @foreach (var element in this.FormModel.Elements)
+            {
+                <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element) />
+            }
+        </RadzenStack>
+    </RadzenCard>
+</BDFormComponentWrapper>

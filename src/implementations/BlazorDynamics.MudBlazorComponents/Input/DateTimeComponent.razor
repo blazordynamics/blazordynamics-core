@@ -1,0 +1,16 @@
+﻿@namespace BlazorDynamics.MudBlazorComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.DateTimeComponentBase
+
+<BDFormComponentWrapper Class="datetimecomponent" FormComponent="@this">
+    <MudDatePicker @bind-Date="@DateTimeValue" Label="@Label" Variant="Variant.Outlined" Validation="@(new Func<string, string>(ValueMatch))" AutoClose="true" />
+</BDFormComponentWrapper>
+
+@code{
+         
+    private string ValueMatch(string arg)
+    {
+        if(!IsValid)
+            return ValidationString;
+        return null;
+    }
+ }

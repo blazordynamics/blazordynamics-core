@@ -1,0 +1,11 @@
+﻿@namespace BlazorDynamics.HTMLComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.DateTimeComponentBase
+
+
+<BDFormComponentWrapper Class="datetimecomponent" FormComponent="@this">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <div class="bd-label">@Label</div>
+    }
+    <input @bind="@DateTimeValue" type="date" class="form-control" />
+</BDFormComponentWrapper>

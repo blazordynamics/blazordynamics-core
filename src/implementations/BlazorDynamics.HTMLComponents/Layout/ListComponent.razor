@@ -1,0 +1,18 @@
+@namespace BlazorDynamics.HTMLComponents.Layout
+@inherits BlazorDynamics.Forms.Components.Layout.ListComponentBase
+
+<BDFormComponentWrapper Class="listcomponent" FormComponent="@this">
+    <div class="bd-label">
+        @Label
+    </div>
+
+    @for (int i = 0; i < _listValue.Count; i++)
+    {
+        <div class="stack vertical justify-start">
+            @foreach (var element in this.FormModel.Elements)
+            {
+                <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element, i) />
+            }
+        </div>
+    }
+</BDFormComponentWrapper>

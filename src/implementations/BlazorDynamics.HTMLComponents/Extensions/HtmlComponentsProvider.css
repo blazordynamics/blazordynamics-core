@@ -1,0 +1,60 @@
+﻿/* Apply common styles for components with cards */
+.card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Apply a stack class for vertical and horizontal stacks */
+.stack {
+    display: flex;
+    gap: 10px;
+}
+
+/* Modifier classes for the stack */
+.vertical {
+    flex-direction: column;
+}
+
+.horizontal {
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+/* Justify content modifier */
+.justify-start {
+    justify-content: flex-start;
+}
+
+/* Specific styles for number components */
+.numbercomponent .rating {
+    /* Define the layout of the rating component */
+}
+
+    .numbercomponent .rating label {
+        cursor: pointer;
+        font-size: 2rem; /* Adjust the size of your stars */
+    }
+
+        .numbercomponent .rating label:hover,
+        .numbercomponent .rating label:hover ~ label,
+        .numbercomponent .rating input[type="radio"]:checked ~ label {
+            content: "★"; /* Filled star */
+        }
+
+    .numbercomponent .rating input[type="radio"] {
+        display: none; /* Hide the radio buttons */
+    }
+
+/* Style for subtitles */
+.bd-label {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Specific styles for components that don't share styles with others */
+.boolcomponent, .dropdowncomponent, .horizontalcomponent, .verticaltalcomponent {
+    /* Unique styles for these components if needed */
+}

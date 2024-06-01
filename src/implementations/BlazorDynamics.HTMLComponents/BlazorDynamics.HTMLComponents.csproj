@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.11.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BlazorDynamics.Components\BlazorDynamics.Forms.Components.csproj" />
+    <ProjectReference Include="..\..\BlazorDynamics.Extensions\BlazorDynamics.Extensions.csproj" />
+    <ProjectReference Include="..\..\BlazorDynamics.Forms.Actions\BlazorDynamics.Forms.Actions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Actions\DeleteAction.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
+</Project>

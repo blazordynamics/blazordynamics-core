@@ -1,0 +1,7 @@
+﻿@namespace BlazorDynamics.HTMLComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.BooleanComponentBase
+
+<BDFormComponentWrapper Class="boolcomponent" FormComponent="@this">
+    <input type="checkbox" id="CheckBox1" @bind="@BooleanValue" />
+    <label for="CheckBox1" class="bd-label">@Label</label>
+</BDFormComponentWrapper>

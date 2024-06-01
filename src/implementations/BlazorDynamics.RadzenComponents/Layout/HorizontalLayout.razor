@@ -1,0 +1,12 @@
+@namespace BlazorDynamics.RadzenComponents.Layout
+@inherits  BlazorDynamics.Forms.Components.Layout.HorizontalLayoutBase
+@using BlazorDynamics.Common.Enums;
+
+<BDFormComponentWrapper Class="horizontalcomponent" FormComponent="@this">
+    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start">
+        @foreach (var element in this.FormModel.Elements)
+        {
+            <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element) />
+        }
+    </RadzenStack>
+</BDFormComponentWrapper>

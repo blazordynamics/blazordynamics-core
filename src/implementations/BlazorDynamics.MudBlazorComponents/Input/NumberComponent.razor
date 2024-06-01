@@ -1,0 +1,19 @@
+﻿@namespace BlazorDynamics.MudBlazorComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.NumberComponentBase
+
+<BDFormComponentWrapper Class="numbercomponent" FormComponent="@this">
+    <MudNumericField @bind-Value="@NumberValue" Label="@Label" Validation="@(new Func<int, string>(ValueValidation))" Variant="Variant.Outlined" Step="@Step" />
+</BDFormComponentWrapper>
+
+@code{
+
+    [Parameter]
+    public double Step {get;set;} = 1;
+
+    private string ValueValidation(int arg)
+    {
+        if (!IsValid)
+            return ValidationString;
+        return null;
+    }
+}

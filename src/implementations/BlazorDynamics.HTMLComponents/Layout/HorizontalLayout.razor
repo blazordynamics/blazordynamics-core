@@ -1,0 +1,12 @@
+@namespace BlazorDynamics.HTMLComponents.Layout
+@using BlazorDynamics.Common.Enums;
+@inherits BlazorDynamics.Forms.Components.Layout.HorizontalLayoutBase
+
+<BDFormComponentWrapper Class="horizontalcomponent" FormComponent="@this">
+    <div class="horizontal-stack">
+        @foreach (var element in this.FormModel.Elements)
+        {
+            <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element) />
+        }
+    </div>
+</BDFormComponentWrapper>
