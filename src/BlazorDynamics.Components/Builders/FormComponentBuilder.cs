@@ -72,6 +72,12 @@ namespace BlazorDynamics.Forms.Components.Builders
             return this as TBuilder;
         }
 
+        public TBuilder WithString(string label, string path)
+        {
+            _component.FormModel.Elements.Add(Factories.FormFactory.StringComponent(label, path));
+            return this as TBuilder;
+        }
+
         public TBuilder WithValueChanged(EventCallback<object?> valueChanged)
         {
             _component.ValueChanged = valueChanged;

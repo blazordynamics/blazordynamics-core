@@ -23,7 +23,7 @@ namespace BlazorDynamics.Forms.Components.Input
             set
             {
                 _selectedValueId = _mapping.FirstOrDefault(x => x.Value.Equals(value)).Key;
-                ComponentLogic.UpdateValue(this, value);
+                ValueHandler.UpdateValue(this, value);
             }
         }
 

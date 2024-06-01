@@ -35,9 +35,9 @@ public DynamicFormModel CreateAdvancedForm()
 {
     return FormFactory.GroupLayout(builder =>
     {
-        builder.AddElement(FormFactory.StringComponent("Email", "email"));
-        builder.AddElement(FormFactory.NumberComponent("Age", "age"));
-        builder.AddElement(FormFactory.DateTimeComponent("Birthdate", "birthdate"));
+          builder.WithElement(FormFactory.StringComponent("Email", "email"));
+          builder.WithElement(FormFactory.NumberComponent("Age", "age"));
+          builder.WithElement(FormFactory.DateTimeComponent("Birthdate", "birthdate"));
     });
 }
 ```

@@ -15,7 +15,7 @@ namespace BlazorDynamics.Forms.Components.Input
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 
         public bool? _booleanValue = false;
-        public bool? BooleanValue { get { return _booleanValue; } set { _booleanValue = value; ComponentLogic.UpdateValue(this,_booleanValue); } }
+        public bool? BooleanValue { get { return _booleanValue; } set { _booleanValue = value; ValueHandler.UpdateValue(this,_booleanValue); } }
         protected override void OnParametersSet()
         {
             try

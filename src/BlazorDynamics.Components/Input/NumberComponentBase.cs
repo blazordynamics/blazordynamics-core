@@ -19,7 +19,7 @@ namespace BlazorDynamics.Forms.Components.Input
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 
         public double _numberValue = 0;
-        public double NumberValue { get { return _numberValue; } set { _numberValue = value; ComponentLogic.UpdateValue(this, _numberValue); } }
+        public double NumberValue { get { return _numberValue; } set { _numberValue = value; ValueHandler.UpdateValue(this, _numberValue); } }
         protected override void OnParametersSet()
         {
             try

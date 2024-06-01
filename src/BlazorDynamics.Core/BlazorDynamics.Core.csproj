@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorDynamics.DynamicUI.JsonSchema\BlazorDynamics.DynamicUI.JsonSchema.csproj" />
+    <ProjectReference Include="..\BlazorDynamics.DynamicUI.JsonSchema\BlazorDynamics.JsonSchema.csproj" />
     <ProjectReference Include="..\BlazorDynamics.UISchema\BlazorDynamics.UISchema.csproj" />
   </ItemGroup>
 

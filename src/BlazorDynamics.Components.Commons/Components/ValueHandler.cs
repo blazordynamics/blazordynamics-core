@@ -2,7 +2,7 @@
 
 namespace BlazorDynamics.Forms.Commons.Components
 {
-    public class ComponentLogic
+    public class ValueHandler
     {
         public static void UpdateValue(FormComponentBase component, object propertyValue)
         {

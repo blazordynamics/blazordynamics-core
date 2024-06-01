@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json;
-using Microsoft.AspNetCore.Authorization;
 using BlazorDynamics.Core.Models;
 using BlazorDynamics.Core.Models.ParameterModels;
 

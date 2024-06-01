@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\BlazorDynamics.Core\BlazorDynamics.Core.csproj" />
-    <ProjectReference Include="..\..\src\BlazorDynamics.DynamicUI.JsonSchema\BlazorDynamics.DynamicUI.JsonSchema.csproj" />
+    <ProjectReference Include="..\..\src\BlazorDynamics.DynamicUI.JsonSchema\BlazorDynamics.JsonSchema.csproj" />
     <ProjectReference Include="..\..\src\BlazorDynamics.UISchema\BlazorDynamics.UISchema.csproj" />
   </ItemGroup>
 

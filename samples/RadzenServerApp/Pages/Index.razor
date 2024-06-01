@@ -1,9 +1,7 @@
 ﻿@page "/"
+@using BlazorDynamics.Forms.Components.Factories
+@using System.Text.Json;
 
-@    using System.Text.Json;
-@    using BlazorDynamics.Forms.Commons
-@    using BlazorDynamics.Forms.Components.Factories
-@    using Newtonsoft.Json.Linq;
 
 <PageTitle>Index</PageTitle>
 
@@ -13,7 +11,7 @@
             @data.FirstName - @data.LastName (@data.Address.City)
         </RadzenCard>
         <RadzenCard>
-            <DynamicForm FormModel=@model Components=@components Value="@data"></DynamicForm>
+            <BDForm FormModel=@model Components=@components Value="@data"></BDForm>
         </RadzenCard>
         <RadzenCard>
         </RadzenCard>

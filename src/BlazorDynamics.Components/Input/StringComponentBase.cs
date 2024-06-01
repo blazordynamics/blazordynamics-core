@@ -22,7 +22,7 @@ namespace BlazorDynamics.Forms.Components.Input
         public string? Format { get; set; }
 
         public string _localString = string.Empty;
-        public string StringValue { get { return _localString; } set { _localString = value; ComponentLogic.UpdateValue(this, StringValue); } }
+        public string StringValue { get { return _localString; } set { _localString = value; ValueHandler.UpdateValue(this, StringValue); } }
 
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 

@@ -14,7 +14,7 @@ namespace BlazorDynamics.Forms.Components.Layout
         public string Label { get; set; }
 
         public List<object> _listValue = new List<object>();
-        public List<object> ListValue { get { return _listValue; } set { _listValue = value; ComponentLogic.UpdateValue(this,_listValue); } }
+        public List<object> ListValue { get { return _listValue; } set { _listValue = value; ValueHandler.UpdateValue(this,_listValue); } }
 
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 

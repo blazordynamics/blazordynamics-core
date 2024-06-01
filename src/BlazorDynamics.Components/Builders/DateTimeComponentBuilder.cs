@@ -13,6 +13,11 @@ namespace BlazorDynamics.Forms.Components.Builders
             return this;
         }
 
+        public DateTimeComponentBuilder WithFormat(string format) {
+            _component.Format = format;
+            return this;
+        }
+
         public DateTimeComponentBuilder WithMinimumDateTime(DateTime? minimumDateTime)
         {
             _component.MinimumDateTime = minimumDateTime;
