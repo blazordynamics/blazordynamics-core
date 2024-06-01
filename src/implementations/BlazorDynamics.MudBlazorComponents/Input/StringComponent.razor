@@ -1,0 +1,16 @@
+﻿@namespace BlazorDynamics.MudBlazorComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.StringComponentBase
+
+<BDFormComponentWrapper Class="stringcomponent" FormComponent="@this" >
+    <MudTextField @bind-Value="@StringValue" Label="@Label" Variant="Variant.Outlined" Validation="@(new Func<string, string>(ValueValidation))" />
+</BDFormComponentWrapper>
+
+@code {
+
+    private string ValueValidation(string arg)
+    {
+        if (!IsValid)
+            return ValidationString;
+        return null;
+    }
+ }

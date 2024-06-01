@@ -1,0 +1,10 @@
+﻿@namespace BlazorDynamics.RadzenComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.DropDownComponentBase
+
+<BDFormComponentWrapper Class="dropdowncomponent" FormComponent="@this">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <RadzenText>@Label</RadzenText>
+    }
+    <RadzenDropDown  @bind-Value=@SelectedValue Data=@Options ValueProperty="Key" TextProperty="Value" Style="width: 100%; max-width: 400px;" />
+</BDFormComponentWrapper>

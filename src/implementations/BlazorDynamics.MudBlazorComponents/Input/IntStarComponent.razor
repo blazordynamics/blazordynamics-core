@@ -1,0 +1,7 @@
+﻿@namespace BlazorDynamics.MudBlazorComponents.Input
+@inherits  BlazorDynamics.Forms.Components.Input.IntComponentBase
+
+<BDFormComponentWrapper Class="intcomponent intcomponentstar" FormComponent="@this">
+    @Label
+    <MudRating @bind-SelectedValue=@NumberValue />
+</BDFormComponentWrapper>

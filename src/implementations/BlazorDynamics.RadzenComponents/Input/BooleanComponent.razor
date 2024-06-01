@@ -1,0 +1,6 @@
+﻿@namespace BlazorDynamics.RadzenComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.BooleanComponentBase
+
+<BDFormComponentWrapper Class="boolcomponent" FormComponent="@this">
+    <RadzenCheckBox @bind-Value="@BooleanValue" Name="CheckBox1" Placeholder="@Label" />
+</BDFormComponentWrapper>

@@ -1,0 +1,6 @@
+﻿@namespace BlazorDynamics.HTMLComponents.Actions
+@inherits BlazorDynamics.Forms.Actions.DeleteActionBase
+
+<BDFormComponentWrapper Class="deleteaction" FormComponent="@this">
+    <button type="button" @onclick="@DeleteItem">@Label</button>
+</BDFormComponentWrapper>

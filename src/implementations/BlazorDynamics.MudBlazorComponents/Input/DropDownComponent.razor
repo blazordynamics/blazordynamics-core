@@ -1,0 +1,23 @@
+﻿@namespace BlazorDynamics.MudBlazorComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.DropDownComponentBase
+
+<BDFormComponentWrapper Class="dropdowncomponent" FormComponent="@this">
+    <MudSelect @bind-Value="@SelectedValue" Label="@Label" Validation="@(new Func<string, string>(ValueMatch))">
+        @foreach (var item in Options)
+        {
+            <MudSelectItem Value="@item.Key">
+                @item.Value
+            </MudSelectItem>
+        }
+    </MudSelect>
+</BDFormComponentWrapper>
+
+@code{
+         
+    private string ValueMatch(string arg)
+    {
+        if(!IsValid)
+            return ValidationString;
+        return null;
+    }
+ }

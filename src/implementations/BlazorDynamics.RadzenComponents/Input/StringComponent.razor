@@ -1,0 +1,11 @@
+﻿@namespace BlazorDynamics.RadzenComponents.Input
+@inherits BlazorDynamics.Forms.Components.Input.StringComponentBase
+
+<BDFormComponentWrapper Class="stringcomponent" FormComponent="@this" >
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <RadzenText>@Label</RadzenText>
+    }
+    <RadzenTextBox @bind-Value="@StringValue" />
+</BDFormComponentWrapper>
+

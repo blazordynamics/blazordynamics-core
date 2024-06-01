@@ -1,0 +1,70 @@
+﻿<div class="top-row ps-3">
+    <div class="container-fluid centered-navbar">
+        <a class="navbar-brand" href="">Blazor Dynamics</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <MudPaper Width="250px" Class="py-3" Elevation="0">
+        <MudNavMenu>
+            <MudNavGroup Title="Documentation">
+                <MudNavLink Href="/documentation/getting-started">Getting started</MudNavLink>
+                <MudDivider Class="my-2" />
+                <MudNavLink Href="/documentation/DynamicFormModel">DynamicFormModel</MudNavLink>
+                <MudNavLink Href="/documentation/Stringbuilder">String builder</MudNavLink>
+                <MudNavLink Href="/documentation/DropdownBuilder">DropDown builder</MudNavLink>
+                <MudDivider Class="my-2" />
+                <MudNavLink Href="/documentation/create-custom-component">Create custom component</MudNavLink>
+                <MudDivider Class="my-2" />
+                @* <MudNavLink Href="/documentation/styling">Styling</MudNavLink> *@
+            </MudNavGroup>
+            <MudNavGroup Title="Components">
+                <MudNavLink Href="/samples/components/string">String</MudNavLink>
+                <MudNavLink Href="/samples/components/int">Int</MudNavLink>
+                <MudNavLink Href="/samples/components/number">Number</MudNavLink>
+                <MudNavLink Href="/samples/components/boolean">Boolean</MudNavLink>
+                <MudNavLink Href="/samples/components/datetime">Datetime</MudNavLink>
+                <MudNavLink Href="/samples/components/dropdown">Dropdown</MudNavLink>
+                <MudNavLink Href="/samples/components/templatecontent">Template</MudNavLink>
+                <MudDivider Class="my-2" />
+                <MudNavLink Href="/samples/components/horizontal-layout">Horizontal-layout</MudNavLink>
+                <MudNavLink Href="/samples/components/vertical-layout">Vertical-layout</MudNavLink>
+                <MudNavLink Href="/samples/components/group">Group</MudNavLink>
+                <MudDivider Class="my-2" />
+                <MudNavLink Href="/samples/components/list">List</MudNavLink>
+                <MudNavLink Href="/samples/components/list-typed">List typed</MudNavLink>
+            </MudNavGroup>
+            <MudDivider Class="my-2" />
+            <MudNavGroup Title="Databinding">
+                <MudNavLink Href="/samples/typed/base">Basis</MudNavLink>
+                <MudNavLink Href="/samples/typed/list">List</MudNavLink>
+                <MudNavLink Href="/samples/typed/complete">Complete sample</MudNavLink>
+            </MudNavGroup>
+            <MudDivider Class="my-2" />
+            <MudNavGroup Title="Validation">
+                <MudNavLink Href="/samples/components/validation">Field Validation</MudNavLink>
+                <MudNavLink Href="/samples/rules/rulesSample">Rules</MudNavLink>
+            </MudNavGroup>
+
+            <MudNavGroup Title="Modelling">
+                <MudNavLink Href="/samples/typed/UISchema-Sample">UISchema</MudNavLink>
+                <MudNavLink Href="/samples/playground/json">json-playground</MudNavLink>
+            </MudNavGroup>
+                <MudNavLink Href="/documentation/limitations">Limitations</MudNavLink>
+        </MudNavMenu>
+    </MudPaper>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

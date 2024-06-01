@@ -1,0 +1,13 @@
+﻿@inherits SampleBasePage
+@using MudBlazor
+@page "/samples/playground/json"
+
+<SampleDocumentation MarkDownFile="Samples.Playground.Json.razor.md" Data="@data" ShowPlaygroundButton="false">
+    <MudTextField T="string" @bind-Value=@modelJson Lines=15 Label="Model Json" Variant="Variant.Outlined" />
+    <MudButton OnClick="loadModel" Variant="Variant.Outlined">Render</MudButton>
+    @if (hasError)
+    {
+        <MudAlert Severity="Severity.Error">Could not parse the json model</MudAlert>
+    }
+    <BDForm FormModel="@model" Components="@UserSettingsService.Components" Value="@data" ValueChanged="@update" OnSubmitted="@Submit"></BDForm>
+</SampleDocumentation>
