@@ -5,9 +5,9 @@
     <div class="card">
         <div class="stack-vertical">
             <div class="bd-label">@Label</div>
-            @foreach (var element in this.FormModel.Elements)
+            @foreach (var element in this.FormModel.SubElements)
             {
-                <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element) />
+                <DynamicComponent Type=@GetTypeNameFor(element) Parameters=@GetValidParametersFor(element) />
             }
         </div>
     </div>

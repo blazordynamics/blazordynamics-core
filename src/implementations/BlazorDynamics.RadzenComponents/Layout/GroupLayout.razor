@@ -5,9 +5,9 @@
     <RadzenCard>
         <RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.Start">
             <RadzenText>@Label</RadzenText>
-                @foreach (var element in this.FormModel.Elements)
+                @foreach (var element in this.FormModel.SubElements)
             {
-                <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element) />
+                <DynamicComponent Type=@GetTypeNameFor(element) Parameters=@GetValidParametersFor(element) />
             }
         </RadzenStack>
     </RadzenCard>

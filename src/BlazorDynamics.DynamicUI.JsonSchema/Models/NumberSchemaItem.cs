@@ -4,7 +4,7 @@ namespace BlazorDynamics.DynamicUI.JsonSchema.Models;
 
 public class NumberSchemaItem : SchemaItem
 {
-    public NumberSchemaItem(ComponentType type, string path) : base(type, path)
+    public NumberSchemaItem(TypeName type, string path) : base(type, path)
     {
     }
     public double? Minimum { get; set; }

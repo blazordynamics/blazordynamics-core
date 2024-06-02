@@ -5,15 +5,18 @@ namespace BlazorDynamics.Core.Models;
 
 public class ComponentSelectionKey
 {
-    public ComponentType ComponentType { get; }
+    
 
-    public string TypeDefinitionName { get; }
+    public TypeName TypeName { get; }
+
+    [JsonProperty("variationName")]
+    public string? VariationName { get; } = null;
 
     [JsonConstructor]
-    public ComponentSelectionKey(ComponentType componentType, string? typeDefinitionName = default!)
+    public ComponentSelectionKey(TypeName typeName, string? variationName = default!)
     {
-        ComponentType = componentType;
-        TypeDefinitionName = typeDefinitionName ?? string.Empty;
+        TypeName = typeName;
+        VariationName = variationName ?? null;
     }
 
     public override bool Equals(object obj)
@@ -24,11 +27,11 @@ public class ComponentSelectionKey
         }
 
         ComponentSelectionKey other = (ComponentSelectionKey)obj;
-        return ComponentType == other.ComponentType && TypeDefinitionName == other.TypeDefinitionName;
+        return TypeName == other.TypeName && VariationName == other.VariationName;
     }
 
     public override int GetHashCode()
     {
-        return (ComponentType, TypeDefinitionName).GetHashCode();
+        return (TypeName, VariationName).GetHashCode();
     }
 }

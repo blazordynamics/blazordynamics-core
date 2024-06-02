@@ -9,7 +9,7 @@ public class StringSchemaItem : SchemaItem
     public string? Pattern { get; set; }
     public string? Format { get; set; }
     
-    public StringSchemaItem(string path) : base(ComponentType.String, path)
+    public StringSchemaItem(string path) : base(TypeName.String, path)
     {
     }
 }

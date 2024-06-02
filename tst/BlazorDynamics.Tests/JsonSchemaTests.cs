@@ -1,5 +1,4 @@
 using BlazorDynamics.Common.Enums;
-using BlazorDynamics.Core.Models;
 using BlazorDynamics.DynamicUI.JsonSchema.Implementations;
 using Newtonsoft.Json.Linq;
 
@@ -16,7 +15,7 @@ namespace BlazorDynamics.Tests
 
             var type = schemaReader.GetTypeFromPath(schemaObject, "#/properties/firstName");
 
-            Assert.That(type.Type, Is.EqualTo(ComponentType.String));
+            Assert.That(type.Type, Is.EqualTo(TypeName.String));
         }
 
         [Test]
@@ -38,15 +37,15 @@ namespace BlazorDynamics.Tests
             var recordingArtistsFunctions =
                 schemaReader.GetTypeFromPath(schemaObject, "#/properties/recording_artists/items/functions");
 
-            Assert.That(type.Type, Is.EqualTo(ComponentType.Number));
-            Assert.That(objectPath.Type, Is.EqualTo(ComponentType.Object));
-            Assert.That(arrayPath.Type, Is.EqualTo(ComponentType.Array));
-            Assert.That(stringArrayItemPath.Type, Is.EqualTo(ComponentType.String));
+            Assert.That(type.Type, Is.EqualTo(TypeName.Number));
+            Assert.That(objectPath.Type, Is.EqualTo(TypeName.Object));
+            Assert.That(arrayPath.Type, Is.EqualTo(TypeName.Array));
+            Assert.That(stringArrayItemPath.Type, Is.EqualTo(TypeName.String));
 
 
-            Assert.That(recordingArtistsName.Type, Is.EqualTo(ComponentType.String));
-            Assert.That(recordingArtistsFunctionsItem.Type, Is.EqualTo(ComponentType.String));
-            Assert.That(recordingArtistsFunctions.Type, Is.EqualTo(ComponentType.Array));
+            Assert.That(recordingArtistsName.Type, Is.EqualTo(TypeName.String));
+            Assert.That(recordingArtistsFunctionsItem.Type, Is.EqualTo(TypeName.String));
+            Assert.That(recordingArtistsFunctions.Type, Is.EqualTo(TypeName.Array));
         }
     }
 }

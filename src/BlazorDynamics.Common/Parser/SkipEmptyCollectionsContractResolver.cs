@@ -6,7 +6,7 @@ using BlazorDynamics.Core.Models.ParameterModels;
 
 namespace BlazorDynamics.Core.Parser;
 
-public class SkipEmptyCollectionsContractResolver<T> : DefaultContractResolver
+public class SkipEmptyCollectionsContractResolver<T> : CamelCasePropertyNamesContractResolver
 {
     protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
     {

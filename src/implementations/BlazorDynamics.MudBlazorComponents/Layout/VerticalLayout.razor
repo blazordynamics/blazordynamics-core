@@ -3,9 +3,9 @@
 
 <BDFormComponentWrapper Class="verticalcomponent" FormComponent="@this">
     <MudStack>
-        @foreach (var element in this.FormModel.Elements)
+        @foreach (var element in this.FormModel.SubElements)
         {
-            <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element) />
+            <DynamicComponent Type=@GetTypeNameFor(element) Parameters=@GetValidParametersFor(element) />
         }
     </MudStack>
 </BDFormComponentWrapper>

@@ -5,7 +5,7 @@ namespace BlazorDynamics.DynamicUI.JsonSchema.Models;
 
 public abstract class SchemaItem : ISchemaItem
 {
-    public ComponentType Type { get; }
+    public TypeName Type { get; }
     
     public string Path { get; }
     
@@ -13,7 +13,7 @@ public abstract class SchemaItem : ISchemaItem
     
     public Dictionary<string, object> ItemMetadata => GetPublicPropertiesAsDictionary(this);
     
-    protected SchemaItem(ComponentType type, string path)
+    protected SchemaItem(TypeName type, string path)
     {
         Type = type;
         Path = ("$." + path).Replace(".properties",""); //todo fix this!

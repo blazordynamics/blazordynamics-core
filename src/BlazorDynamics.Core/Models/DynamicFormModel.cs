@@ -13,12 +13,12 @@ public class DynamicFormModel
 
     }
 
-    public DynamicFormModel(ComponentType componentType)
+    public DynamicFormModel(TypeName componentType)
     {
         DynamicType = new ComponentSelectionKey(componentType);
     }
     [JsonConstructor]
-    public DynamicFormModel(ComponentType componentType, string typeDefinionName)
+    public DynamicFormModel(TypeName componentType, string typeDefinionName)
     {
         DynamicType = new ComponentSelectionKey(componentType, typeDefinionName);
     }
@@ -27,12 +27,13 @@ public class DynamicFormModel
         DynamicType = componentSelectionKey;
     }
 
-    [JsonProperty("DynamicType")]
-    public ComponentSelectionKey DynamicType { get; set; } = new ComponentSelectionKey(ComponentType.Default);
+   
+    public ComponentSelectionKey DynamicType { get; set; } = new ComponentSelectionKey(TypeName.Default);
 
+   
     public ParameterList Parameters { get; set; } = new();
 
-    public List<DynamicFormModel> Elements { get; set; } = new();
+    public List<DynamicFormModel> SubElements { get; set; } = new();
 
     public DynamicFormModelOptions DynamicFormModelOptions
     {

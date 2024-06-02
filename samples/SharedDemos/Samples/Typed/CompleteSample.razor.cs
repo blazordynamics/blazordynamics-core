@@ -32,25 +32,12 @@ namespace SharedDemos.Samples.Typed
         {
             return FormFactory.GroupLayout(
                 FormFactory.StringComponent("Street Name", "$.Address.StreetName"),
-                FormFactory.DropDownComponent("City", "$.Address.City",
-                    new Dictionary<object, string>()
-                            {
-                                {
-                                  "Utrecht",
-                                  "Utrecht"
-                                },
-                                {
-                                  "Oradea",
-                                  "Oradea"
-                                },
-                                {
-                                  "Amsterdam",
-                                  "Amsterdam"
-                                }
-                        }
+                FormFactory.DropDownComponent("City", "$.Address.City", DataFactory.SelectionList(new List<string> { "Utrecht", "Amsterdam", "Den Helder" }
                 )
-            ).AddSchemaRule(RuleEffect.HIDE, "#/properties/Address/properties/IsActive", "{ const: false }");
+            )).AddSchemaRule(RuleEffect.HIDE, "#/properties/Address/properties/IsActive", "{ const: false }");
         }
+
+      
 
         private DynamicFormModel CreateCarsForm()
         {
@@ -106,4 +93,7 @@ namespace SharedDemos.Samples.Typed
             }
         };
     }
+
+
+
 }

@@ -15,7 +15,7 @@ builder.Services.AddSingleton<OnboardingService>();
 builder.Services.AddMudServices();
 builder.Services.AddBlazorDynamics(cfg => 
                 cfg.UseDefaultMudBlazorComponents()
-                .RegisterComponent(ComponentType.GroupLayout, "Collapsable", typeof(CollapsableGroup)));
+                .RegisterComponent(TypeName.GroupLayout, "Collapsable", typeof(CollapsableGroup)));
 
 var app = builder.Build();
 
