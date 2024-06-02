@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <RootNamespace>BlazorDynamics.DynamicUI.JsonSchema</RootNamespace>
       <IsPackable>false</IsPackable>
+      <ProjectGuid>33a0d986-e4f4-4e00-a708-755f29de664f</ProjectGuid>
     </PropertyGroup>
 
     <ItemGroup>

@@ -6,15 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
+    <ProjectGuid>f48eb0fe-3c43-4144-bdb3-cd03e8bb4f7b</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.11.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorDynamics.DynamicUI.JsonSchema\BlazorDynamics.JsonSchema.csproj" />
     <ProjectReference Include="..\BlazorDynamics.UISchema\BlazorDynamics.UISchema.csproj" />
   </ItemGroup>
-
 </Project>
