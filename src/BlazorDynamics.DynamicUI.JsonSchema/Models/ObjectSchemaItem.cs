@@ -8,7 +8,7 @@ public class ObjectSchemaItem : SchemaItem
     public int? MaximumProperties { get; set; }
     public int? MinimumProperties { get; set; }
     
-    public ObjectSchemaItem(string path) : base(ComponentType.Object, path)
+    public ObjectSchemaItem(string path) : base(TypeName.Object, path)
     {
     }
 }

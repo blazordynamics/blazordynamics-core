@@ -8,6 +8,7 @@
     <UserSecretsId>32101319-b3b4-481a-990d-ee1ca87eae52</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <ProjectGuid>323dd684-67bb-4105-bb0e-353d5ce11453</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\BlazorDynamics\BlazorDynamics.csproj" />
     <ProjectReference Include="..\SharedDemos\SharedDemos.csproj" />
   </ItemGroup>
 

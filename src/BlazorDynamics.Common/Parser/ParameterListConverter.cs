@@ -1,4 +1,5 @@
-﻿using BlazorDynamics.Core.Models.ParameterModels;
+﻿using BlazorDynamics.Common.Helpers;
+using BlazorDynamics.Core.Models.ParameterModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Dynamic;
@@ -22,7 +23,8 @@ namespace BlazorDynamics.Core.Parser
                 {
                     if (kvp.Key != null && kvp.Value != null)
                     {
-                        jObject.Add(new JProperty(kvp.Key, JToken.FromObject(kvp.Value, serializer)));
+
+                        jObject.Add(new JProperty(TextHelper.FirstCharToLower(kvp.Key), JToken.FromObject(kvp.Value, serializer)));
                     }
                 }
                 jObject.WriteTo(writer);
@@ -36,17 +38,18 @@ namespace BlazorDynamics.Core.Parser
 
             foreach (var property in jObject.Properties())
             {
-                if (property.Name == "Options")
+                var propertyName = TextHelper.FirstCharToUpper(property.Name);
+                if (propertyName == "Options")
                 {
-                    parameters.Add(property.Name, ConvertJTokenToObject(property.Value));
+                    parameters.Add(propertyName, ConvertJTokenToObject(property.Value));
                 }
-                else if (property.Name == "DefaultValue")
+                else if (propertyName == "DefaultValue")
                 {
-                    parameters.Add(property.Name, ConvertJTokenToExpando(property.Value));
+                    parameters.Add(propertyName, ConvertJTokenToExpando(property.Value));
                 }
                 else
                 {
-                    parameters.Add(property.Name, property.Value.ToObject<object>(serializer));
+                    parameters.Add(propertyName, property.Value.ToObject<object>(serializer));
                 }
             }
 
@@ -82,7 +85,7 @@ namespace BlazorDynamics.Core.Parser
             }
         }
 
-        public static ExpandoObject ConvertJTokenToExpando(JToken token)
+        public static object ConvertJTokenToExpando(JToken token)
         {
             if (token.Type == JTokenType.Object)
             {
@@ -95,7 +98,8 @@ namespace BlazorDynamics.Core.Parser
             }
             else
             {
-                return token.ToObject<ExpandoObject>();
+
+                return ConvertJTokenToExpandoOrValue(token);
             }
         }
 

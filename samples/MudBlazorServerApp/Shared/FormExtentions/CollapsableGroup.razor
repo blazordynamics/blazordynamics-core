@@ -17,7 +17,7 @@
                 </MudCardHeader>
                 <MudCardContent>
                     <MudStack>
-                            <DynamicComponent Type=@GetComponentTypeFor(HeaderModel) Parameters=@GetValidParametersFor(HeaderModel) />
+                            <DynamicComponent Type=@GetTypeNameFor(HeaderModel) Parameters=@GetValidParametersFor(HeaderModel) />
                     </MudStack>
                 </MudCardContent>
             </MudCard>
@@ -38,9 +38,9 @@
 
                 <MudCardContent>
                     <MudStack>
-                        @foreach (var element in this.FormModel.Elements)
+                        @foreach (var element in this.FormModel.SubElements)
                         {
-                            <DynamicComponent Type=@GetComponentTypeFor(element) Parameters=@GetValidParametersFor(element) />
+                            <DynamicComponent Type=@GetTypeNameFor(element) Parameters=@GetValidParametersFor(element) />
                         }
                     </MudStack>
                 </MudCardContent>

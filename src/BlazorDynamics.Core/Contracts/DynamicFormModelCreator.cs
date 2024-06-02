@@ -37,8 +37,8 @@ public class DynamicFormModelCreator : IDynamicFormModelCreator
 
                     var horizontalDynamicFormModel = new DynamicFormModel
                     {
-                        DynamicType = new ComponentSelectionKey(ComponentType.HorizontalLayout),
-                        Elements = GenerateModelsInternal(currentItem.Elements, new List<DynamicFormModel>()),
+                        DynamicType = new ComponentSelectionKey(TypeName.HorizontalLayout),
+                        SubElements = GenerateModelsInternal(currentItem.Elements, new List<DynamicFormModel>()),
                     };
 
                     if (currentItem.Rule != null)
@@ -53,8 +53,8 @@ public class DynamicFormModelCreator : IDynamicFormModelCreator
                     var verticalLayout = item as VerticalLayoutDescriptionItem;
                     var verticalDynamicFormModel = new DynamicFormModel
                     {
-                        DynamicType = new ComponentSelectionKey(ComponentType.VerticalLayout),
-                        Elements = GenerateModelsInternal(verticalLayout.Elements, new List<DynamicFormModel>()),
+                        DynamicType = new ComponentSelectionKey(TypeName.VerticalLayout),
+                        SubElements = GenerateModelsInternal(verticalLayout.Elements, new List<DynamicFormModel>()),
                         Rules = new List<DynamicFormModelRule> { new DynamicFormModelRule(verticalLayout.Rule.Effect,
                         new DynamicFormModelRuleCondition(verticalLayout.Rule.Condition.Scope, verticalLayout.Rule.Condition.Schema)) }
                     };
@@ -73,7 +73,7 @@ public class DynamicFormModelCreator : IDynamicFormModelCreator
 
                     var dynamicFormModel = new DynamicFormModel
                     {
-                        DynamicType = new ComponentSelectionKey(Enum.Parse<ComponentType>(controlItem.ScopeMetadata["Type"].ToString()), controlOptions.Format),
+                        DynamicType = new ComponentSelectionKey(Enum.Parse<TypeName>(controlItem.ScopeMetadata["Type"].ToString()), controlOptions.Format),
                         Parameters = new ParameterList(controlItem.ScopeMetadata),
                         DynamicFormModelOptions = new DynamicFormModelOptions()
                         {
@@ -98,8 +98,8 @@ public class DynamicFormModelCreator : IDynamicFormModelCreator
 
                     var categorizationDynamic = new DynamicFormModel
                     {
-                        DynamicType = new ComponentSelectionKey(ComponentType.Categorization),
-                        Elements = GenerateModelsInternal(categorization.Elements, new List<DynamicFormModel>()),
+                        DynamicType = new ComponentSelectionKey(TypeName.Categorization),
+                        SubElements = GenerateModelsInternal(categorization.Elements, new List<DynamicFormModel>()),
                         Rules = new List<DynamicFormModelRule> { new DynamicFormModelRule(categorization.Rule.Effect,
                         new DynamicFormModelRuleCondition(categorization.Rule.Condition.Scope, categorization.Rule.Condition.Schema)) }
                     };
@@ -115,8 +115,8 @@ public class DynamicFormModelCreator : IDynamicFormModelCreator
                     var category = item as CategoryDescriptionItem;
                     var categoryDynamicFormModel = new DynamicFormModel
                     {
-                        DynamicType = new ComponentSelectionKey(ComponentType.Category),
-                        Elements = GenerateModelsInternal(category.Elements, new List<DynamicFormModel>()),
+                        DynamicType = new ComponentSelectionKey(TypeName.Category),
+                        SubElements = GenerateModelsInternal(category.Elements, new List<DynamicFormModel>()),
                         DynamicFormModelOptions = new DynamicFormModelOptions()
                         {
                             Label = category.Label
@@ -135,8 +135,8 @@ public class DynamicFormModelCreator : IDynamicFormModelCreator
 
                     var groupDynamicFormModel = new DynamicFormModel
                     {
-                        DynamicType = new ComponentSelectionKey(ComponentType.GroupLayout),
-                        Elements = GenerateModelsInternal(group.Elements, new List<DynamicFormModel>()),
+                        DynamicType = new ComponentSelectionKey(TypeName.GroupLayout),
+                        SubElements = GenerateModelsInternal(group.Elements, new List<DynamicFormModel>()),
                         DynamicFormModelOptions = new DynamicFormModelOptions()
                         {
                             Label = group.Label

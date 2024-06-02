@@ -39,13 +39,13 @@ namespace BlazorDynamics.Extensions
             return this;
         }
 
-        public BlazorDynamicsConfigBuilder RegisterComponent(ComponentType componentType, string typeDefinitionName, Type formComponentType)
+        public BlazorDynamicsConfigBuilder RegisterComponent(TypeName componentType, string typeDefinitionName, Type formComponentType)
         {
             RegisterComponent(new ComponentSelectionKey(componentType, typeDefinitionName), formComponentType);
             return this;
         }
 
-        public BlazorDynamicsConfigBuilder RegisterComponent(ComponentType componentType, Type formComponentType)
+        public BlazorDynamicsConfigBuilder RegisterComponent(TypeName componentType, Type formComponentType)
         {
             RegisterComponent(new ComponentSelectionKey(componentType), formComponentType);
             return this;

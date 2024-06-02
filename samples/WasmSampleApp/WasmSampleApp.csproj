@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
+    <ProjectGuid>5929192c-bd80-4a62-9bf1-9b22e42351bc</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\BlazorDynamics\BlazorDynamics.csproj" />
     <ProjectReference Include="..\SharedDemos\SharedDemos.csproj" />
   </ItemGroup>
 

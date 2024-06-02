@@ -8,7 +8,7 @@ public class ArraySchemaItem : SchemaItem
     public int? MaximumItems { get; set; }
     public bool? UniqueItems { get; set; }
 
-    public ArraySchemaItem(string path) : base(ComponentType.Array, path)
+    public ArraySchemaItem(string path) : base(TypeName.Array, path)
     {
     }
 }

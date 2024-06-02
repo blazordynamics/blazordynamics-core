@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
       <IsPackable>false</IsPackable>
+      <ProjectGuid>fa0e3ca3-e4c9-492d-ba5e-d988fe72d044</ProjectGuid>
     </PropertyGroup>
 
     <ItemGroup>

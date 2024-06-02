@@ -35,7 +35,7 @@
     public ComponentsList GetCustomComponents()
     {
         var result = new ComponentsList(UserSettingsService.Components);
-        result.Add(new ComponentSelectionKey(ComponentType.TemplateContent, "intro"), typeof(SampleComponents.SampleTemplateComponent));
+        result.Add(new ComponentSelectionKey(TypeName.TemplateContent, "intro"), typeof(SampleComponents.SampleTemplateComponent));
         return result;
     }
 

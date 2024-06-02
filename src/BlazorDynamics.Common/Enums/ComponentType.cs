@@ -1,6 +1,6 @@
 namespace BlazorDynamics.Common.Enums;
 
-public enum ComponentType
+public enum TypeName
 {
     String,
     Boolean,

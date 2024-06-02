@@ -1,8 +1,5 @@
-﻿using BlazorDynamics.Core;
-using BlazorDynamics.Forms.Commons.Components;
+﻿using BlazorDynamics.Forms.Commons.Components;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using System.Diagnostics;
 
 namespace BlazorDynamics.Forms.Components
 {

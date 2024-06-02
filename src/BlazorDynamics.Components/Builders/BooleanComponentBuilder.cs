@@ -22,7 +22,7 @@ namespace BlazorDynamics.Forms.Components.Builders
         public new DynamicFormModel Build()
         {
             var model = base.Build();
-            model.DynamicType = new ComponentSelectionKey(ComponentType.Boolean);
+            model.DynamicType = new ComponentSelectionKey(TypeName.Boolean);
             model.Parameters.Add(ParameterNames.Label, _component.Label);
             model.Parameters.Add(ParameterNames.NeedsToBeChecked, _component.NeedsToBeChecked);
             return model;
