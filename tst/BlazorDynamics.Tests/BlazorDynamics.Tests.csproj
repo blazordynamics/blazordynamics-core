@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+    <ProjectGuid>2d717f7a-2a2b-4f3b-8d4f-6c458f7b47d2</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,9 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\BlazorDynamics.Contracts\BlazorDynamics.Contracts.csproj" />
     <ProjectReference Include="..\..\src\BlazorDynamics.Core\BlazorDynamics.Core.csproj" />
-    <ProjectReference Include="..\..\src\BlazorDynamics.DynamicUI.JsonSchema\BlazorDynamics.JsonSchema.csproj" />
-    <ProjectReference Include="..\..\src\BlazorDynamics.UISchema\BlazorDynamics.UISchema.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>true</IsPackable>
+    <ProjectGuid>1587c9fb-97d4-4035-a8d7-1e4fceefd7f3</ProjectGuid>
   </PropertyGroup>
 
 
@@ -20,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BlazorDynamics.Components\BlazorDynamics.Forms.Components.csproj" />
-    <ProjectReference Include="..\..\BlazorDynamics.Extensions\BlazorDynamics.Extensions.csproj" />
     <ProjectReference Include="..\..\BlazorDynamics.Forms.Actions\BlazorDynamics.Forms.Actions.csproj" />
   </ItemGroup>
 

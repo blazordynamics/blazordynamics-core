@@ -62,19 +62,19 @@ namespace BlazorDynamics.Forms.Components.Builders
 
         public TBuilder WithElements(params DynamicFormModel[] elements)
         {
-            _component.FormModel.Elements.AddRange(elements);
+            _component.FormModel.SubElements.AddRange(elements);
             return this as TBuilder;
         }
 
         public TBuilder WithElement(DynamicFormModel element)
         {
-            _component.FormModel.Elements.Add(element);
+            _component.FormModel.SubElements.Add(element);
             return this as TBuilder;
         }
 
         public TBuilder WithString(string label, string path)
         {
-            _component.FormModel.Elements.Add(Factories.FormFactory.StringComponent(label, path));
+            _component.FormModel.SubElements.Add(Factories.FormFactory.StringComponent(label, path));
             return this as TBuilder;
         }
 
@@ -117,7 +117,7 @@ namespace BlazorDynamics.Forms.Components.Builders
             model.Parameters.AddRange(_customParameters);
             model.Parameters.Add(ParameterNames.Path, _component.Path);
             model.Parameters.Add(ParameterNames.InvalidMesssage, _component.InvalidMessage);
-            model.Elements = _component.FormModel.Elements;
+            model.SubElements = _component.FormModel.SubElements;
             return model;
         }
     }

@@ -33,7 +33,7 @@ namespace BlazorDynamics.Forms.Components.Builders
         public new DynamicFormModel Build()
         {
             var model = base.Build();
-            model.DynamicType = new ComponentSelectionKey(ComponentType.DateTime);
+            model.DynamicType = new ComponentSelectionKey(TypeName.DateTime);
             model.Parameters.Add(ParameterNames.Label, _component.Label);
             model.Parameters.Add(ParameterNames.MinimumDateTime, _component.MinimumDateTime);
             model.Parameters.Add(ParameterNames.MaximumDateTime, _component.MaximumDateTime);

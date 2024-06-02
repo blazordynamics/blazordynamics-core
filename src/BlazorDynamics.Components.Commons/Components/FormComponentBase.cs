@@ -98,7 +98,7 @@ namespace BlazorDynamics.Forms.Commons.Components
         public Dictionary<string, object> GetValidParametersFor(DynamicFormModel formModel)
         {
             if (formModel == null) { return new Dictionary<string, object>(); }
-            var componentType = GetComponentTypeFor(formModel);
+            var componentType = GetTypeNameFor(formModel);
             var validParameters = RegularObjectHandler.GetParameters(componentType, formModel.Parameters.Entries, IncludeDynamicOptionsInParameters(formModel.Parameters.Entries));
             validParameters.Add(ParameterNames.Value, Value);
             validParameters.Add(ParameterNames.ValueChanged, EventCallback.Factory.Create<object?>(this, ValueUpdate));
@@ -164,10 +164,10 @@ namespace BlazorDynamics.Forms.Commons.Components
             {
                 return typeof(NotFoundComponent);
             }
-            return GetComponentTypeFor(FormModel);
+            return GetTypeNameFor(FormModel);
         }
 
-        public Type GetComponentTypeFor(DynamicFormModel formModel)
+        public Type GetTypeNameFor(DynamicFormModel formModel)
         {
             if (!Components.ContainsKey(formModel.DynamicType))
             {
@@ -180,7 +180,7 @@ namespace BlazorDynamics.Forms.Commons.Components
 
         private Type GetLessSpefificType(DynamicFormModel formModel)
         {
-            var newKey = new ComponentSelectionKey(formModel.DynamicType.ComponentType);
+            var newKey = new ComponentSelectionKey(formModel.DynamicType.TypeName);
             if (!Components.ContainsKey(newKey))
             {
                 return typeof(NotFoundComponent);

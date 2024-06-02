@@ -9,7 +9,7 @@ namespace BlazorDynamics.Forms.Components.Builders
         public new  DynamicFormModel Build()
         {
             var model = base.Build();
-            model.DynamicType = new ComponentSelectionKey(ComponentType.VerticalLayout);
+            model.DynamicType = new ComponentSelectionKey(TypeName.VerticalLayout);
             return model;
         }
     }

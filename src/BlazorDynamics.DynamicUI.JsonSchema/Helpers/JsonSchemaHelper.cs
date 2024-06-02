@@ -14,9 +14,9 @@ public static class JsonSchemaHelper
         switch (type)
         {
             case JSchemaType.Integer:
-                return GetNumber(token, ComponentType.Int);
+                return GetNumber(token, TypeName.Int);
             case JSchemaType.Number:
-                return GetNumber(token, ComponentType.Number);
+                return GetNumber(token, TypeName.Number);
             case JSchemaType.String:
                 return GetString(token);
             case JSchemaType.Boolean:
@@ -30,7 +30,7 @@ public static class JsonSchemaHelper
         }
     }
 
-    private static ISchemaItem GetNumber(JToken token, ComponentType type)
+    private static ISchemaItem GetNumber(JToken token, TypeName type)
     {
         return new NumberSchemaItem(type, token.Path)
         {

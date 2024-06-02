@@ -2,7 +2,6 @@
 using BlazorDynamics.Forms.Components.Layout;
 using BlazorDynamics.Core.Models;
 using BlazorDynamics.Core.Models.ParameterModels;
-using BlazorDynamics.Forms.Components.Factories;
 
 namespace BlazorDynamics.Forms.Components.Builders
 {
@@ -17,7 +16,7 @@ namespace BlazorDynamics.Forms.Components.Builders
         public new DynamicFormModel Build()
         {
             var model = base.Build();
-            model.DynamicType = new ComponentSelectionKey(ComponentType.GroupLayout);
+            model.DynamicType = new ComponentSelectionKey(TypeName.GroupLayout);
             model.Parameters.Add(ParameterNames.Label, _component.Label);
             return model;
         }
