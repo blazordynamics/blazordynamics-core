@@ -17,9 +17,9 @@ namespace MudBlazorServerApp.Pages
             StateHasChanged();
         }
 
-        public ExpandoObject data = new ExpandoObject();
+        private ExpandoObject data = new ExpandoObject();
 
-        public DynamicFormModel model = FormFactory.GroupLayout(group =>
+        private DynamicFormModel model = FormFactory.GroupLayout(group =>
             group
                .WithParameter("Collapsed", false)
                .WithParameter("HeaderModel", HeaderForm())
