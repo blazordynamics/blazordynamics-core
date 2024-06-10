@@ -8,7 +8,7 @@ be a dynamic form element that can toggle between expanded and collapsed states.
 Create a new Razor component for your custom group layout. This component will inherit from `BlazorDynamics.Forms.Components.Layout.GroupLayoutBase`. 
 Here's the code for your custom component:
 
-```razor
+```csharp
 @inherits BlazorDynamics.Forms.Components.Layout.GroupLayoutBase
 
 <div class="groupcomponent @Class" style="@Style">
