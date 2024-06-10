@@ -63,13 +63,9 @@ namespace BlazorDynamics.Core.Models.ParameterModels
             }
             set
             {
-                if (parameters.ContainsKey(key))
+                if (!parameters.TryAdd(key, value))
                 {
                     parameters[key] = value;
-                }
-                else
-                {
-                    parameters.Add(key, value);
                 }
             }
         }
