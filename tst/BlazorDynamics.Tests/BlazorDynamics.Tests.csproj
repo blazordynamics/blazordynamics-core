@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\BlazorDynamics.Components\BlazorDynamics.Forms.Components.csproj" />
     <ProjectReference Include="..\..\src\BlazorDynamics.Contracts\BlazorDynamics.Contracts.csproj" />
     <ProjectReference Include="..\..\src\BlazorDynamics.Core\BlazorDynamics.Core.csproj" />
   </ItemGroup>

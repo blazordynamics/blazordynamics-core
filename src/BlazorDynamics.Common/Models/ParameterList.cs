@@ -50,5 +50,28 @@ namespace BlazorDynamics.Core.Models.ParameterModels
                 parameters.Add(item.Key, item.Value);
             }
         }
+
+        public object this[string key]
+        {
+            get
+            {
+                if (parameters.TryGetValue(key, out var value))
+                {
+                    return value;
+                }
+                throw new KeyNotFoundException($"The key '{key}' was not found in the parameters.");
+            }
+            set
+            {
+                if (parameters.ContainsKey(key))
+                {
+                    parameters[key] = value;
+                }
+                else
+                {
+                    parameters.Add(key, value);
+                }
+            }
+        }
     }
 }
