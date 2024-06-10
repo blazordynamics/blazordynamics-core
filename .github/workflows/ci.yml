@@ -10,6 +10,8 @@ jobs:
     name: Build and analyze
     runs-on: windows-latest
     steps:
+      - name: Set VERSION variable from tag
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
