@@ -6,7 +6,7 @@ using BlazorDynamics.Core.Models;
 
 namespace BlazorDynamics.Forms.Components.Factories
 {
-    public static partial class FormFactory
+    public static class FormFactory
     {
         // Vertical Layout Methods
         public static DynamicFormModel VerticalLayout()

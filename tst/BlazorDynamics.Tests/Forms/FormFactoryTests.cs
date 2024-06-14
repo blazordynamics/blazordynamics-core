@@ -1,8 +1,6 @@
-﻿using NUnit.Framework;
-using BlazorDynamics.Forms.Components.Factories;
+﻿using BlazorDynamics.Forms.Components.Factories;
 using BlazorDynamics.Core.Models;
 using BlazorDynamics.Common.Enums;
-using System.Linq;
 using Newtonsoft.Json.Linq;
 
 namespace BlazorDynamics.Tests.Forms
@@ -16,7 +14,7 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.VerticalLayout();
 
             Assert.NotNull(model);
-            Assert.AreEqual(TypeName.VerticalLayout, model.DynamicType.TypeName);
+            Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.VerticalLayout));
         }
 
         [Test]
@@ -26,8 +24,8 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.VerticalLayout(variationName);
 
             Assert.NotNull(model);
-            Assert.AreEqual(TypeName.VerticalLayout, model.DynamicType.TypeName);
-            Assert.AreEqual(variationName, model.DynamicType.VariationName);
+            Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.VerticalLayout));
+            Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
 
         [Test]
@@ -41,8 +39,8 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.VerticalLayout(elements);
 
             Assert.NotNull(model);
-            Assert.AreEqual(TypeName.VerticalLayout, model.DynamicType.TypeName);
-            Assert.AreEqual(elements.Length, model.SubElements.Count);
+            Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.VerticalLayout));
+            Assert.That(model.SubElements.Count, Is.EqualTo(elements.Length));
             Assert.Contains(elements[0], model.SubElements);
             Assert.Contains(elements[1], model.SubElements);
         }
@@ -56,9 +54,9 @@ namespace BlazorDynamics.Tests.Forms
             });
 
             Assert.NotNull(model);
-            Assert.AreEqual(TypeName.VerticalLayout, model.DynamicType.TypeName);
-            Assert.AreEqual(1, model.SubElements.Count);
-            Assert.AreEqual(TypeName.String, model.SubElements.First().DynamicType.TypeName);
+            Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.VerticalLayout));
+            Assert.That(model.SubElements.Count, Is.EqualTo(1));
+            Assert.That(model.SubElements.First().DynamicType.TypeName, Is.EqualTo(TypeName.String));
         }
 
         // Repeat similar tests for HorizontalLayout, GroupLayout, and other component creation methods
@@ -71,9 +69,9 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.StringComponent(label, path);
 
             Assert.NotNull(model);
-            Assert.AreEqual(TypeName.String, model.DynamicType.TypeName);
-            Assert.AreEqual(label, model.Parameters["Label"]);
-            Assert.AreEqual(path, model.Parameters["Path"]);
+            Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.String));
+            Assert.That(model.Parameters["Label"], Is.EqualTo(label));
+            Assert.That(model.Parameters["Path"], Is.EqualTo(path));
         }
 
         [Test]
@@ -84,9 +82,9 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.BooleanComponent(label, path);
 
             Assert.NotNull(model);
-            Assert.AreEqual(TypeName.Boolean, model.DynamicType.TypeName);
-            Assert.AreEqual(label, model.Parameters["Label"]);
-            Assert.AreEqual(path, model.Parameters["Path"]);
+            Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Boolean));
+            Assert.That(model.Parameters["Label"], Is.EqualTo(label));
+            Assert.That(model.Parameters["Path"], Is.EqualTo(path));
         }
 
         // Add similar tests for each method in the FormFactory class
@@ -99,7 +97,7 @@ namespace BlazorDynamics.Tests.Forms
 
             var result = model.WithVariationName(variationName);
 
-            Assert.AreEqual(variationName, result.DynamicType.VariationName);
+            Assert.That(result.DynamicType.VariationName, Is.EqualTo(variationName));
         }
 
         [Test]
@@ -111,10 +109,10 @@ namespace BlazorDynamics.Tests.Forms
 
             var result = model.AddSchemaRule(RuleEffect.SHOW, scope, jsonSchema);
 
-            Assert.AreEqual(1, result.Rules.Count);
-            Assert.AreEqual(RuleEffect.SHOW, result.Rules.First().Effect);
-            Assert.AreEqual(scope, result.Rules.First().Condition.Scope);
-            Assert.AreEqual(jsonSchema, result.Rules.First().Condition.Schema);
+            Assert.That(result.Rules.Count, Is.EqualTo(1));
+            Assert.That(result.Rules.First().Effect, Is.EqualTo(RuleEffect.SHOW));
+            Assert.That(result.Rules.First().Condition.Scope, Is.EqualTo(scope));
+            Assert.That(result.Rules.First().Condition.Schema, Is.EqualTo(jsonSchema));
         }
 
         [Test]
@@ -125,9 +123,9 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.NumberDisplay(label, path);
 
             Assert.NotNull(model);
-            Assert.AreEqual(TypeName.NumberDisplay, model.DynamicType.TypeName);
-            Assert.AreEqual(label, model.Parameters["Label"]);
-            Assert.AreEqual(path, model.Parameters["Path"]);
+            Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.NumberDisplay));
+            Assert.That(model.Parameters["Label"], Is.EqualTo(label));
+            Assert.That(model.Parameters["Path"], Is.EqualTo(path));
         }
 
         [Test]
@@ -138,9 +136,9 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.NumberComponent(label, path);
 
             Assert.NotNull(model);
-            Assert.AreEqual(TypeName.Number, model.DynamicType.TypeName);
-            Assert.AreEqual(label, model.Parameters["Label"]);
-            Assert.AreEqual(path, model.Parameters["Path"]);
+            Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Number));
+            Assert.That(model.Parameters["Label"], Is.EqualTo(label));
+            Assert.That(model.Parameters["Path"], Is.EqualTo(path));
         }
 
         [Test]
@@ -151,9 +149,9 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.TemplateDisplay(variationName, path);
 
             Assert.NotNull(model);
-            Assert.AreEqual(TypeName.TemplateContent, model.DynamicType.TypeName);
-            Assert.AreEqual(variationName, model.DynamicType.VariationName);
-            Assert.AreEqual(path, model.Parameters["Path"]);
+            Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.TemplateContent));
+            Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
+            Assert.That(model.Parameters["Path"], Is.EqualTo(path));
         }
     }
 }
