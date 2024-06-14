@@ -7,41 +7,55 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   build:
-    name: Build and Test with Code Coverage
+    name: Build and analyze
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          dotnet-version: '8.0'  # Specify your .NET version
+          java-version: 17
+          distribution: 'zulu' # Alternative distribution options are available.
 
-      - name: Install dependencies
-        run: dotnet restore
-
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Test and collect coverage
-        run: dotnet test --configuration Release --no-restore --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./TestResults/' --collect "Code coverage" --logger trx
-        # Use your preferred testing and coverage tools; this example uses coverlet
-
-      - name: Setup SonarCloud
-        uses: SonarSource/sonarcloud-github-action@master
+      - uses: actions/checkout@v3
         with:
-          args: >
-            -Dsonar.projectKey=blazordynamics_blazordynamics-core
-            -Dsonar.organization=blazordynamics
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.coverageReportPaths=**/coverage.opencover.xml
-            -Dsonar.coverage.exclusions="samples/**/*.csproj, tst/**/*.csproj"
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v3
+        with:
+          path: ./sonar/scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ./sonar/scanner
+          dotnet tool update dotnet-sonarscanner --tool-path ./sonar/scanner
+
+      - name: Begin sonar scan
+        run: |
+          ./sonar/scanner/dotnet-sonarscanner begin /k:"blazordynamics_blazordynamics-core" /o:"blazordynamics" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.opencover.reportsPaths=coverage.xml /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverage.exclusions="samples/**/*.csproj, tst/**/*.csproj"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - name: SonarCloud Scan
-        run: sonar-scanner
+      - name: Build and run unit tests
+        run: |
+          dotnet restore
+          dotactnet build --configuration Release --no-restore
+          dotnet test --configuration Release --no-restore --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./TestResults/'
+
+      - name: End Sonar scan
+        run: ./sonar/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
