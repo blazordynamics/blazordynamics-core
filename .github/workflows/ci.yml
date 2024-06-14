@@ -51,7 +51,7 @@ jobs:
       - name: Build and run unit tests
         run: |
           dotnet restore
-          dotactnet build --configuration Release --no-restore
+          dotnet build --configuration Release --no-restore
           dotnet test --configuration Release --no-restore --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./TestResults/'
 
       - name: End Sonar scan
