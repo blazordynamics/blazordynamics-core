@@ -18,12 +18,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
           path: ~\sonar\cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
+
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
         uses: actions/cache@v3
@@ -31,18 +33,30 @@ jobs:
           path: .\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
+
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-      - name: Build and analyze
+        
+      - name: Begin sonar scan
+        run: | 
+           .\.sonar\scanner\dotnet-sonarscanner begin /k:"blazordynamics_blazordynamics-core" /o:"blazordynamics" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.opencover.reportsPaths=coverage.xml /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverage.exclusions="samples/**/*.csproj, tst/**/*.csproj"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
+        
+      - name: Build and run unit tests
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"blazordynamics_blazordynamics-core" /o:"blazordynamics" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverage.exclusions="samples/**/*.csproj, tst/**/*.csproj"
-          dotnet build --configuration Release
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          dotnet restore
+          dotnet build --configuration Release --no-restore
+          dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -o="coverage.xml"
+
+           
+      - name: End Sonar scan
+        run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
