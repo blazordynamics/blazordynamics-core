@@ -43,7 +43,7 @@ jobs:
 
       - name: Begin sonar scan
         run: |
-          ./sonar/scanner/dotnet-sonarscanner begin /k:"blazordynamics_blazordynamics-core" /o:"blazordynamics" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverage.exclusions="samples/**/*.csproj, tst/**/*.csproj"
+          ./sonar/scanner/dotnet-sonarscanner begin /k:"blazordynamics_blazordynamics-core" /o:"blazordynamics" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml /d:sonar.host.url="https://sonarcloud.io" /d:sonar.test.exclusions=samples/** /d:sonar.coverage.exclusions="samples/**/*.csproj, tst/**/*.csproj"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
