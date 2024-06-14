@@ -58,7 +58,7 @@ jobs:
 
       - name: dotnet | Test
         run: |
-          dotnet test --configuration Release --no-restore --no-build /p:CollectCoverage=true --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=opencover'
+          dotnet test --configuration Release --no-restore --no-build /p:CollectCoverage=true --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=opencover
 
       - name: End Sonar scan
         run: ./sonar/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
