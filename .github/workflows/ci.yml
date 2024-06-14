@@ -52,7 +52,7 @@ jobs:
         run: |
           dotnet restore
           dotnet build --configuration Release --no-restore
-          dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -o="coverage.xml"
+          dotnet test --configuration Release --no-restore --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
            
       - name: End Sonar scan
