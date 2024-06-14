@@ -1,0 +1,49 @@
+name: Build and SonarCloud Analysis
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build and Test with Code Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0'  # Specify your .NET version
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Test and collect coverage
+      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      # Use your preferred testing and coverage tools; this example uses coverlet
+
+    - name: Setup SonarCloud
+      uses: SonarSource/sonarcloud-github-action@master
+      with:
+        args: >
+          -Dsonar.projectKey=<YourSonarProjectKey>
+          -Dsonar.organization=<YourSonarOrganization>
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.coverageReportPaths=**/coverage.opencover.xml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    - name: SonarCloud Scan
+      run: sonar-scanner
