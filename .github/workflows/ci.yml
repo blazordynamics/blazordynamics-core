@@ -33,8 +33,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@master
         with:
           args: >
-            -Dsonar.projectKey=<YourSonarProjectKey>
-            -Dsonar.organization=<YourSonarOrganization>
+            -Dsonar.projectKey=blazordynamics_blazordynamics-core
+            -Dsonar.organization=blazordynamics
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
             -Dsonar.coverageReportPaths=**/coverage.opencover.xml
