@@ -26,7 +26,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Test and collect coverage
-        run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+        run: dotnet test --configuration Release --no-restore --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./TestResults/' --collect "Code coverage" --logger trx
         # Use your preferred testing and coverage tools; this example uses coverlet
 
       - name: Setup SonarCloud
@@ -36,8 +36,9 @@ jobs:
             -Dsonar.projectKey=blazordynamics_blazordynamics-core
             -Dsonar.organization=blazordynamics
             -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
             -Dsonar.coverageReportPaths=**/coverage.opencover.xml
+            -Dsonar.coverage.exclusions="samples/**/*.csproj, tst/**/*.csproj"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
