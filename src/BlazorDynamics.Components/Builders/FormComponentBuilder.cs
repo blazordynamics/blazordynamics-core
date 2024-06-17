@@ -12,7 +12,7 @@ namespace BlazorDynamics.Forms.Components.Builders
         internal string? typeDefinitionName = null;
         internal readonly TComponent _component = new TComponent();
         private readonly ParameterList _customParameters = new ParameterList();
-        public TBuilder WithComponents(ComponentsList components)
+        public TBuilder WithComponentDefinitions(ComponentsList components)
         {
             _component.Components = components;
             return this as TBuilder;
@@ -60,13 +60,13 @@ namespace BlazorDynamics.Forms.Components.Builders
         //    return this as TBuilder;
         //}
 
-        public TBuilder WithElements(params DynamicFormModel[] elements)
+        public TBuilder WithSubElements(params DynamicFormModel[] elements)
         {
             _component.FormModel.SubElements.AddRange(elements);
             return this as TBuilder;
         }
 
-        public TBuilder WithElement(DynamicFormModel element)
+        public TBuilder WithSubElement(DynamicFormModel element)
         {
             _component.FormModel.SubElements.Add(element);
             return this as TBuilder;

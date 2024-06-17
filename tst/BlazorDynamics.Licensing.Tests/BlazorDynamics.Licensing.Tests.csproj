@@ -9,6 +9,12 @@
       <ProjectGuid>cdad0671-0fde-4f86-bbda-e4496185da75</ProjectGuid>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <CollectCoverage>true</CollectCoverage>
+        <CoverletOutput>../coverage/projects/$(MSBuildProjectName)/</CoverletOutput>
+        <CoverletOutputFormat>opencover</CoverletOutputFormat>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Azure.Identity" Version="1.11.3" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />

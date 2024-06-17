@@ -6,7 +6,7 @@ using BlazorDynamics.Core.Models;
 
 namespace BlazorDynamics.Forms.Components.Factories
 {
-    public static partial class FormFactory
+    public static class FormFactory
     {
         // Vertical Layout Methods
         public static DynamicFormModel VerticalLayout()
@@ -14,9 +14,9 @@ namespace BlazorDynamics.Forms.Components.Factories
             return new DynamicFormModel(TypeName.VerticalLayout);
         }
 
-        public static DynamicFormModel VerticalLayout(string typeDefinionName)
+        public static DynamicFormModel VerticalLayout(string variationName)
         {
-            return new DynamicFormModel(TypeName.VerticalLayout, typeDefinionName);
+            return new DynamicFormModel(TypeName.VerticalLayout, variationName);
         }
 
         public static DynamicFormModel VerticalLayout(params DynamicFormModel[] elements)
@@ -47,9 +47,9 @@ namespace BlazorDynamics.Forms.Components.Factories
             return new DynamicFormModel(TypeName.HorizontalLayout);
         }
 
-        public static DynamicFormModel HorizontalLayout(string typeDefinionName)
+        public static DynamicFormModel HorizontalLayout(string variationName)
         {
-            return new DynamicFormModel(TypeName.HorizontalLayout, typeDefinionName);
+            return new DynamicFormModel(TypeName.HorizontalLayout, variationName);
         }
 
         public static DynamicFormModel HorizontalLayout(Action<HorizontalLayoutBuilder>? configure)
@@ -80,9 +80,9 @@ namespace BlazorDynamics.Forms.Components.Factories
             return new DynamicFormModel(TypeName.GroupLayout);
         }
 
-        public static DynamicFormModel GroupLayout(string typeDefinionName)
+        public static DynamicFormModel GroupLayout(string variationName)
         {
-            return new DynamicFormModel(TypeName.GroupLayout, typeDefinionName);
+            return new DynamicFormModel(TypeName.GroupLayout, variationName);
         }
 
         public static DynamicFormModel GroupLayout(params DynamicFormModel[] elements)
@@ -117,9 +117,9 @@ namespace BlazorDynamics.Forms.Components.Factories
 
 
         // extention
-        public static DynamicFormModel WithTypeDefinionName(this DynamicFormModel model, string typeDefinition)
+        public static DynamicFormModel WithVariationName(this DynamicFormModel model, string variationName)
         {
-            model.DynamicType = new ComponentSelectionKey(model.DynamicType.TypeName, typeDefinition);
+            model.DynamicType = new ComponentSelectionKey(model.DynamicType.TypeName, variationName);
             return model;
         }
         public static DynamicFormModel AddSchemaRule(this DynamicFormModel model, RuleEffect ruleEffect, string scope, string jsonSchema)
@@ -144,10 +144,10 @@ namespace BlazorDynamics.Forms.Components.Factories
                 .Build();
         }
 
-        public static DynamicFormModel TemplateDisplay(string typeDefinionName, string path)
+        public static DynamicFormModel TemplateDisplay(string variationName, string path)
         {
             return new TemplateDisplayBuider()
-                .WithTypeDefinition(typeDefinionName)
+                .WithTypeDefinition(variationName)
                 .WithPath(path)
                 .Build();
         }
@@ -156,6 +156,13 @@ namespace BlazorDynamics.Forms.Components.Factories
         {
             return new StringDisplayBuilder()
                 .WithLabel(label)
+                .WithPath(path)
+                .Build();
+        }
+
+        public static DynamicFormModel StringDisplay(string path)
+        {
+            return new StringDisplayBuilder()
                 .WithPath(path)
                 .Build();
         }
@@ -175,9 +182,9 @@ namespace BlazorDynamics.Forms.Components.Factories
                 .Build();
         }
 
-        public static DynamicFormModel StringComponent(string typeDefinionName)
+        public static DynamicFormModel StringComponent(string variationName)
         {
-            return new DynamicFormModel(TypeName.String, typeDefinionName);
+            return new DynamicFormModel(TypeName.String, variationName);
         }
 
         public static DynamicFormModel StringComponent(string label, string path, Action<StringComponentBuilder>? configure = null)
@@ -200,9 +207,9 @@ namespace BlazorDynamics.Forms.Components.Factories
             return new DynamicFormModel(TypeName.Boolean);
         }
 
-        public static DynamicFormModel BooleanComponent(string typeDefinionName)
+        public static DynamicFormModel BooleanComponent(string variationName)
         {
-            return new DynamicFormModel(TypeName.Boolean, typeDefinionName);
+            return new DynamicFormModel(TypeName.Boolean, variationName);
         }
 
         public static DynamicFormModel BoolComponent(string label, string path)
@@ -214,11 +221,11 @@ namespace BlazorDynamics.Forms.Components.Factories
             };
         }
 
-        public static DynamicFormModel BoolComponent(string typeDefinionName, string label, string path)
+        public static DynamicFormModel BoolComponent(string variationName, string label, string path)
         {
             return new DynamicFormModel()
             {
-                DynamicType = new ComponentSelectionKey(TypeName.Boolean, typeDefinionName),
+                DynamicType = new ComponentSelectionKey(TypeName.Boolean, variationName),
                 Parameters = BooleanParameters.Set(label, path)
             };
         }
@@ -244,9 +251,9 @@ namespace BlazorDynamics.Forms.Components.Factories
             return new DynamicFormModel(TypeName.DateTime);
         }
 
-        public static DynamicFormModel DateTimeComponent(string typeDefinionName)
+        public static DynamicFormModel DateTimeComponent(string variationName)
         {
-            return new DynamicFormModel(TypeName.DateTime, typeDefinionName);
+            return new DynamicFormModel(TypeName.DateTime, variationName);
         }
 
         public static DynamicFormModel DateTimeComponent(string label, string path)
@@ -278,9 +285,9 @@ namespace BlazorDynamics.Forms.Components.Factories
             return new DynamicFormModel(TypeName.Number);
         }
 
-        public static DynamicFormModel NumberComponent(string typeDefinionName)
+        public static DynamicFormModel NumberComponent(string variationName)
         {
-            return new DynamicFormModel(TypeName.Number, typeDefinionName);
+            return new DynamicFormModel(TypeName.Number, variationName);
         }
 
         public static DynamicFormModel NumberComponent(string label, string path)
@@ -312,9 +319,9 @@ namespace BlazorDynamics.Forms.Components.Factories
             return new DynamicFormModel(TypeName.Int);
         }
 
-        public static DynamicFormModel IntComponent(string typeDefinionName)
+        public static DynamicFormModel IntComponent(string variationName)
         {
-            return new DynamicFormModel(TypeName.Int, typeDefinionName);
+            return new DynamicFormModel(TypeName.Int, variationName);
         }
 
         public static DynamicFormModel IntComponent(string label, string path)
@@ -327,11 +334,11 @@ namespace BlazorDynamics.Forms.Components.Factories
         }
 
 
-        public static DynamicFormModel IntComponent(string typeDefinionName, string label, string path)
+        public static DynamicFormModel IntComponent(string variationName, string label, string path)
         {
             return new DynamicFormModel()
             {
-                DynamicType = new ComponentSelectionKey(TypeName.Int, typeDefinionName),
+                DynamicType = new ComponentSelectionKey(TypeName.Int, variationName),
                 Parameters = BaseParameters.Set(label, path)
             };
         }
@@ -357,9 +364,9 @@ namespace BlazorDynamics.Forms.Components.Factories
             return new DynamicFormModel(TypeName.List);
         }
 
-        public static DynamicFormModel ListComponent(string typeDefinionName)
+        public static DynamicFormModel ListComponent(string variationName)
         {
-            return new DynamicFormModel(TypeName.List, typeDefinionName);
+            return new DynamicFormModel(TypeName.List, variationName);
         }
 
         public static DynamicFormModel ListComponent(string label, string path, params DynamicFormModel[] elements)
@@ -392,9 +399,9 @@ namespace BlazorDynamics.Forms.Components.Factories
             return new DynamicFormModel(TypeName.Dropdown);
         }
 
-        public static DynamicFormModel DropDownComponent(string typeDefinionName)
+        public static DynamicFormModel DropDownComponent(string variationName)
         {
-            return new DynamicFormModel(TypeName.Dropdown, typeDefinionName);
+            return new DynamicFormModel(TypeName.Dropdown, variationName);
         }
 
         public static DynamicFormModel DropDownComponent(string label, string path, Dictionary<object, string> options)

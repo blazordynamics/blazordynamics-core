@@ -52,7 +52,7 @@ namespace SharedDemos.Samples.Typed
                                 FormFactory.HorizontalLayout(
                                     FormFactory.StringComponent("Make", "@.Make"),
                                     FormFactory.StringComponent("Model", "@.Model"),
-                                    FormFactory.IntComponent("Rating", "@.Rating").WithTypeDefinionName("starRating"),
+                                    FormFactory.IntComponent("Rating", "@.Rating").WithVariationName("starRating"),
                                     FormFactory.DeleteAction("Delete Car", "@")
                                 ),
                                 FormFactory.AddAction("+ Comment", "@.Comments", new Comment()),
