@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Newtonsoft.Json.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace BlazorDynamics.Common.Helpers
@@ -7,7 +8,7 @@ namespace BlazorDynamics.Common.Helpers
     {
         public static string ReplaceTokens<T>(string template, T obj)
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            if (EqualityComparer<T>.Default.Equals(obj, default)) { throw new ArgumentNullException(nameof(obj)); }
             if (template == null) return string.Empty;
             // Regex to find tokens in the format {PropertyName}
             var tokenRegex = new Regex(@"\{(?<token>[^\}]+)\}", RegexOptions.None, TimeSpan.FromMilliseconds(100));
