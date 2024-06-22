@@ -65,17 +65,19 @@ public class SchemaReader : ISchemaReader
     private JToken NavigateArrayPath(JToken currentToken, string part)
     {
         string propertyName = part.Substring(0, part.IndexOf('['));
-        currentToken = currentToken["properties"]?[propertyName];
+        currentToken = currentToken["properties"]?[propertyName] ?? JValue.CreateNull(); ;
+      
+        if (currentToken.Type.Equals(JTokenType.Null )) { return JValue.CreateNull(); }
 
         int index = ExtractArrayIndex(part);
 
         if (currentToken["items"]?.Type == JTokenType.Array)  // Handle tuple scenario
         {
-            return currentToken["items"]?[index];
+            return currentToken["items"]?[index] ?? JValue.CreateNull(); ;
         }
         else  // Handle standard array of single type scenario
         {
-            return currentToken["items"];
+            return currentToken["items"] ??  JValue.CreateNull(); ;
         }
     }
 
