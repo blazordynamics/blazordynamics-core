@@ -10,7 +10,7 @@ namespace BlazorDynamics.Common.Helpers
             if (obj == null) throw new ArgumentNullException(nameof(obj));
             if (template == null) return string.Empty;
             // Regex to find tokens in the format {PropertyName}
-            var tokenRegex = new Regex(@"\{(?<token>[^\}]+)\}");
+            var tokenRegex = new Regex(@"\{(?<token>[^\}]+)\}", RegexOptions.None, TimeSpan.FromMilliseconds(100));
 
             return tokenRegex.Replace(template, match =>
             {
