@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <ProjectGuid>2d717f7a-2a2b-4f3b-8d4f-6c458f7b47d2</ProjectGuid>
+    <SonarQubeExclude>true</SonarQubeExclude>
   </PropertyGroup>
 
   <PropertyGroup>

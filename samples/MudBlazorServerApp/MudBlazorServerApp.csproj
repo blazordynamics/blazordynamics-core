@@ -6,6 +6,7 @@
     <IsPackable>false</IsPackable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ProjectGuid>07c2867b-ce81-4eb2-b6dc-0d490ab36fca</ProjectGuid>
+    <SonarQubeExclude>true</SonarQubeExclude>
   </PropertyGroup>
 
   <ItemGroup>
