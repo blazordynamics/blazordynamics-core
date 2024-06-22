@@ -4,7 +4,7 @@
 @namespace BlazorDynamics.Forms.Components
 
 <div class="@($"{Class} {FormComponent.Class}")">
-    @if (RuleEffect.SHOW != RuleEffect.HIDE)
+    @if (FormComponent.RuleEffect != RuleEffect.HIDE)
     {
         @ChildContent
     }
