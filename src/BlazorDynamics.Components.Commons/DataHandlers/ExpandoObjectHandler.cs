@@ -181,7 +181,7 @@ namespace BlazorDynamics.Forms.Commons.ObjectHandlers
 
                 // Check if the segment has an array indexer
                 var arrayIndex = -1; // Default to -1 to indicate no array index
-                var arrayPattern = new Regex(@"(\w+)\[(\d+)\]"); // Pattern to match 'name[index]'
+                var arrayPattern = new Regex(@"(\w+)\[(\d+)\]", RegexOptions.None, TimeSpan.FromMilliseconds(100)); // Pattern to match 'name[index]'
                 var match = arrayPattern.Match(segment);
                 if (match.Success)
                 {
@@ -234,7 +234,7 @@ namespace BlazorDynamics.Forms.Commons.ObjectHandlers
             for (int i = 0; i < segments.Length; i++)
             {
                 var segment = segments[i];
-                var arrayPattern = new Regex(@"(\w+)\[(\d+)\]");
+                var arrayPattern = new Regex(@"(\w+)\[(\d+)\]", RegexOptions.None, TimeSpan.FromMilliseconds(100));
                 var match = arrayPattern.Match(segment);
 
                 if (i == segments.Length - 1)
@@ -300,7 +300,7 @@ namespace BlazorDynamics.Forms.Commons.ObjectHandlers
 
                 // Check for array indexers
                 var arrayIndex = -1;
-                var arrayPattern = new Regex(@"(\w+)\[(\d+)\]");
+                var arrayPattern = new Regex(@"(\w+)\[(\d+)\]", RegexOptions.None, TimeSpan.FromMilliseconds(100));
                 var match = arrayPattern.Match(segment);
                 if (match.Success)
                 {
