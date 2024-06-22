@@ -9,6 +9,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
     <ProjectGuid>323dd684-67bb-4105-bb0e-353d5ce11453</ProjectGuid>
+    <SonarQubeExclude>true</SonarQubeExclude>
   </PropertyGroup>
 
   <ItemGroup>
