@@ -83,7 +83,7 @@ public class SchemaReader : ISchemaReader
 
     private static int ExtractArrayIndex(string part)
     {
-        return int.Parse(Regex.Match(part, @"\[(\d+)\]").Groups[1].Value);
+        return int.Parse(Regex.Match(part, @"\[(\d+)\]", RegexOptions.None, TimeSpan.FromMilliseconds(100)).Groups[1].Value);
     }
 
     private static bool IsArrayIndex(string part)
