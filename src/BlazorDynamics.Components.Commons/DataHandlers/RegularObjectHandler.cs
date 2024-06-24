@@ -52,7 +52,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
 
             var segments = NormalizePath(path).Split('.');
 
-            TraverseAndSet(segments, obj, value, path);
+            TraverseAndSet(segments, obj, value);
         }
 
         public void RemoveValue(string path, object obj)
@@ -61,7 +61,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
 
             var segments = NormalizePath(path).Split('.');
 
-            TraverseAndRemove(segments, obj, path);
+            TraverseAndRemove(segments, obj);
         }
 
         public int GetCounterValue(string path, object valueObject)
@@ -165,7 +165,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             return propInfo.GetValue(obj);
         }
 
-        private void TraverseAndSet(string[] segments, object currentObj, object value, string path)
+        private void TraverseAndSet(string[] segments, object currentObj, object value)
         {
             for (int i = 0; i < segments.Length; i++)
             {
@@ -174,7 +174,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
 
                 if (isLastSegment)
                 {
-                    SetValueToTarget(currentObj, segment, value, path);
+                    SetValueToTarget(currentObj, segment, value);
                     return;
                 }
                 else
@@ -187,7 +187,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             }
         }
 
-        private void SetValueToTarget(object targetObj, string segment, object value, string path)
+        private static void SetValueToTarget(object targetObj, string segment, object value)
         {
             if (IsIndexedProperty(segment))
             {
@@ -230,7 +230,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             return propInfo;
         }
 
-        private void TraverseAndRemove(string[] segments, object currentObj, string path)
+        private void TraverseAndRemove(string[] segments, object currentObj)
         {
             for (int i = 0; i < segments.Length; i++)
             {
@@ -246,7 +246,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
                     currentObj = GetSegmentValue(currentObj, segment);
 
                     if (currentObj == null)
-                        throw new Exception($"Property {segment} was null and could not traverse to {segments[i + 1]}");
+                        throw new ArgumentException($"Property {segment} was null and could not traverse to {segments[i + 1]}");
                 }
             }
         }
@@ -267,13 +267,13 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             var propertyInfo = targetObj.GetType().GetProperty(segment);
             if (propertyInfo == null)
             {
-                throw new Exception($"Property {segment} does not exist on the target object.");
+                throw new ArgumentException($"Property {segment} does not exist on the target object.");
             }
 
             SetDefaultValue(targetObj, propertyInfo);
         }
 
-        private void SetDefaultValue(object targetObj, PropertyInfo propertyInfo)
+        private static void SetDefaultValue(object targetObj, PropertyInfo propertyInfo)
         {
             if (propertyInfo.PropertyType.IsValueType && Nullable.GetUnderlyingType(propertyInfo.PropertyType) == null)
             {
@@ -308,7 +308,6 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
 
         private void TraverseAndAdd(string[] segments, object currentObj, object defaultValue, string path)
         {
-            var previousObj = currentObj;
             for (int i = 0; i < segments.Length; i++)
             {
                 var segment = segments[i];
@@ -318,14 +317,14 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
                 currentObj = GetSegmentValue(currentObj, segment);
 
                 if (currentObj == null)
-                    throw new NullReferenceException($"Property {segment} was null and could not traverse to {segments[i + 1]}");
+                    throw new ArgumentNullException($"Property {segment} was null and could not traverse to {segments[i + 1]}");
 
                 if (isLastSegment)
                     AddValueToTarget(currentObj, parentObj, segment, defaultValue, path);
             }
         }
 
-        private object GetSegmentValue(object obj, string segment)
+        private static object GetSegmentValue(object obj, string segment)
         {
             return IsIndexedProperty(segment) ? GetIndexedPropertyValue(obj, segment) : GetPropertyValue(obj, segment);
         }
@@ -334,7 +333,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
         {
             if (targetObj.GetType().IsArray)
             {
-                ExpandArray(targetObj, rootObj, segment, defaultValue, path);
+                ExpandArray(targetObj, rootObj, segment, defaultValue);
             }
             else if (targetObj is IList list)
             {
@@ -346,7 +345,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             }
         }
 
-        private void ExpandArray(object arrayObj, object rootObj, string segment, object newValue, string path)
+        private static void ExpandArray(object arrayObj, object rootObj, string segment, object newValue)
         {
             var array = (Array)arrayObj;
             var elementType = array.GetType().GetElementType();
