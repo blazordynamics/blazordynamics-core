@@ -191,7 +191,7 @@ namespace BlazorDynamics.Tests.DataHandlersTests
             string path = "Nested.InnerProperty";
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => _handler.RemoveValue(path, obj));
+            var ex = Assert.Throws<ArgumentException>(() => _handler.RemoveValue(path, obj));
             Assert.That(ex.Message, Is.EqualTo("Property Nested was null and could not traverse to InnerProperty"));
         }
 
