@@ -230,7 +230,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             return propInfo;
         }
 
-        private void TraverseAndRemove(string[] segments, object currentObj)
+        private static void TraverseAndRemove(string[] segments, object currentObj)
         {
             for (int i = 0; i < segments.Length; i++)
             {
@@ -251,7 +251,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             }
         }
 
-        private void RemoveValueFromTarget(object targetObj, string segment)
+        private static void RemoveValueFromTarget(object targetObj, string segment)
         {
             if (IsIndexedProperty(segment))
             {
@@ -306,7 +306,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             TraverseAndAdd(segments, obj, defaultValue, path);
         }
 
-        private void TraverseAndAdd(string[] segments, object currentObj, object defaultValue, string path)
+        private static void TraverseAndAdd(string[] segments, object currentObj, object defaultValue, string path)
         {
             for (int i = 0; i < segments.Length; i++)
             {
