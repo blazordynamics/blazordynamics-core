@@ -165,7 +165,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             return propInfo.GetValue(obj);
         }
 
-        private void TraverseAndSet(string[] segments, object currentObj, object value)
+        private static void TraverseAndSet(string[] segments, object currentObj, object value)
         {
             for (int i = 0; i < segments.Length; i++)
             {
@@ -262,7 +262,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             RemoveNonIndexedValue(targetObj, segment);
         }
 
-        private void RemoveNonIndexedValue(object targetObj, string segment)
+        private static void RemoveNonIndexedValue(object targetObj, string segment)
         {
             var propertyInfo = targetObj.GetType().GetProperty(segment);
             if (propertyInfo == null)
@@ -329,7 +329,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             return IsIndexedProperty(segment) ? GetIndexedPropertyValue(obj, segment) : GetPropertyValue(obj, segment);
         }
 
-        private void AddValueToTarget(object targetObj, object rootObj, string segment, object defaultValue, string path)
+        private static void AddValueToTarget(object targetObj, object rootObj, string segment, object defaultValue, string path)
         {
             if (targetObj.GetType().IsArray)
             {
