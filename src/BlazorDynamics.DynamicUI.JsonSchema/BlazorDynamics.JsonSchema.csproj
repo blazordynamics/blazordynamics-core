@@ -10,10 +10,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Azure.Identity" Version="1.11.3" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\BlazorDynamics.Contracts\BlazorDynamics.Contracts.csproj" />
     </ItemGroup>
 

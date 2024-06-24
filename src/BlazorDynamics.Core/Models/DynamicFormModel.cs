@@ -1,5 +1,5 @@
 using BlazorDynamics.Common.Enums;
-using BlazorDynamics.Core.Models.ParameterModels;
+using BlazorDynamics.Common.Models;
 using Newtonsoft.Json;
 
 namespace BlazorDynamics.Core.Models;

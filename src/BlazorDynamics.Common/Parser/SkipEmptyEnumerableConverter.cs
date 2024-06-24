@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections;
 
-namespace BlazorDynamics.Core.Parser;
+namespace BlazorDynamics.Common.Parser;
 public class SkipEmptyEnumerableConverter : JsonConverter
 {
     public override bool CanConvert(Type objectType)

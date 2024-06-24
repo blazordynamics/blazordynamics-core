@@ -1,4 +1,5 @@
-﻿using BlazorDynamics.Core.Models;
+﻿using BlazorDynamics.Common.Models;
+using BlazorDynamics.Core.Models;
 using BlazorDynamics.Core.Models.ParameterModels;
 using BlazorDynamics.Forms.Commons.Components;
 using Microsoft.AspNetCore.Components;

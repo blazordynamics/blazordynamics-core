@@ -1,16 +1,14 @@
-﻿using BlazorDynamics.Core.Models.ParameterModels;
+﻿using BlazorDynamics.Common.Models;
 
 namespace BlazorDynamics.Tests.Parameters
 {
     [TestFixture]
     public class ParameterListTests
     {
-
-       
         [Test]
         public void CanReceiveParametersThroughConstructor()
         {
-            //Arrange
+            // Arrange
             var parameters = new Dictionary<string, object>
             {
                 { "one", 1 },
@@ -18,19 +16,21 @@ namespace BlazorDynamics.Tests.Parameters
                 { "three", 3 }
             };
 
-            // act 
+            // Act 
             var sut = new ParameterList(parameters);
-            Assert.NotNull(sut);
+
+            // Assert
+            Assert.That(sut, Is.Not.Null);
             Assert.That(sut.Count(), Is.EqualTo(parameters.Count));
-            Assert.That(sut.Contains(parameters.ToArray()[0]));
-            Assert.That(sut.Contains(parameters.ToArray()[1]));
-            Assert.That(sut.Contains(parameters.ToArray()[2]));
+            Assert.That(sut.Contains(parameters.ToArray()[0]), Is.True);
+            Assert.That(sut.Contains(parameters.ToArray()[1]), Is.True);
+            Assert.That(sut.Contains(parameters.ToArray()[2]), Is.True);
         }
 
         [Test]
         public void CanReceiveParametersThroughConstructorAndAccessThemByEntries()
         {
-            //Arrange
+            // Arrange
             var parameters = new Dictionary<string, object>
             {
                 { "one", 1 },
@@ -38,25 +38,28 @@ namespace BlazorDynamics.Tests.Parameters
                 { "three", 3 }
             };
 
-            // act 
+            // Act 
             var sut = new ParameterList(parameters);
-            Assert.NotNull(sut);
+
+            // Assert
+            Assert.That(sut, Is.Not.Null);
             Assert.That(sut.Entries.Count(), Is.EqualTo(parameters.Count));
-            Assert.That(sut.Entries.Contains(parameters.ToArray()[0]));
-            Assert.That(sut.Entries.Contains(parameters.ToArray()[1]));
-            Assert.That(sut.Entries.Contains(parameters.ToArray()[2]));
+            Assert.That(sut.Entries.Contains(parameters.ToArray()[0]), Is.True);
+            Assert.That(sut.Entries.Contains(parameters.ToArray()[1]), Is.True);
+            Assert.That(sut.Entries.Contains(parameters.ToArray()[2]), Is.True);
         }
 
         [Test]
         public void CanAddParameterAfterConstruction()
         {
-            //Arrange
+            // Arrange
             var sut = new ParameterList();
 
-            // act 
+            // Act 
             sut.Add("one", 1);
 
-            Assert.NotNull(sut);
+            // Assert
+            Assert.That(sut, Is.Not.Null);
             Assert.That(sut.Entries.Count(), Is.EqualTo(1));
             Assert.That(sut.Entries.First().Key, Is.EqualTo("one"));
             Assert.That(sut.Entries.First().Value, Is.EqualTo(1));
@@ -65,7 +68,7 @@ namespace BlazorDynamics.Tests.Parameters
         [Test]
         public void CanAddParametersAfterConstruction()
         {
-            //Arrange
+            // Arrange
             var sut = new ParameterList();
             var parameters = new Dictionary<string, object>
             {
@@ -75,27 +78,29 @@ namespace BlazorDynamics.Tests.Parameters
             };
             var baseParameterList = new ParameterList(parameters);
 
-            // act 
+            // Act 
             sut.AddRange(baseParameterList);
 
-            Assert.NotNull(sut);
+            // Assert
+            Assert.That(sut, Is.Not.Null);
             Assert.That(sut.Entries.Count(), Is.EqualTo(parameters.Count));
-            Assert.That(sut.Entries.Contains(parameters.ToArray()[0]));
-            Assert.That(sut.Entries.Contains(parameters.ToArray()[1]));
-            Assert.That(sut.Entries.Contains(parameters.ToArray()[2]));
+            Assert.That(sut.Entries.Contains(parameters.ToArray()[0]), Is.True);
+            Assert.That(sut.Entries.Contains(parameters.ToArray()[1]), Is.True);
+            Assert.That(sut.Entries.Contains(parameters.ToArray()[2]), Is.True);
         }
 
         [Test]
         public void CanNotAddSameKeyParameterAfterConstruction()
         {
-            //Arrange
+            // Arrange
             var sut = new ParameterList();
 
-            // act 
+            // Act 
             sut.Add("one", 1);
-            sut.Add("one", 11);// will override value
+            sut.Add("one", 11); // will override value
 
-            Assert.NotNull(sut);
+            // Assert
+            Assert.That(sut, Is.Not.Null);
             Assert.That(sut.Entries.Count(), Is.EqualTo(1));
             Assert.That(sut.Entries.First().Key, Is.EqualTo("one"));
             Assert.That(sut.Entries.First().Value, Is.EqualTo(11));
@@ -104,14 +109,15 @@ namespace BlazorDynamics.Tests.Parameters
         [Test]
         public void CanNotAddSameKeyParameterAfterConstructionUsingIndexer()
         {
-            //Arrange
+            // Arrange
             var sut = new ParameterList();
 
-            // act 
+            // Act 
             sut["one"] = 1;
-            sut["one"] =  11;// will override value
+            sut["one"] = 11; // will override value
 
-            Assert.NotNull(sut);
+            // Assert
+            Assert.That(sut, Is.Not.Null);
             Assert.That(sut.Entries.Count(), Is.EqualTo(1));
             Assert.That(sut.Entries.First().Key, Is.EqualTo("one"));
             Assert.That(sut.Entries.First().Value, Is.EqualTo(11));
@@ -120,21 +126,21 @@ namespace BlazorDynamics.Tests.Parameters
         [Test]
         public void WillThrowErrorWhenKeyDoesntExists()
         {
-            //Arrange
+            // Arrange
             var sut = new ParameterList();
 
-            // act +  assert
-            Assert.Throws<KeyNotFoundException>(() => { object test = sut["not present"]; });
+            // Act + Assert
+            Assert.That(() => { object test = sut["not present"]; }, Throws.TypeOf<KeyNotFoundException>());
         }
 
         [Test]
         public void WillReturnEnumerator()
         {
-            //Arrange
-
+            // Arrange
             var sut = new ParameterList();
 
-            Assert.IsNotNull(sut.GetEnumerator());
+            // Assert
+            Assert.That(sut.GetEnumerator(), Is.Not.Null);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Dynamic;
 
-namespace BlazorDynamics.Forms.Commons.ObjectHandlers
+namespace BlazorDynamics.Forms.Commons.DataHandlers
 {
     public class DataObjectHelper
     {

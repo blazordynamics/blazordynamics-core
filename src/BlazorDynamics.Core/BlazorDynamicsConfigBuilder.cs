@@ -3,7 +3,7 @@ using BlazorDynamics.Core.Contracts;
 using BlazorDynamics.Core.Models;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BlazorDynamics.Extensions
+namespace BlazorDynamics.Core
 {
     public class BlazorDynamicsConfigBuilder
     {

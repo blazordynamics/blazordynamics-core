@@ -1,4 +1,4 @@
-﻿using BlazorDynamics.Extensions;
+﻿using BlazorDynamics.Core;
 
 namespace BlazorDynamics.RadzenComponents.Extensions
 {

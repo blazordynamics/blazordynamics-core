@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Reflection;
 
-namespace BlazorDynamics.Forms.Commons.ObjectHandlers
+namespace BlazorDynamics.Forms.Commons.DataHandlers
 {
     public class RegularObjectHandler : IValueHandler
     {
@@ -29,9 +29,80 @@ namespace BlazorDynamics.Forms.Commons.ObjectHandlers
             return obj;
         }
 
+        public static Dictionary<string, object> GetParameters(Type componentType, Dictionary<string, object> parameters, List<KeyValuePair<string, object>> completeListOfParameters)
+        {
+            var validParameters = new Dictionary<string, object>();
+            IEnumerable<string> componentProperties = GetPropertiesWithParameterAnnotation(componentType);
+
+            completeListOfParameters.ForEach(p =>
+            {
+                if (componentProperties.Contains(p.Key))
+                {
+                    validParameters.Add(p.Key, p.Value);
+                }
+            }
+            );
+
+
+            return validParameters;
+        }
+        public void SetValue(string path, object obj, object value)
+        {
+            ValidateInput(path, obj);
+
+            var segments = NormalizePath(path).Split('.');
+
+            TraverseAndSet(segments, obj, value, path);
+        }
+
+        public void RemoveValue(string path, object obj)
+        {
+            ValidateInput(path, obj);
+
+            var segments = NormalizePath(path).Split('.');
+
+            TraverseAndRemove(segments, obj, path);
+        }
+
+        public int GetCounterValue(string path, object valueObject)
+        {
+            var obj = GetValue(path, valueObject);
+
+            // Check if obj is null
+            if (obj == null)
+            {
+                return 0;
+            }
+
+            // Check if the object is a collection
+            if (obj is IEnumerable && !(obj is string))
+            {
+                int count = 0;
+
+                // Count the number of items in the collection
+                foreach (var item in (IEnumerable)obj)
+                {
+                    count++;
+                }
+
+                return count;
+            }
+
+            // If obj is not a collection, return 0 or some other default value
+            return 0;
+
+        }
+        public static List<string> GetPropertiesWithParameterAnnotation(Type componentType)
+        {
+            return componentType.GetProperties()
+                .Where(p => p.GetCustomAttribute<ParameterAttribute>() != null)
+                .Select(p => p.Name)
+                .ToList();
+        }
+
         private static void ValidateInput(string path, object obj)
         {
-            if (obj == null) { return;  }
+            if (obj == null) { return; }
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
         }
 
@@ -94,44 +165,38 @@ namespace BlazorDynamics.Forms.Commons.ObjectHandlers
             return propInfo.GetValue(obj);
         }
 
-        public void SetValue(string path, object obj, object value)
+        private void TraverseAndSet(string[] segments, object currentObj, object value, string path)
         {
-            ValidateInput(path, obj);
-
-            var segments = NormalizePath(path).Split('.');
-
             for (int i = 0; i < segments.Length; i++)
             {
                 var segment = segments[i];
+                bool isLastSegment = i == segments.Length - 1;
 
-                if (IsLastSegment(segments, i))
+                if (isLastSegment)
                 {
-                    if (IsIndexedProperty(segment))
-                    {
-                        SetIndexedPropertyValue(obj, segment, value);
-                    }
-                    else
-                    {
-                        SetPropertyValue(obj, segment, value);
-                    }
+                    SetValueToTarget(currentObj, segment, value, path);
+                    return;
                 }
                 else
                 {
-                    if (IsIndexedProperty(segment))
-                    {
-                        obj = GetIndexedPropertyValue(obj, segment);
-                    }
-                    else
-                    {
-                        obj = GetPropertyValue(obj, segment);
-                    }
+                    currentObj = GetSegmentValue(currentObj, segment);
+
+                    if (currentObj == null)
+                        throw new NullReferenceException($"Property {segment} was null and could not traverse to {segments[i + 1]}");
                 }
             }
         }
 
-        private static bool IsLastSegment(string[] segments, int currentIndex)
+        private void SetValueToTarget(object targetObj, string segment, object value, string path)
         {
-            return currentIndex == segments.Length - 1;
+            if (IsIndexedProperty(segment))
+            {
+                SetIndexedPropertyValue(targetObj, segment, value);
+            }
+            else
+            {
+                SetPropertyValue(targetObj, segment, value);
+            }
         }
 
         private static void SetPropertyValue(object obj, string propertyName, object value)
@@ -153,7 +218,7 @@ namespace BlazorDynamics.Forms.Commons.ObjectHandlers
             listObj[index] = value;
         }
 
-        private static PropertyInfo GetPropertyInfo(object obj, string propertyName)
+        private static PropertyInfo? GetPropertyInfo(object obj, string propertyName)
         {
             if (obj == null) { return null; }
             var propInfo = obj.GetType().GetProperty(propertyName);
@@ -165,59 +230,60 @@ namespace BlazorDynamics.Forms.Commons.ObjectHandlers
             return propInfo;
         }
 
-        public static List<string> GetPropertiesWithParameterAnnotation(Type componentType)
+        private void TraverseAndRemove(string[] segments, object currentObj, string path)
         {
-            return componentType.GetProperties()
-                .Where(p => p.GetCustomAttribute<ParameterAttribute>() != null)
-                .Select(p => p.Name)
-                .ToList();
-        }
-
-        public static Dictionary<string, object> GetParameters(Type componentType, Dictionary<string, object> parameters, List<KeyValuePair<string, object>> completeListOfParameters)
-        {
-            var validParameters = new Dictionary<string, object>();
-            IEnumerable<string> componentProperties = GetPropertiesWithParameterAnnotation(componentType);
-
-            completeListOfParameters.ForEach(p =>
-            {
-                if (componentProperties.Contains(p.Key))
-                {
-                    validParameters.Add(p.Key, p.Value);
-                }
-            }
-            );
-
-
-            return validParameters;
-        }
-
-        public void RemoveValue(string path, object obj)
-        {
-            ValidateInput(path, obj);
-
-            var segments = NormalizePath(path).Split('.');
-
             for (int i = 0; i < segments.Length; i++)
             {
                 var segment = segments[i];
+                bool isLastSegment = i == segments.Length - 1;
 
-                if (IsLastSegment(segments, i))
+                if (isLastSegment)
                 {
-                    if (IsIndexedProperty(segment))
-                    {
-                        RemoveIndexedValue(obj, segment);
-                    }
-                    else
-                    {
-                        // Handle non-indexed properties if needed
-                        throw new Exception($"Cannot remove value for non-indexed property {segment}");
-                    }
+                    RemoveValueFromTarget(currentObj, segment);
                 }
                 else
                 {
-                    obj = IsIndexedProperty(segment) ? GetIndexedPropertyValue(obj, segment) : GetPropertyValue(obj, segment);
-                    if (obj == null) throw new Exception($"Property {segment} was null and could not traverse to {segments[i + 1]}");
+                    currentObj = GetSegmentValue(currentObj, segment);
+
+                    if (currentObj == null)
+                        throw new Exception($"Property {segment} was null and could not traverse to {segments[i + 1]}");
                 }
+            }
+        }
+
+        private void RemoveValueFromTarget(object targetObj, string segment)
+        {
+            if (IsIndexedProperty(segment))
+            {
+                RemoveIndexedValue(targetObj, segment);
+                return;
+            }
+
+            RemoveNonIndexedValue(targetObj, segment);
+        }
+
+        private void RemoveNonIndexedValue(object targetObj, string segment)
+        {
+            var propertyInfo = targetObj.GetType().GetProperty(segment);
+            if (propertyInfo == null)
+            {
+                throw new Exception($"Property {segment} does not exist on the target object.");
+            }
+
+            SetDefaultValue(targetObj, propertyInfo);
+        }
+
+        private void SetDefaultValue(object targetObj, PropertyInfo propertyInfo)
+        {
+            if (propertyInfo.PropertyType.IsValueType && Nullable.GetUnderlyingType(propertyInfo.PropertyType) == null)
+            {
+                // Handle non-nullable value types with their default value
+                propertyInfo.SetValue(targetObj, Activator.CreateInstance(propertyInfo.PropertyType));
+            }
+            else
+            {
+                // Set reference types or nullable value types to null
+                propertyInfo.SetValue(targetObj, null);
             }
         }
 
@@ -237,73 +303,57 @@ namespace BlazorDynamics.Forms.Commons.ObjectHandlers
 
             var segments = NormalizePath(path).Split('.');
 
+            TraverseAndAdd(segments, obj, defaultValue, path);
+        }
+
+        private void TraverseAndAdd(string[] segments, object currentObj, object defaultValue, string path)
+        {
+            var previousObj = currentObj;
             for (int i = 0; i < segments.Length; i++)
             {
                 var segment = segments[i];
+                bool isLastSegment = i == segments.Length - 1;
+                var parentObj = currentObj;
 
-                if (IsLastSegment(segments, i))
-                {
-                    // Get the property or indexed value
-                    var targetObj = IsIndexedProperty(segment) ? GetIndexedPropertyValue(obj, segment) : GetPropertyValue(obj, segment);
+                currentObj = GetSegmentValue(currentObj, segment);
 
-                    // Add to list or array
-                    if (targetObj is IList list)
-                    {
-                        list.Add(defaultValue);
-                    }
-                    else if (targetObj.GetType().IsArray)
-                    {
-                        var array = (Array)targetObj;
-                        var elementType = array.GetType().GetElementType();
-                        var newArray = Array.CreateInstance(elementType, array.Length + 1);
-                        Array.Copy(array, newArray, array.Length);
-                        newArray.SetValue(defaultValue, array.Length);
-                        SetPropertyValue(obj, segment, newArray); // Replace the old array with the new array
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException($"Expected a list or array at path '{path}', but found a different type.");
-                    }
-                }
-                else
-                {
-                    // Navigate to the next segment
-                    obj = IsIndexedProperty(segment) ? GetIndexedPropertyValue(obj, segment) : GetPropertyValue(obj, segment);
-                    if (obj == null)
-                    {
-                        throw new NullReferenceException($"Property {segment} was null and could not traverse to {segments[i + 1]}");
-                    }
-                }
+                if (currentObj == null)
+                    throw new NullReferenceException($"Property {segment} was null and could not traverse to {segments[i + 1]}");
+
+                if (isLastSegment)
+                    AddValueToTarget(currentObj, parentObj, segment, defaultValue, path);
             }
         }
 
-        public int GetCounterValue(string path, object valueObject)
+        private object GetSegmentValue(object obj, string segment)
         {
-            var obj = GetValue(path, valueObject);  
-            
-                // Check if obj is null
-                if (obj == null)
-                {
-                    return 0;
-                }
+            return IsIndexedProperty(segment) ? GetIndexedPropertyValue(obj, segment) : GetPropertyValue(obj, segment);
+        }
 
-                // Check if the object is a collection
-                if (obj is IEnumerable && !(obj is string))
-                {
-                    int count = 0;
+        private void AddValueToTarget(object targetObj, object rootObj, string segment, object defaultValue, string path)
+        {
+            if (targetObj.GetType().IsArray)
+            {
+                ExpandArray(targetObj, rootObj, segment, defaultValue, path);
+            }
+            else if (targetObj is IList list)
+            {
+                list.Add(defaultValue);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Expected a list or array at path '{path}', but found type {targetObj.GetType().Name}.");
+            }
+        }
 
-                    // Count the number of items in the collection
-                    foreach (var item in (IEnumerable)obj)
-                    {
-                        count++;
-                    }
-
-                    return count;
-                }
-
-                // If obj is not a collection, return 0 or some other default value
-                return 0;
-            
+        private void ExpandArray(object arrayObj, object rootObj, string segment, object newValue, string path)
+        {
+            var array = (Array)arrayObj;
+            var elementType = array.GetType().GetElementType();
+            var newArray = Array.CreateInstance(elementType, array.Length + 1);
+            Array.Copy(array, newArray, array.Length);
+            newArray.SetValue(newValue, array.Length);
+            SetPropertyValue(rootObj, segment, newArray); // Replace the old array with the new array
         }
     }
 }

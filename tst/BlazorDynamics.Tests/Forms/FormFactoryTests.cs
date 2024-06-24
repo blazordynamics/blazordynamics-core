@@ -15,12 +15,10 @@ namespace BlazorDynamics.Tests.Forms
         {
             var model = FormFactory.VerticalLayout();
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.VerticalLayout));
         }
 
-       
-       
         [Test]
         public void BooleanComponent_NoParams_ReturnsCorrectModel()
         {
@@ -28,10 +26,9 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.BooleanComponent();
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Boolean));
         }
-
 
         [Test]
         public void StringComponentBuilder_WithPath_ReturnsBuilderWithCorrectPath()
@@ -43,12 +40,11 @@ namespace BlazorDynamics.Tests.Forms
             var builder = FormFactory.StringComponentBuilder(path);
 
             // Assert
-            Assert.NotNull(builder);
+            Assert.That(builder, Is.Not.Null);
             Assert.That(builder, Is.TypeOf<StringComponentBuilder>());
             var model = builder.Build();
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
         }
-
 
         [Test]
         public void StringComponent_WithLabelPathAndConfigure_ReturnsCorrectModel()
@@ -65,7 +61,7 @@ namespace BlazorDynamics.Tests.Forms
             });
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.String));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -78,7 +74,7 @@ namespace BlazorDynamics.Tests.Forms
             var builder = FormFactory.BooleanComponentBuilder();
 
             // Assert
-            Assert.NotNull(builder);
+            Assert.That(builder, Is.Not.Null);
             Assert.That(builder, Is.TypeOf<BooleanComponentBuilder>());
         }
 
@@ -96,11 +92,10 @@ namespace BlazorDynamics.Tests.Forms
             });
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.DateTime));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
-           
         }
 
         [Test]
@@ -110,7 +105,7 @@ namespace BlazorDynamics.Tests.Forms
             var builder = FormFactory.HorizontalLayoutBuilder();
 
             // Assert
-            Assert.NotNull(builder);
+            Assert.That(builder, Is.Not.Null);
             Assert.That(builder, Is.TypeOf<HorizontalLayoutBuilder>());
         }
 
@@ -121,7 +116,7 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.NumberComponent();
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Number));
         }
 
@@ -139,7 +134,7 @@ namespace BlazorDynamics.Tests.Forms
             });
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Number));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -161,7 +156,7 @@ namespace BlazorDynamics.Tests.Forms
             });
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Int));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -180,11 +175,10 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.ListComponent(label, path, builder => { });
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.List));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
-
         }
 
         [Test]
@@ -194,19 +188,16 @@ namespace BlazorDynamics.Tests.Forms
             string label = "TestLabel";
             string path = "TestPath";
             var options = new Dictionary<object, string>
-    {
-        { 1, "Option 1" },
-        { 2, "Option 2" }
-    };
+        {
+            { 1, "Option 1" },
+            { 2, "Option 2" }
+        };
 
             // Act
-            var model = FormFactory.DropDownComponent(label, options, path, builder =>
-            {
-
-            });
+            var model = FormFactory.DropDownComponent(label, options, path, builder => { });
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Dropdown));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -220,7 +211,7 @@ namespace BlazorDynamics.Tests.Forms
             var builder = FormFactory.DropDownComponentBuilder();
 
             // Assert
-            Assert.NotNull(builder);
+            Assert.That(builder, Is.Not.Null);
             Assert.That(builder, Is.TypeOf<DropDownComponentBuilder>());
         }
 
@@ -235,12 +226,11 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.DeleteAction(label, path);
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.DeleteAction));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
         }
-
 
         [Test]
         public void ListComponentBuilder_ReturnsNewInstance()
@@ -249,7 +239,7 @@ namespace BlazorDynamics.Tests.Forms
             var builder = FormFactory.ListComponentBuilder();
 
             // Assert
-            Assert.NotNull(builder);
+            Assert.That(builder, Is.Not.Null);
             Assert.That(builder, Is.TypeOf<ListComponentBuilder>());
         }
 
@@ -260,7 +250,7 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.DropDownComponent();
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Dropdown));
         }
 
@@ -274,11 +264,10 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.DropDownComponent(variationName);
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Dropdown));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
-
 
         [Test]
         public void IntComponentBuilder_ReturnsNewInstance()
@@ -287,7 +276,7 @@ namespace BlazorDynamics.Tests.Forms
             var builder = FormFactory.IntComponentBuilder();
 
             // Assert
-            Assert.NotNull(builder);
+            Assert.That(builder, Is.Not.Null);
             Assert.That(builder, Is.TypeOf<IntComponentBuilder>());
         }
 
@@ -298,7 +287,7 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.ListComponent();
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.List));
         }
 
@@ -312,12 +301,10 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.ListComponent(variationName);
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.List));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
-
-
 
         [Test]
         public void NumberComponentBuilder_ReturnsNewInstance()
@@ -326,9 +313,10 @@ namespace BlazorDynamics.Tests.Forms
             var builder = FormFactory.NumberComponentBuilder();
 
             // Assert
-            Assert.NotNull(builder);
+            Assert.That(builder, Is.Not.Null);
             Assert.That(builder, Is.TypeOf<NumberComponentBuilder>());
         }
+
         [Test]
         public void IntComponent_WithVariationName_ReturnsCorrectModel()
         {
@@ -339,7 +327,7 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.IntComponent(variationName);
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Int));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
@@ -351,10 +339,9 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.IntComponent();
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Int));
         }
-
 
         [Test]
         public void NumberComponent_WithVariationName_ReturnsCorrectModel()
@@ -366,11 +353,10 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.NumberComponent(variationName);
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Number));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
-
 
         [Test]
         public void DateTimeComponentBuilder_ReturnsNewInstance()
@@ -379,10 +365,9 @@ namespace BlazorDynamics.Tests.Forms
             var builder = FormFactory.DateTimeComponentBuilder();
 
             // Assert
-            Assert.NotNull(builder);
+            Assert.That(builder, Is.Not.Null);
             Assert.That(builder, Is.TypeOf<DateTimeComponentBuilder>());
         }
-
 
         [Test]
         public void AddSchemaRule_WithStringJsonSchema_AddsRuleToModel()
@@ -397,13 +382,12 @@ namespace BlazorDynamics.Tests.Forms
             var result = model.AddSchemaRule(ruleEffect, scope, jsonSchema);
 
             // Assert
-            Assert.NotNull(result);
+            Assert.That(result, Is.Not.Null);
             Assert.That(result.Rules.Count, Is.EqualTo(1));
             Assert.That(result.Rules.First().Effect, Is.EqualTo(ruleEffect));
             Assert.That(result.Rules.First().Condition.Scope, Is.EqualTo(scope));
             Assert.That(result.Rules.First().Condition.Schema.ToString(), Is.EqualTo(JObject.Parse(jsonSchema).ToString()));
         }
-
 
         [Test]
         public void GroupLayoutBuilder_ReturnsNewInstance()
@@ -412,10 +396,9 @@ namespace BlazorDynamics.Tests.Forms
             var builder = FormFactory.GroupLayoutBuilder();
 
             // Assert
-            Assert.NotNull(builder);
+            Assert.That(builder, Is.Not.Null);
             Assert.That(builder, Is.TypeOf<GroupLayoutBuilder>());
         }
-
 
         [Test]
         public void BoolComponent_WithVariationNameLabelAndPath_ReturnsCorrectModel()
@@ -429,13 +412,12 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.BoolComponent(variationName, label, path);
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Boolean));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
         }
-
 
         [Test]
         public void BoolComponent_WithLabelAndPath_ReturnsCorrectModel()
@@ -448,12 +430,11 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.BoolComponent(label, path);
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Boolean));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
         }
-
 
         [Test]
         public void StringComponent_WithVariationName_ReturnsCorrectModel()
@@ -465,11 +446,10 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.StringComponent(variationName);
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.String));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
-
 
         [Test]
         public void StringComponent_NoParams_ReturnsCorrectModel()
@@ -478,10 +458,9 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.StringComponent();
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.String));
         }
-
 
         [Test]
         public void StringDisplay_WithPath_ReturnsCorrectModel()
@@ -493,11 +472,10 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.StringDisplay(path);
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.StringDisplay));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
         }
-
 
         [Test]
         public void StringDisplay_WithLabelAndPath_ReturnsCorrectModel()
@@ -510,13 +488,11 @@ namespace BlazorDynamics.Tests.Forms
             var model = FormFactory.StringDisplay(label, path);
 
             // Assert
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.StringDisplay));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
         }
-
-
 
         [Test]
         public void VerticalLayout_WithVariationName_ReturnsCorrectModel()
@@ -524,7 +500,7 @@ namespace BlazorDynamics.Tests.Forms
             string variationName = "TestVariation";
             var model = FormFactory.VerticalLayout(variationName);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.VerticalLayout));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
@@ -533,17 +509,17 @@ namespace BlazorDynamics.Tests.Forms
         public void VerticalLayout_WithElements_ReturnsCorrectModel()
         {
             var elements = new DynamicFormModel[] {
-                new DynamicFormModel(TypeName.String),
-                new DynamicFormModel(TypeName.Boolean)
-            };
+            new DynamicFormModel(TypeName.String),
+            new DynamicFormModel(TypeName.Boolean)
+        };
 
             var model = FormFactory.VerticalLayout(elements);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.VerticalLayout));
             Assert.That(model.SubElements.Count, Is.EqualTo(elements.Length));
-            Assert.Contains(elements[0], model.SubElements);
-            Assert.Contains(elements[1], model.SubElements);
+            Assert.That(model.SubElements, Contains.Item(elements[0]));
+            Assert.That(model.SubElements, Contains.Item(elements[1]));
         }
 
         [Test]
@@ -554,7 +530,7 @@ namespace BlazorDynamics.Tests.Forms
                 builder.WithSubElement(FormFactory.StringComponent("Label", "Path"));
             });
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.VerticalLayout));
             Assert.That(model.SubElements.Count, Is.EqualTo(1));
             Assert.That(model.SubElements.First().DynamicType.TypeName, Is.EqualTo(TypeName.String));
@@ -566,7 +542,7 @@ namespace BlazorDynamics.Tests.Forms
         {
             var builder = FormFactory.VerticalLayoutBuilder();
 
-            Assert.NotNull(builder);
+            Assert.That(builder, Is.Not.Null);
             Assert.That(builder, Is.TypeOf<VerticalLayoutBuilder>());
         }
 
@@ -576,7 +552,7 @@ namespace BlazorDynamics.Tests.Forms
         {
             var model = FormFactory.HorizontalLayout();
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.HorizontalLayout));
         }
 
@@ -586,7 +562,7 @@ namespace BlazorDynamics.Tests.Forms
             string variationName = "TestVariation";
             var model = FormFactory.HorizontalLayout(variationName);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.HorizontalLayout));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
@@ -595,17 +571,17 @@ namespace BlazorDynamics.Tests.Forms
         public void HorizontalLayout_WithElements_ReturnsCorrectModel()
         {
             var elements = new DynamicFormModel[] {
-                new DynamicFormModel(TypeName.String),
-                new DynamicFormModel(TypeName.Boolean)
-            };
+            new DynamicFormModel(TypeName.String),
+            new DynamicFormModel(TypeName.Boolean)
+        };
 
             var model = FormFactory.HorizontalLayout(elements);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.HorizontalLayout));
             Assert.That(model.SubElements.Count, Is.EqualTo(elements.Length));
-            Assert.Contains(elements[0], model.SubElements);
-            Assert.Contains(elements[1], model.SubElements);
+            Assert.That(model.SubElements, Contains.Item(elements[0]));
+            Assert.That(model.SubElements, Contains.Item(elements[1]));
         }
 
         [Test]
@@ -616,7 +592,7 @@ namespace BlazorDynamics.Tests.Forms
                 builder.WithSubElement(FormFactory.StringComponent("Label", "Path"));
             });
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.HorizontalLayout));
             Assert.That(model.SubElements.Count, Is.EqualTo(1));
             Assert.That(model.SubElements.First().DynamicType.TypeName, Is.EqualTo(TypeName.String));
@@ -628,7 +604,7 @@ namespace BlazorDynamics.Tests.Forms
         {
             var model = FormFactory.GroupLayout();
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.GroupLayout));
         }
 
@@ -638,7 +614,7 @@ namespace BlazorDynamics.Tests.Forms
             string variationName = "TestVariation";
             var model = FormFactory.GroupLayout(variationName);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.GroupLayout));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
@@ -647,17 +623,17 @@ namespace BlazorDynamics.Tests.Forms
         public void GroupLayout_WithElements_ReturnsCorrectModel()
         {
             var elements = new DynamicFormModel[] {
-                new DynamicFormModel(TypeName.String),
-                new DynamicFormModel(TypeName.Boolean)
-            };
+            new DynamicFormModel(TypeName.String),
+            new DynamicFormModel(TypeName.Boolean)
+        };
 
             var model = FormFactory.GroupLayout(elements);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.GroupLayout));
             Assert.That(model.SubElements.Count, Is.EqualTo(elements.Length));
-            Assert.Contains(elements[0], model.SubElements);
-            Assert.Contains(elements[1], model.SubElements);
+            Assert.That(model.SubElements, Contains.Item(elements[0]));
+            Assert.That(model.SubElements, Contains.Item(elements[1]));
         }
 
         [Test]
@@ -668,7 +644,7 @@ namespace BlazorDynamics.Tests.Forms
                 builder.WithSubElement(FormFactory.StringComponent("Label", "Path"));
             });
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.GroupLayout));
             Assert.That(model.SubElements.Count, Is.EqualTo(1));
             Assert.That(model.SubElements.First().DynamicType.TypeName, Is.EqualTo(TypeName.String));
@@ -682,7 +658,7 @@ namespace BlazorDynamics.Tests.Forms
             string path = "TestPath";
             var model = FormFactory.StringComponent(label, path);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.String));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -695,7 +671,7 @@ namespace BlazorDynamics.Tests.Forms
             string path = "TestPath";
             var model = FormFactory.BooleanComponent(label, path);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Boolean));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -734,7 +710,7 @@ namespace BlazorDynamics.Tests.Forms
             string path = "TestPath";
             var model = FormFactory.NumberDisplay(label, path);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.NumberDisplay));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -747,7 +723,7 @@ namespace BlazorDynamics.Tests.Forms
             string path = "TestPath";
             var model = FormFactory.NumberComponent(label, path);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Number));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -760,7 +736,7 @@ namespace BlazorDynamics.Tests.Forms
             string path = "TestPath";
             var model = FormFactory.TemplateDisplay(variationName, path);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.TemplateContent));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -773,14 +749,14 @@ namespace BlazorDynamics.Tests.Forms
             string label = "TestLabel";
             string path = "TestPath";
             var options = new Dictionary<object, string>
-            {
-                { 1, "Option 1" },
-                { 2, "Option 2" }
-            };
+        {
+            { 1, "Option 1" },
+            { 2, "Option 2" }
+        };
 
             var model = FormFactory.DropDownComponent(label, path, options);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Dropdown));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -794,19 +770,19 @@ namespace BlazorDynamics.Tests.Forms
             string path = "TestPath";
             var elements = new DynamicFormModel[]
             {
-                FormFactory.StringComponent("Label1", "Path1"),
-                FormFactory.NumberComponent("Label2", "Path2")
+            FormFactory.StringComponent("Label1", "Path1"),
+            FormFactory.NumberComponent("Label2", "Path2")
             };
 
             var model = FormFactory.ListComponent(label, path, elements);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.List));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
             Assert.That(model.SubElements.Count, Is.EqualTo(elements.Length));
-            Assert.Contains(elements[0], model.SubElements);
-            Assert.Contains(elements[1], model.SubElements);
+            Assert.That(model.SubElements, Contains.Item(elements[0]));
+            Assert.That(model.SubElements, Contains.Item(elements[1]));
         }
 
         [Test]
@@ -818,7 +794,7 @@ namespace BlazorDynamics.Tests.Forms
 
             var model = FormFactory.AddAction(label, path, defaultValue);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.AddAction));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -832,7 +808,7 @@ namespace BlazorDynamics.Tests.Forms
 
             var model = FormFactory.SubmitAction(label);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.SubmitAction));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
         }
@@ -844,7 +820,7 @@ namespace BlazorDynamics.Tests.Forms
             string variationName = "BooleanVariation";
             var model = FormFactory.BooleanComponent(variationName);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Boolean));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
@@ -855,7 +831,7 @@ namespace BlazorDynamics.Tests.Forms
         {
             var model = FormFactory.DateTimeComponent();
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.DateTime));
         }
 
@@ -865,7 +841,7 @@ namespace BlazorDynamics.Tests.Forms
             string variationName = "DateTimeVariation";
             var model = FormFactory.DateTimeComponent(variationName);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.DateTime));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
         }
@@ -877,7 +853,7 @@ namespace BlazorDynamics.Tests.Forms
             string path = "TestPath";
             var model = FormFactory.DateTimeComponent(label, path);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.DateTime));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -890,7 +866,7 @@ namespace BlazorDynamics.Tests.Forms
             string path = "TestPath";
             var model = FormFactory.IntComponent(label, path);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Int));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
@@ -904,11 +880,12 @@ namespace BlazorDynamics.Tests.Forms
             string path = "TestPath";
             var model = FormFactory.IntComponent(variationName, label, path);
 
-            Assert.NotNull(model);
+            Assert.That(model, Is.Not.Null);
             Assert.That(model.DynamicType.TypeName, Is.EqualTo(TypeName.Int));
             Assert.That(model.DynamicType.VariationName, Is.EqualTo(variationName));
             Assert.That(model.Parameters[ParameterNames.Label], Is.EqualTo(label));
             Assert.That(model.Parameters[ParameterNames.Path], Is.EqualTo(path));
         }
     }
+
 }

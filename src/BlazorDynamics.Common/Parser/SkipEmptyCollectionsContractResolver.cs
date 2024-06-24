@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using System.Reflection;
-using BlazorDynamics.Core.Models.ParameterModels;
+using BlazorDynamics.Common.Models;
 
 
-namespace BlazorDynamics.Core.Parser;
+namespace BlazorDynamics.Common.Parser;
 
 public class SkipEmptyCollectionsContractResolver<T> : CamelCasePropertyNamesContractResolver
 {

@@ -8,11 +8,7 @@
       <ProjectGuid>94f2238b-1fc8-49cb-8fde-6f668f946e8c</ProjectGuid>
     </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Azure.Identity" Version="1.11.3" />
-    </ItemGroup>
-
-    <ItemGroup>
+  <ItemGroup>
       <ProjectReference Include="..\BlazorDynamics.Common\BlazorDynamics.Common.csproj" />
     </ItemGroup>
 

@@ -1,9 +1,9 @@
 using MudBlazor;
 using MudBlazor.Services;
 using SharedDemos.Shared;
-using BlazorDynamics.Extensions;
 using BlazorDynamics.MudBlazorComponents.Extensions;
 using BlazorDynamics.RadzenComponents.Extensions;
+using BlazorDynamics.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
