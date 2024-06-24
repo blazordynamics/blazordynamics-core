@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-namespace BlazorDynamics.Core.Parser;
+namespace BlazorDynamics.Common.Parser;
 
 public class OptionsDictionaryConverter : JsonConverter
 {

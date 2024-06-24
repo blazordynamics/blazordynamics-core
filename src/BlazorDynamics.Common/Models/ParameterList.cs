@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace BlazorDynamics.Core.Models.ParameterModels
+namespace BlazorDynamics.Common.Models
 {
     public class ParameterList : IEnumerable<KeyValuePair<string, object>>
     {

@@ -1,4 +1,4 @@
-﻿namespace BlazorDynamics.Forms.Commons.ObjectHandlers
+﻿namespace BlazorDynamics.Forms.Commons.DataHandlers
 {
     public interface IValueHandler
     {

@@ -1,4 +1,6 @@
-﻿namespace BlazorDynamics.Core.Models.ParameterModels
+﻿using BlazorDynamics.Common.Models;
+
+namespace BlazorDynamics.Core.Models.ParameterModels
 {
     public class AddActionParameters
     {

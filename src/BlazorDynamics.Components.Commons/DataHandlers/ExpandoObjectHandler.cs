@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace BlazorDynamics.Forms.Commons.ObjectHandlers
+namespace BlazorDynamics.Forms.Commons.DataHandlers
 {
     public class ExpandoObjectHandler : IValueHandler
     {
@@ -147,7 +147,7 @@ namespace BlazorDynamics.Forms.Commons.ObjectHandlers
         public int GetCounterValue(string path, object obj)
         {
             var pathValue = GetValue(path, obj);
-            if(pathValue == null) { return 0; }
+            if (pathValue == null) { return 0; }
             // Check if the value is a collection and return its count
             if (pathValue is List<object> currentList)
             {

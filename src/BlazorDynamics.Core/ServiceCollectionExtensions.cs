@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace BlazorDynamics.Extensions
+namespace BlazorDynamics.Core
 {
     public static class ServiceCollectionExtensions
     {
-       
-        public static IServiceCollection AddBlazorDynamics(this IServiceCollection services, 
+
+        public static IServiceCollection AddBlazorDynamics(this IServiceCollection services,
             Action<BlazorDynamicsConfigBuilder> configAction = null)
         {
             var builder = new BlazorDynamicsConfigBuilder();
@@ -14,6 +14,6 @@ namespace BlazorDynamics.Extensions
 
             return services;
         }
-      
+
     }
 }

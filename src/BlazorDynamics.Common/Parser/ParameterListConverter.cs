@@ -1,10 +1,10 @@
 ﻿using BlazorDynamics.Common.Helpers;
-using BlazorDynamics.Core.Models.ParameterModels;
+using BlazorDynamics.Common.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Dynamic;
 
-namespace BlazorDynamics.Core.Parser
+namespace BlazorDynamics.Common.Parser
 {
     public class ParameterListConverter : JsonConverter
     {

@@ -1,5 +1,5 @@
-﻿using BlazorDynamics.Core.Models;
-using BlazorDynamics.Core.Parser;
+﻿using BlazorDynamics.Common.Parser;
+using BlazorDynamics.Core.Models;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 

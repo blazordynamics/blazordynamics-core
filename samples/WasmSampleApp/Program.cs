@@ -4,9 +4,9 @@ using MudBlazor.Services;
 using MudBlazor;
 using WasmSampleApp;
 using SharedDemos.Shared;
-using BlazorDynamics.Extensions;
 using BlazorDynamics.MudBlazorComponents.Extensions;
 using BlazorDynamics.RadzenComponents.Extensions;
+using BlazorDynamics.Core;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

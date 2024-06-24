@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace BlazorDynamics.Core.Parser
+namespace BlazorDynamics.Common.Parser
 {
     public class ModelParser<T>
     {
@@ -30,7 +30,7 @@ namespace BlazorDynamics.Core.Parser
             }
             catch (Exception)
             {
-                return default(T);
+                return default;
             }
         }
     }
