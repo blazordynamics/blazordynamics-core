@@ -55,13 +55,13 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             TraverseAndSet(segments, obj, value);
         }
 
-        public void RemoveValue(string path, object obj)
+        public void RemoveValue(string path, object value)
         {
-            ValidateInput(path, obj);
+            ValidateInput(path, value);
 
             var segments = NormalizePath(path).Split('.');
 
-            TraverseAndRemove(segments, obj);
+            TraverseAndRemove(segments, value);
         }
 
         public int GetCounterValue(string path, object obj)

@@ -5,13 +5,14 @@ namespace BlazorDynamics.Common.Helpers
 {
     public class TokenReplacer
     {
-        public TokenReplacer()
+        protected TokenReplacer()
         {
             
         }
 
-        public static string ReplaceTokens<T>(string template, T obj)
+        public static string ReplaceTokens<T>(string? template, T obj)
         {
+            if (template == null) return string.Empty;
             if (EqualityComparer<T>.Default.Equals(obj, default)) { throw new ArgumentNullException(nameof(obj)); }
             if (template == null) return string.Empty;
             // Regex to find tokens in the format {PropertyName}

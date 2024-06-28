@@ -13,13 +13,14 @@ namespace BlazorDynamics.Common.Parser
             return objectType == typeof(ParameterList);
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
+            if(value == null) { writer.WriteNull(); return; }
             var parameterList = value as ParameterList;
             if (parameterList != null && parameterList.Entries != null && parameterList.Entries.Count != 0)
             {
                 var jObject = new JObject();
-                foreach (var kvp in parameterList?.Entries)
+                foreach (var kvp in parameterList?.Entries?? new Dictionary<string, object>())
                 {
                     if (kvp.Key != null && kvp.Value != null)
                     {
@@ -31,7 +32,7 @@ namespace BlazorDynamics.Common.Parser
             }
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             var jObject = JObject.Load(reader);
             var parameters = new Dictionary<string, object>();
@@ -49,7 +50,7 @@ namespace BlazorDynamics.Common.Parser
                 }
                 else
                 {
-                    parameters.Add(propertyName, property.Value.ToObject<object>(serializer));
+                    parameters.Add(propertyName, property?.Value?.ToObject<object>(serializer)?? string.Empty);
                 }
             }
 
@@ -62,7 +63,7 @@ namespace BlazorDynamics.Common.Parser
             var result = new Dictionary<object, string>();
             foreach (var property in jObject.Properties())
             {
-                result[property.Name] = ConvertJTokenToObject(property.Value)?.ToString();
+                result[property.Name] = ConvertJTokenToObject(property.Value)?.ToString() ?? string.Empty;
             }
             return result;
         }
@@ -72,7 +73,7 @@ namespace BlazorDynamics.Common.Parser
             switch (token.Type)
             {
                 case JTokenType.Object:
-                    return ConvertJObjectToDictionary(token as JObject);
+                    return ConvertJObjectToDictionary(jObject: (JObject)token);
                 case JTokenType.Array:
                     var list = new List<object>();
                     foreach (var item in token.Children())
@@ -81,11 +82,11 @@ namespace BlazorDynamics.Common.Parser
                     }
                     return list;
                 default:
-                    return token.ToObject<object>();
+                    return token.ToObject<object>() ?? JValue.CreateNull();
             }
         }
 
-        public static object ConvertJTokenToExpando(JToken token)
+        public static object? ConvertJTokenToExpando(JToken token)
         {
             if (token.Type == JTokenType.Object)
             {
@@ -103,7 +104,7 @@ namespace BlazorDynamics.Common.Parser
             }
         }
 
-        private static object ConvertJTokenToExpandoOrValue(JToken token)
+        private static object? ConvertJTokenToExpandoOrValue(JToken token)
         {
             switch (token.Type)
             {
