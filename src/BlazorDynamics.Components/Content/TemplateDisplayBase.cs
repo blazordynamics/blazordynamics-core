@@ -8,19 +8,9 @@ namespace BlazorDynamics.Forms.Components.Content
     {
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 
-        public string StringValue { get { return Convert.ToString(GetValue() ?? ""); } }
-
-        public String GetValue(string path)
-        {
-            if (Value == null || string.IsNullOrEmpty(path))
-            {
-                return string.Empty;
-            }
-          
-                return Convert.ToString(DataObjectHelper.GetValue(GetInstancePath(path), Value) ?? "");
-        }
-
-        public string GetValue(string path, string format = null)
+        public string StringValue { get { return Convert.ToString(GetValue() ?? "") ?? string.Empty; } }
+       
+        public string GetValue(string path, string? format = null)
         {
             if (Value == null || string.IsNullOrEmpty(path))
             {
@@ -40,12 +30,12 @@ namespace BlazorDynamics.Forms.Components.Content
                 else
                 {
                     // If valueObject is not a formattable type, ignore the format string
-                    return valueObject.ToString();
+                    return valueObject?.ToString() ?? string.Empty;
                 }
             }
 
             // If no format is provided or valueObject is null, convert the value to a string normally
-            return Convert.ToString(valueObject ?? "");
+            return Convert.ToString(valueObject ?? "") ?? string.Empty;
         }
 
 
