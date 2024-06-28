@@ -19,48 +19,81 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             path = path.TrimStart('$').TrimStart('.');
             var segments = path.Split('.');
 
+            expando = AddValueForSegemnts(path, expando, defaultExpando, segments);
+        }
+
+        private static IDictionary<string, object> AddValueForSegemnts(string path, IDictionary<string, object> expando, ExpandoObject defaultExpando, string[] segments)
+        {
             for (int i = 0; i < segments.Length; i++)
             {
-                var segment = segments[i];
+                expando = AddValuePerSegment(path, expando, defaultExpando, segments, i);
+            }
+            return expando;
+        }
 
-                if (i == segments.Length - 1)
+        private static IDictionary<string, object> AddValuePerSegment(string path, IDictionary<string, object> expando, ExpandoObject defaultExpando, string[] segments, int i)
+        {
+            var segment = segments[i];
+
+            if (i == segments.Length - 1)
+            {
+                AddValueForLastSegment(path, expando, defaultExpando, segment);
+            }
+
+            else
+            {
+                GetNextSegment(ref expando, segment);
+            }
+
+            return expando;
+        }
+
+        private static void AddValueForLastSegment(string path, IDictionary<string, object> expando, ExpandoObject defaultExpando, string segment)
+        {
+            if (expando.TryGetValue(segment, out var currentValue))
+            {
+                // Handle List<object>
+                if (currentValue is List<object> currentList)
                 {
-                    if (expando.TryGetValue(segment, out var currentValue))
-                    {
-                        // Handle List<object>
-                        if (currentValue is List<object> currentList)
-                        {
-                            currentList.Add(defaultExpando);
-                        }
-                        // Handle Array
-                        else if (currentValue.GetType().IsArray)
-                        {
-                            var array = (Array)currentValue;
-                            var elementType = array.GetType().GetElementType();
-                            var newArray = Array.CreateInstance(elementType, array.Length + 1);
-                            Array.Copy(array, newArray, array.Length);
-                            newArray.SetValue(defaultExpando, array.Length);
-                            expando[segment] = newArray; // Replace old array with new array
-                        }
-                        else
-                        {
-                            // Not a list or array
-                            throw new InvalidOperationException($"Expected a list or array at path '{path}', but found a different type.");
-                        }
-                    }
-                    else
-                    {
-                        // Segment not found, create new list
-                        var newList = new List<object> { defaultExpando };
-                        expando[segment] = newList;
-                    }
+                    AddValueToList(defaultExpando, currentList);
                 }
-
+                // Handle Array
+                else if (currentValue.GetType().IsArray)
+                {
+                    AddValueToArray(expando, defaultExpando, segment, currentValue);
+                }
                 else
                 {
-                    GetNextSegment(ref expando, segment);
+                    // Not a list or array
+                    throw new InvalidOperationException($"Expected a list or array at path '{path}', but found a different type.");
                 }
             }
+            else
+            {
+                AddValueToNewList(expando, defaultExpando, segment);
+            }
+        }
+
+        private static void AddValueToNewList(IDictionary<string, object> expando, ExpandoObject defaultExpando, string segment)
+        {
+            // Segment not found, create new list
+            var newList = new List<object> { defaultExpando };
+            expando[segment] = newList;
+        }
+
+        private static void AddValueToList(ExpandoObject defaultExpando, List<object> currentList)
+        {
+            currentList.Add(defaultExpando);
+        }
+
+        private static void AddValueToArray(IDictionary<string, object> expando, ExpandoObject defaultExpando, string segment, object currentValue)
+        {
+            var array = (Array)currentValue;
+            var elementType = array.GetType().GetElementType();
+            var newArray = Array.CreateInstance(elementType, array.Length + 1);
+            Array.Copy(array, newArray, array.Length);
+            newArray.SetValue(defaultExpando, array.Length);
+            expando[segment] = newArray; // Replace old array with new array
         }
 
         private static object GetNextSegment(ref IDictionary<string, object> expando, string segment)
@@ -84,25 +117,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
 
             if (isArrayIndex)
             {
-                // Process segment with array index
-                if (!expando.TryGetValue(arrayName, out obj) || !(obj is IList<object> currentList))
-                {
-                    currentList = new List<object>();
-                    expando[arrayName] = currentList;
-                }
-
-                while (currentList.Count <= arrayIndex)
-                {
-                    currentList.Add(new ExpandoObject());
-                }
-
-                obj = currentList[arrayIndex];
-                if (!(obj is IDictionary<string, object> nextExpando))
-                {
-                    nextExpando = new ExpandoObject();
-                    currentList[arrayIndex] = nextExpando;
-                }
-                expando = nextExpando;
+                obj = ProcessSegmentWithArrayIndex(ref expando, arrayIndex, arrayName);
             }
             else
             {
@@ -115,6 +130,31 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
                 expando = nextExpando;
             }
 
+            return obj;
+        }
+
+        private static object ProcessSegmentWithArrayIndex(ref IDictionary<string, object> expando, int arrayIndex, string arrayName)
+        {
+            object obj;
+           
+            if (!expando.TryGetValue(arrayName, out obj) || !(obj is IList<object> currentList))
+            {
+                currentList = new List<object>();
+                expando[arrayName] = currentList;
+            }
+
+            while (currentList.Count <= arrayIndex)
+            {
+                currentList.Add(new ExpandoObject());
+            }
+
+            obj = currentList[arrayIndex];
+            if (!(obj is IDictionary<string, object> nextExpando))
+            {
+                nextExpando = new ExpandoObject();
+                currentList[arrayIndex] = nextExpando;
+            }
+            expando = nextExpando;
             return obj;
         }
 
@@ -181,7 +221,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
 
                 // Check if the segment has an array indexer
                 var arrayIndex = -1; // Default to -1 to indicate no array index
-                var arrayPattern = new Regex(@"(\w+)\[(\d+)\]", RegexOptions.None, TimeSpan.FromMilliseconds(100)); // Pattern to match 'name[index]'
+                var arrayPattern = GetRegexPatternForCollection();
                 var match = arrayPattern.Match(segment);
                 if (match.Success)
                 {
@@ -231,47 +271,26 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
 
             path = path.TrimStart('$').TrimStart('.');
             var segments = path.Split('.');
+            expando = removeValueWithSegments(path, expando, segments);
+        }
+
+        private static IDictionary<string, object> removeValueWithSegments(string path, IDictionary<string, object> expando, string[] segments)
+        {
             for (int i = 0; i < segments.Length; i++)
             {
                 var segment = segments[i];
-                var arrayPattern = new Regex(@"(\w+)\[(\d+)\]", RegexOptions.None, TimeSpan.FromMilliseconds(100));
+                var arrayPattern = GetRegexPatternForCollection();
                 var match = arrayPattern.Match(segment);
 
                 if (i == segments.Length - 1)
                 {
                     if (match.Success)
                     {
-                        // Handle array/list removal
-                        segment = match.Groups[1].Value;
-                        int arrayIndex = int.Parse(match.Groups[2].Value);
-
-                        if (expando.TryGetValue(segment, out var listObj) && listObj is IList<object> list)
-                        {
-                            if (arrayIndex >= 0 && arrayIndex < list.Count)
-                            {
-                                list.RemoveAt(arrayIndex);
-                            }
-                            else
-                            {
-                                throw new IndexOutOfRangeException($"Index {arrayIndex} is out of range for list at '{path}'.");
-                            }
-                        }
-                        else
-                        {
-                            throw new KeyNotFoundException($"List key '{segment}' not found in ExpandoObject.");
-                        }
+                        segment = RemoveCollection(path, expando, match);
                     }
                     else
                     {
-                        // Remove the key for non-list/array segment
-                        if (expando.ContainsKey(segment))
-                        {
-                            expando.Remove(segment);
-                        }
-                        else
-                        {
-                            throw new KeyNotFoundException($"Key '{segment}' not found in ExpandoObject.");
-                        }
+                        RemoveKeyForNonCollectionSegment(expando, segment);
                     }
                 }
                 else
@@ -279,8 +298,47 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
                     GetNextSegment(ref expando, segment);
                 }
             }
+
+            return expando;
         }
 
+        private static void RemoveKeyForNonCollectionSegment(IDictionary<string, object> expando, string segment)
+        {
+            // Remove the key for non-list/array segment
+            if (expando.ContainsKey(segment))
+            {
+                expando.Remove(segment);
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Key '{segment}' not found in ExpandoObject.");
+            }
+        }
+
+        private static string RemoveCollection(string path, IDictionary<string, object> expando, Match match)
+        {
+            // Handle array/list removal
+            string segment = match.Groups[1].Value;
+            int arrayIndex = int.Parse(match.Groups[2].Value);
+
+            if (expando.TryGetValue(segment, out var listObj) && listObj is IList<object> list)
+            {
+                if (arrayIndex >= 0 && arrayIndex < list.Count)
+                {
+                    list.RemoveAt(arrayIndex);
+                }
+                else
+                {
+                    throw new IndexOutOfRangeException($"Index {arrayIndex} is out of range for list at '{path}'.");
+                }
+            }
+            else
+            {
+                throw new KeyNotFoundException($"List key '{segment}' not found in ExpandoObject.");
+            }
+
+            return segment;
+        }
 
         public void SetValue(string path, object obj, object value)
         {
@@ -294,13 +352,18 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             path = path.TrimStart('.');
 
             var segments = path.Split('.');
+            SetValueForSegmentCollection(ref obj, value, ref expando, segments);
+        }
+
+        private static void SetValueForSegmentCollection(ref object obj, object value, ref IDictionary<string, object> expando, string[] segments)
+        {
             for (int i = 0; i < segments.Length; i++)
             {
                 var segment = segments[i];
 
                 // Check for array indexers
                 var arrayIndex = -1;
-                var arrayPattern = new Regex(@"(\w+)\[(\d+)\]", RegexOptions.None, TimeSpan.FromMilliseconds(100));
+                Regex arrayPattern = GetRegexPatternForCollection();
                 var match = arrayPattern.Match(segment);
                 if (match.Success)
                 {
@@ -310,15 +373,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
 
                 if (i == segments.Length - 1)
                 {
-                    // Handle setting value for an array element
-                    if (arrayIndex >= 0 && expando[segment] is IList<object> list && arrayIndex < list.Count)
-                    {
-                        list[arrayIndex] = value;
-                    }
-                    else
-                    {
-                        expando[segment] = value;
-                    }
+                    SetValueForArraySegement(value, expando, segment, arrayIndex);
                 }
                 else
                 {
@@ -365,6 +420,22 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             }
         }
 
+        private static void SetValueForArraySegement(object value, IDictionary<string, object> expando, string segment, int arrayIndex)
+        {
+            // Handle setting value for an array element
+            if (arrayIndex >= 0 && expando[segment] is IList<object> list && arrayIndex < list.Count)
+            {
+                list[arrayIndex] = value;
+            }
+            else
+            {
+                expando[segment] = value;
+            }
+        }
 
+        private static Regex GetRegexPatternForCollection()
+        {
+            return new Regex(@"(\w+)\[(\d+)\]", RegexOptions.None, TimeSpan.FromMilliseconds(100));
+        }
     }
 }
