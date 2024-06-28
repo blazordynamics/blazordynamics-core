@@ -105,7 +105,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             {
                 var arrayIndex = -1;
                 // Extract array name and index from segment
-                var arrayName = segment.Substring(0, segment.IndexOf("["));
+                var arrayName = segment.Substring(0, segment.IndexOf('['));
                 var indexStr = segment.Substring(segment.IndexOf('[') + 1, segment.Length - arrayName.Length - 2);
                 if (!int.TryParse(indexStr, out arrayIndex))
                 {
