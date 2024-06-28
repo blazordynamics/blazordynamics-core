@@ -221,13 +221,13 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
 
 
 
-        public void RemoveValue(string path, object obj)
+        public void RemoveValue(string path, object value)
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
 
-            if (!(obj is IDictionary<string, object> expando))
-                throw new ArgumentException("Object must be of type ExpandoObject", nameof(obj));
+            if (!(value is IDictionary<string, object> expando))
+                throw new ArgumentException("Object must be of type ExpandoObject", nameof(value));
 
             path = path.TrimStart('$').TrimStart('.');
             var segments = path.Split('.');
