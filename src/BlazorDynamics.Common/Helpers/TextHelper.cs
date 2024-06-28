@@ -2,6 +2,10 @@
 {
     internal class TextHelper
     {
+        private TextHelper()
+        {
+        }
+
         internal static String FirstCharToLower(string input)
         {
             if (string.IsNullOrEmpty(input) || char.IsLower(input[0]))

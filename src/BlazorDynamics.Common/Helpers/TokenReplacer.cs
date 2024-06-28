@@ -5,6 +5,11 @@ namespace BlazorDynamics.Common.Helpers
 {
     public class TokenReplacer
     {
+        public TokenReplacer()
+        {
+            
+        }
+
         public static string ReplaceTokens<T>(string template, T obj)
         {
             if (EqualityComparer<T>.Default.Equals(obj, default)) { throw new ArgumentNullException(nameof(obj)); }
@@ -18,12 +23,12 @@ namespace BlazorDynamics.Common.Helpers
                 string propertyName = match.Groups["token"].Value;
 
                 // Get the property from the object
-                PropertyInfo property = typeof(T).GetProperty(propertyName);
+                PropertyInfo? property = typeof(T).GetProperty(propertyName);
 
                 if (property != null)
                 {
                     // Get the value of the property and convert it to string
-                    object value = property.GetValue(obj);
+                    object? value = property.GetValue(obj);
                     return value?.ToString() ?? "";
                 }
 

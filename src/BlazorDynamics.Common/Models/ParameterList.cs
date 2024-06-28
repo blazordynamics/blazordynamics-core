@@ -1,10 +1,11 @@
 ﻿using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace BlazorDynamics.Common.Models
 {
     public class ParameterList : IEnumerable<KeyValuePair<string, object>>
     {
-        Dictionary<string, object> parameters = new Dictionary<string, object>();
+        readonly Dictionary<string, object>  parameters = new Dictionary<string, object>();
         public ParameterList(Dictionary<string, object> parameters)
         {
             foreach (var item in parameters)
@@ -22,13 +23,9 @@ namespace BlazorDynamics.Common.Models
 
         public ParameterList Add(string key, object value)
         {
-            if (parameters.ContainsKey(key))
+            if (!parameters.TryAdd(key, value))
             {
                 parameters[key] = value;
-            }
-            else
-            {
-                parameters.Add(key, value);
             }
             return this;
         }
