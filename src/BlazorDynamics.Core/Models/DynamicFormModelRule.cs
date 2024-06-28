@@ -8,9 +8,9 @@ public class DynamicFormModelRule
 
     public DynamicFormModelRuleCondition Condition { get; }
 
-    public DynamicFormModelRule(RuleEffect effect, DynamicFormModelRuleCondition condition)
+    public DynamicFormModelRule(RuleEffect? effect, DynamicFormModelRuleCondition condition)
     {
-        Effect = effect;
+        Effect = effect?? RuleEffect.SHOW;
         Condition = condition;
     }
 }

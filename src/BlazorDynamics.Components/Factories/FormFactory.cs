@@ -247,16 +247,7 @@ namespace BlazorDynamics.Forms.Components.Factories
         {
             return new DynamicFormModel(TypeName.DateTime, variationName);
         }
-
-        public static DynamicFormModel DateTimeComponent(string label, string path)
-        {
-            return new DynamicFormModel()
-            {
-                DynamicType = new ComponentSelectionKey(TypeName.DateTime),
-                Parameters = DeleteActionParameters.Set(label, path)
-            };
-        }
-
+              
         public static DynamicFormModel DateTimeComponent(string label, string path, Action<DateTimeComponentBuilder>? configure = null)
         {
             var builder = new DateTimeComponentBuilder();
