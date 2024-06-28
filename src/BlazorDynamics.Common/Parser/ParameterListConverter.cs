@@ -20,7 +20,7 @@ namespace BlazorDynamics.Common.Parser
             if (parameterList != null && parameterList.Entries != null && parameterList.Entries.Count != 0)
             {
                 var jObject = new JObject();
-                foreach (var kvp in parameterList?.Entries?? new Dictionary<string, object>())
+                foreach (var kvp in parameterList.Entries)
                 {
                     if (kvp.Key != null && kvp.Value != null)
                     {
@@ -46,7 +46,7 @@ namespace BlazorDynamics.Common.Parser
                 }
                 else if (propertyName == "DefaultValue")
                 {
-                    parameters.Add(propertyName, ConvertJTokenToExpando(property.Value));
+                    parameters.Add(propertyName, ConvertJTokenToExpando(property.Value) ?? JValue.CreateNull());
                 }
                 else
                 {
@@ -86,14 +86,15 @@ namespace BlazorDynamics.Common.Parser
             }
         }
 
-        public static object? ConvertJTokenToExpando(JToken token)
+        public static object? ConvertJTokenToExpando(JToken? token)
         {
+            if(token == null) return null;
             if (token.Type == JTokenType.Object)
             {
                 var expando = new ExpandoObject() as IDictionary<string, object>;
                 foreach (var property in token.Children<JProperty>())
                 {
-                    expando.Add(property.Name, ConvertJTokenToExpandoOrValue(property.Value));
+                    expando.Add(property.Name, ConvertJTokenToExpandoOrValue(property.Value) ?? JValue.CreateNull());
                 }
                 return expando as ExpandoObject;
             }

@@ -14,7 +14,6 @@ namespace BlazorDynamics.Common.Helpers
         {
             if (template == null) return string.Empty;
             if (EqualityComparer<T>.Default.Equals(obj, default)) { throw new ArgumentNullException(nameof(obj)); }
-            if (template == null) return string.Empty;
             // Regex to find tokens in the format {PropertyName}
             var tokenRegex = new Regex(@"\{(?<token>[^\}]+)\}", RegexOptions.None, TimeSpan.FromMilliseconds(100));
 
