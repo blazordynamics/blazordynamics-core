@@ -11,13 +11,13 @@ namespace BlazorDynamics.Forms.Commons
     public partial class BlazorDynamicsForm : ComponentBase
     {
         [Parameter]
-        public JObject Schema { get; set; }
+        public JObject Schema { get; set; } = new JObject();
 
         [Parameter]
-        public JToken UISchema { get; set; }
+        public JToken UISchema { get; set; } = JValue.CreateNull();
 
         [Parameter]
-        public object Data { get; set; }
+        public object? Data { get; set; } = null;
 
         [Parameter]
         public EventCallback<object?> ValueChanged { get; set; }

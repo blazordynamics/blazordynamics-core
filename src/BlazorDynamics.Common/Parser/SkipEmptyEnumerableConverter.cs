@@ -15,8 +15,9 @@ public class SkipEmptyEnumerableConverter : JsonConverter
         get { return true; }
     }
 
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
+        if (value == null) { writer.WriteNull(); return; }
         var enumerable = value as IEnumerable;
         if (enumerable != null && enumerable.Cast<object>().Any())
         {
@@ -29,14 +30,27 @@ public class SkipEmptyEnumerableConverter : JsonConverter
         }
     }
 
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
         JToken token = JToken.Load(reader);
         if (token.Type == JTokenType.Array)
         {
             var elementType = objectType.IsArray ? objectType.GetElementType() : objectType.GetGenericArguments()[0];
+            if (elementType == null)
+            {
+                return existingValue ?? Activator.CreateInstance(objectType);
+            }
+
             var array = token.ToObject(Array.CreateInstance(elementType, 0).GetType(), serializer);
-            return typeof(List<>).MakeGenericType(elementType).GetConstructor(new[] { array.GetType() }).Invoke(new[] { array });
+            if (array == null)
+            {
+                return existingValue ?? Activator.CreateInstance(objectType);
+            }
+
+            return typeof(List<>).MakeGenericType(elementType)
+                    .GetConstructor([array.GetType()])
+                    .Invoke([array]);
+
         }
         return existingValue ?? Activator.CreateInstance(objectType);
     }

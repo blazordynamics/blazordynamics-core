@@ -5,7 +5,7 @@ namespace BlazorDynamics.Common.Parser
 {
     public class ModelParser<T>
     {
-        private JsonSerializerSettings settings = new JsonSerializerSettings
+        private readonly JsonSerializerSettings settings = new JsonSerializerSettings
         {
             Converters = new List<JsonConverter> {
                 new OptionsDictionaryConverter(),
@@ -22,11 +22,11 @@ namespace BlazorDynamics.Common.Parser
             return JsonConvert.SerializeObject(dynamicFormModel, settings);
         }
 
-        public T Deserialize(string jsonModel)
+        public T? Deserialize(string jsonModel)
         {
             try
             {
-                return JsonConvert.DeserializeObject<T>(jsonModel, settings);
+                return JsonConvert.DeserializeObject<T>(jsonModel, settings) ?? default;
             }
             catch (Exception)
             {
