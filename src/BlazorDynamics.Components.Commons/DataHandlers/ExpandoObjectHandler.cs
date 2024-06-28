@@ -22,13 +22,12 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             AddValueForSegemnts(path, expando, defaultExpando, segments);
         }
 
-        private static IDictionary<string, object> AddValueForSegemnts(string path, IDictionary<string, object> expando, ExpandoObject defaultExpando, string[] segments)
+        private static void AddValueForSegemnts(string path, IDictionary<string, object> expando, ExpandoObject defaultExpando, string[] segments)
         {
             for (int i = 0; i < segments.Length; i++)
             {
                 expando = AddValuePerSegment(path, expando, defaultExpando, segments, i);
             }
-            return expando;
         }
 
         private static IDictionary<string, object> AddValuePerSegment(string path, IDictionary<string, object> expando, ExpandoObject defaultExpando, string[] segments, int i)
@@ -107,7 +106,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
                 var arrayIndex = -1;
                 // Extract array name and index from segment
                 var arrayName = segment.Substring(0, segment.IndexOf("["));
-                var indexStr = segment.Substring(segment.IndexOf("[") + 1, segment.Length - arrayName.Length - 2);
+                var indexStr = segment.Substring(segment.IndexOf('[') + 1, segment.Length - arrayName.Length - 2);
                 if (!int.TryParse(indexStr, out arrayIndex))
                 {
                     throw new ArgumentException("Invalid array index in path.", nameof(segment));
@@ -269,7 +268,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             removeValueWithSegments(path, expando, segments);
         }
 
-        private static IDictionary<string, object> removeValueWithSegments(string path, IDictionary<string, object> expando, string[] segments)
+        private static void removeValueWithSegments(string path, IDictionary<string, object> expando, string[] segments)
         {
             for (int i = 0; i < segments.Length; i++)
             {
@@ -293,8 +292,6 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
                     GetNextSegment(ref expando, segment);
                 }
             }
-
-            return expando;
         }
 
         private static void RemoveKeyForNonCollectionSegment(IDictionary<string, object> expando, string segment)
@@ -310,7 +307,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             }
         }
 
-        private static string RemoveCollection(string path, IDictionary<string, object> expando, Match match)
+        private static void RemoveCollection(string path, IDictionary<string, object> expando, Match match)
         {
             // Handle array/list removal
             string segment = match.Groups[1].Value;
@@ -331,8 +328,6 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             {
                 throw new KeyNotFoundException($"List key '{segment}' not found in ExpandoObject.");
             }
-
-            return segment;
         }
 
         public void SetValue(string path, object obj, object value)
