@@ -64,23 +64,23 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             TraverseAndRemove(segments, obj);
         }
 
-        public int GetCounterValue(string path, object valueObject)
+        public int GetCounterValue(string path, object obj)
         {
-            var obj = GetValue(path, valueObject);
+            var valueObject = GetValue(path, obj);
 
             // Check if obj is null
-            if (obj == null)
+            if (valueObject == null)
             {
                 return 0;
             }
 
             // Check if the object is a collection
-            if (obj is IEnumerable && !(obj is string))
+            if (valueObject is IEnumerable && !(valueObject is string))
             {
                 int count = 0;
 
                 // Count the number of items in the collection
-                foreach (var item in (IEnumerable)obj)
+                foreach (var item in (IEnumerable)valueObject)
                 {
                     count++;
                 }

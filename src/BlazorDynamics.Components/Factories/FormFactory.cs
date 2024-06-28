@@ -174,14 +174,6 @@ namespace BlazorDynamics.Forms.Components.Factories
             return new DynamicFormModel(TypeName.String);
         }
 
-        public static DynamicFormModel StringComponent(string label, string path)
-        {
-            return new StringComponentBuilder()
-                .WithLabel(label)
-                .WithPath(path)
-                .Build();
-        }
-
         public static DynamicFormModel StringComponent(string variationName)
         {
             return new DynamicFormModel(TypeName.String, variationName);
@@ -323,16 +315,6 @@ namespace BlazorDynamics.Forms.Components.Factories
         {
             return new DynamicFormModel(TypeName.Int, variationName);
         }
-
-        public static DynamicFormModel IntComponent(string label, string path)
-        {
-            return new DynamicFormModel()
-            {
-                DynamicType = new ComponentSelectionKey(TypeName.Int),
-                Parameters = BaseParameters.Set(label, path)
-            };
-        }
-
 
         public static DynamicFormModel IntComponent(string variationName, string label, string path)
         {
