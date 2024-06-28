@@ -19,7 +19,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             path = path.TrimStart('$').TrimStart('.');
             var segments = path.Split('.');
 
-            expando = AddValueForSegemnts(path, expando, defaultExpando, segments);
+            AddValueForSegemnts(path, expando, defaultExpando, segments);
         }
 
         private static IDictionary<string, object> AddValueForSegemnts(string path, IDictionary<string, object> expando, ExpandoObject defaultExpando, string[] segments)
@@ -101,22 +101,17 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             object obj;
             // Check if segment has an array index notation, e.g., "cars[0]"
             var isArrayIndex = segment.EndsWith("]") && segment.Contains("[");
-            var arrayIndex = -1;
-            string arrayName = null;
 
             if (isArrayIndex)
             {
+                var arrayIndex = -1;
                 // Extract array name and index from segment
-                arrayName = segment.Substring(0, segment.IndexOf("["));
+                var arrayName = segment.Substring(0, segment.IndexOf("[")) ?? "defaultArray";
                 var indexStr = segment.Substring(segment.IndexOf("[") + 1, segment.Length - arrayName.Length - 2);
                 if (!int.TryParse(indexStr, out arrayIndex))
                 {
                     throw new ArgumentException("Invalid array index in path.", nameof(segment));
                 }
-            }
-
-            if (isArrayIndex)
-            {
                 obj = ProcessSegmentWithArrayIndex(ref expando, arrayIndex, arrayName);
             }
             else
@@ -136,7 +131,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
         private static object ProcessSegmentWithArrayIndex(ref IDictionary<string, object> expando, int arrayIndex, string arrayName)
         {
             object obj;
-           
+
             if (!expando.TryGetValue(arrayName, out obj) || !(obj is IList<object> currentList))
             {
                 currentList = new List<object>();
@@ -271,7 +266,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
 
             path = path.TrimStart('$').TrimStart('.');
             var segments = path.Split('.');
-            expando = removeValueWithSegments(path, expando, segments);
+            removeValueWithSegments(path, expando, segments);
         }
 
         private static IDictionary<string, object> removeValueWithSegments(string path, IDictionary<string, object> expando, string[] segments)
@@ -286,7 +281,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
                 {
                     if (match.Success)
                     {
-                        segment = RemoveCollection(path, expando, match);
+                        RemoveCollection(path, expando, match);
                     }
                     else
                     {
@@ -377,47 +372,60 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
                 }
                 else
                 {
-                    if (!expando.TryGetValue(segment, out obj))
-                    {
-                        var nextExpando = new ExpandoObject();
-                        expando[segment] = nextExpando;
-                        obj = nextExpando;
-                    }
-
-                    if (arrayIndex >= 0)
-                    {
-                        // Navigate into the array
-                        if (obj is IList<object> list && arrayIndex < list.Count)
-                        {
-                            obj = list[arrayIndex];
-                        }
-                        else
-                        {
-                            // Handle case where the array or index doesn't exist
-                            var nextExpando = new ExpandoObject();
-                            if (obj is IList<object> existingList && arrayIndex == existingList.Count)
-                            {
-                                // Append new expando to the list
-                                existingList.Add(nextExpando);
-                            }
-                            else
-                            {
-                                // Replace or create a new list with the expando
-                                var newList = new List<object> { nextExpando };
-                                expando[segment] = newList;
-                            }
-                            obj = nextExpando;
-                        }
-                    }
-
-                    if (!(obj is IDictionary<string, object> nextExpandoDict))
-                    {
-                        nextExpandoDict = new ExpandoObject();
-                        expando[segment] = nextExpandoDict;
-                    }
-                    expando = nextExpandoDict;
+                    obj = getNextObjectForSegment(ref expando, segment, arrayIndex);
                 }
             }
+        }
+
+        private static object getNextObjectForSegment(ref IDictionary<string, object> expando, string segment, int arrayIndex)
+        {
+            object obj;
+            if (!expando.TryGetValue(segment, out obj))
+            {
+                var nextExpando = new ExpandoObject();
+                expando[segment] = nextExpando;
+                obj = nextExpando;
+            }
+
+            if (arrayIndex >= 0)
+            {
+                // Navigate into the array
+                if (obj is IList<object> list && arrayIndex < list.Count)
+                {
+                    obj = list[arrayIndex];
+                }
+                else
+                {
+                    obj = AddSegmentWhenNotExists(expando, segment, arrayIndex, obj);
+                }
+            }
+
+            if (!(obj is IDictionary<string, object> nextExpandoDict))
+            {
+                nextExpandoDict = new ExpandoObject();
+                expando[segment] = nextExpandoDict;
+            }
+            expando = nextExpandoDict;
+            return obj;
+        }
+
+        private static object AddSegmentWhenNotExists(IDictionary<string, object> expando, string segment, int arrayIndex, object obj)
+        {
+            // Handle case where the array or index doesn't exist
+            var nextExpando = new ExpandoObject();
+            if (obj is IList<object> existingList && arrayIndex == existingList.Count)
+            {
+                // Append new expando to the list
+                existingList.Add(nextExpando);
+            }
+            else
+            {
+                // Replace or create a new list with the expando
+                var newList = new List<object> { nextExpando };
+                expando[segment] = newList;
+            }
+            obj = nextExpando;
+            return obj;
         }
 
         private static void SetValueForArraySegement(object value, IDictionary<string, object> expando, string segment, int arrayIndex)
