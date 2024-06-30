@@ -15,7 +15,7 @@ namespace BlazorDynamics.Forms.Components.Builders
         private readonly ParameterList _customParameters = new ParameterList();
         public TBuilder WithComponentDefinitions(ComponentsList components)
         {
-            ArgumentNullException.ThrowIfNull(components, nameof(components));
+            ArgumentNullException.ThrowIfNull(components);
             _component.SetComponents(components);
             return GetBuilderToReturn();
 
