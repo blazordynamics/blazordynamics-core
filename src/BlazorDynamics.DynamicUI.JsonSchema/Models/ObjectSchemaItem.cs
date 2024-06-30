@@ -7,7 +7,7 @@ public class ObjectSchemaItem : SchemaItem
     public List<string>? RequiredElements { get; set; }
     public int? MaximumProperties { get; set; }
     public int? MinimumProperties { get; set; }
-    
+
     public ObjectSchemaItem(string path) : base(TypeName.Object, path)
     {
     }

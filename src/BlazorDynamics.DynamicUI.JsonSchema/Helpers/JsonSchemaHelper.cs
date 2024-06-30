@@ -8,7 +8,7 @@ namespace BlazorDynamics.DynamicUI.JsonSchema.Helpers;
 
 public static class JsonSchemaHelper
 {
-    public  static ISchemaItem ExtractSchemaInfo(JToken token)
+    public static ISchemaItem ExtractSchemaInfo(JToken token)
     {
         var type = token["type"].ToObject<JSchemaType>();
         switch (type)
@@ -25,8 +25,8 @@ public static class JsonSchemaHelper
                 return GetArray(token);
             case JSchemaType.Object:
                 return GetObject(token);
-                default:
-                    return new DefaultSchemaItem(token.Path);
+            default:
+                return new DefaultSchemaItem(token.Path);
         }
     }
 
@@ -41,7 +41,7 @@ public static class JsonSchemaHelper
             MultipleOf = token[JsonSchemaConstants.MultipleOf]?.ToObject<double>(),
         };
     }
-    
+
     private static ISchemaItem GetString(JToken token)
     {
         return new StringSchemaItem(token.Path)
@@ -52,12 +52,12 @@ public static class JsonSchemaHelper
             Format = token[JsonSchemaConstants.Format]?.ToObject<string>()
         };
     }
-    
+
     private static ISchemaItem GetBoolean(JToken token)
     {
         return new BoolSchemaItem(token.Path);
     }
-    
+
     private static ISchemaItem GetObject(JToken token)
     {
         return new ObjectSchemaItem(token.Path)
@@ -67,7 +67,7 @@ public static class JsonSchemaHelper
             MaximumProperties = token[JsonSchemaConstants.MaximumProperties]?.ToObject<int>()
         };
     }
-    
+
     private static ISchemaItem GetArray(JToken token)
     {
         return new ArraySchemaItem(token.Path)

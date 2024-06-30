@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using BlazorDynamics.Common.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Reflection;
-using BlazorDynamics.Common.Models;
 
 
 namespace BlazorDynamics.Common.Parser;
@@ -18,7 +18,7 @@ public class SkipEmptyCollectionsContractResolver<T> : CamelCasePropertyNamesCon
             {
                 var prop = member as PropertyInfo;
                 var parameterList = prop?.GetValue(instance) as ParameterList;
-                return parameterList != null && parameterList.Entries.Count()>0;
+                return parameterList != null && parameterList.Entries.Count() > 0;
             };
         }
         else if (property.PropertyType == typeof(List<T>))
@@ -27,7 +27,7 @@ public class SkipEmptyCollectionsContractResolver<T> : CamelCasePropertyNamesCon
             {
                 var prop = member as PropertyInfo;
                 var elements = prop?.GetValue(instance) as List<T>;
-                return elements != null && elements.Count() >0;
+                return elements != null && elements.Count() > 0;
             };
         }
 

@@ -8,13 +8,13 @@ namespace BlazorDynamics.Forms.Components.Input
     {
         [Parameter]
         public string Label { get; set; }
-        
+
         [Parameter]
-        public long? MinimumLength { get; set; } 
-        
+        public long? MinimumLength { get; set; }
+
         [Parameter]
-        public long? MaximumLength { get; set; } 
-        
+        public long? MaximumLength { get; set; }
+
         [Parameter]
         public string? Pattern { get; set; }
 
@@ -33,7 +33,7 @@ namespace BlazorDynamics.Forms.Components.Input
 
         public override void Validate()
         {
-            
+
             if (_localString.Length < (MinimumLength ?? 0) || _localString.Length > (MaximumLength ?? long.MaxValue))
             {
                 IsValid = false;

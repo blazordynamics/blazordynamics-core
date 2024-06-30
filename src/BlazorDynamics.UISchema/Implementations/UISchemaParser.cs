@@ -19,7 +19,7 @@ namespace BlazorDynamics.UISchema.Implementations
         {
             _scopeProvider = scopeProvider;
         }
-        
+
         public IEnumerable<ILayoutDescriptionItem> ParseUISchema(JToken UISchema)
         {
             var result = new List<ILayoutDescriptionItem>();
@@ -115,10 +115,10 @@ namespace BlazorDynamics.UISchema.Implementations
             var result = new HorizontalLayoutBuilder()
                 .WithElements(items)
                 .WithRule(ruleItem);
-            
+
             return result.Build();
         }
-        
+
         private VerticalLayoutDescriptionItem HandleVerticalLayoutItem(JToken token)
         {
             var items = new List<ILayoutDescriptionItem>();
@@ -131,7 +131,7 @@ namespace BlazorDynamics.UISchema.Implementations
 
             return result.Build();
         }
-        
+
         private GroupDescriptionItem HandleGroupItem(JToken token)
         {
             var items = new List<ILayoutDescriptionItem>();
@@ -150,7 +150,7 @@ namespace BlazorDynamics.UISchema.Implementations
         private RuleItem? HandleRuleItem(JToken? token)
         {
             if (token == null) return null;
-            
+
             var condition = token[UISchemaConstants.Condition].ToObject<RuleCondition>();
 
             var result = new RuleItemBuilder()
@@ -160,7 +160,7 @@ namespace BlazorDynamics.UISchema.Implementations
 
             return result;
         }
-        
+
         private CategorizationDescriptionItem HandleCategorizationItem(JToken token)
         {
             var items = new List<ILayoutDescriptionItem>();
@@ -175,7 +175,7 @@ namespace BlazorDynamics.UISchema.Implementations
 
             return result.Build();
         }
-        
+
         private CategoryDescriptionItem HandleCategoryItem(JToken token)
         {
             var items = new List<ILayoutDescriptionItem>();
@@ -184,7 +184,7 @@ namespace BlazorDynamics.UISchema.Implementations
             var result = new CategoryBuilder()
                 .WithLabel(token[UISchemaConstants.Label].ToString())
                 .WithElements(items);
-            
+
             return result.Build();
         }
     }

@@ -7,7 +7,7 @@ namespace BlazorDynamics.Common.Helpers
     {
         protected TokenReplacer()
         {
-            
+
         }
 
         public static string ReplaceTokens<T>(string? template, T obj)

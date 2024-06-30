@@ -5,7 +5,7 @@ namespace BlazorDynamics.Core.Models;
 
 public class ComponentSelectionKey
 {
-    
+
 
     public TypeName TypeName { get; }
 

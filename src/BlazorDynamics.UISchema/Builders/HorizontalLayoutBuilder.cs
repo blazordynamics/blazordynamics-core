@@ -6,7 +6,7 @@ internal class HorizontalLayoutBuilder
 {
     private IEnumerable<ILayoutDescriptionItem> _items;
     private RuleItem? _ruleItem;
-    
+
     internal HorizontalLayoutDescriptionItem Build()
     {
         if (ValidateBuild().Success)

@@ -5,7 +5,7 @@
 
         internal static string ConvertSchemaPathToJsonPath(string schemaPath)
         {
-            if(schemaPath.StartsWith('$') || schemaPath.StartsWith('@')) { return schemaPath; }
+            if (schemaPath.StartsWith('$') || schemaPath.StartsWith('@')) { return schemaPath; }
             // Remove the root symbol #
             string jsonPath = schemaPath.TrimStart('#');
 

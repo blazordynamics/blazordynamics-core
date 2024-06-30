@@ -7,7 +7,7 @@ internal class CategoryBuilder
     private IEnumerable<ILayoutDescriptionItem> _items;
     private string _label;
     private RuleItem _ruleItem;
-    
+
     internal CategoryDescriptionItem Build()
     {
         if (ValidateBuild().Success)
@@ -31,7 +31,7 @@ internal class CategoryBuilder
         _items = items;
         return this;
     }
-    
+
     internal CategoryBuilder WithLabel(string label)
     {
         _label = label;

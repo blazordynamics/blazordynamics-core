@@ -17,7 +17,7 @@ namespace SharedDemos.Shared
         {
             Components = components;
             OnSettingsChanged?.Invoke();
-            
+
         }
     }
 }

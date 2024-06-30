@@ -30,7 +30,7 @@ internal class GroupLayoutBuilder
         _items = items;
         return this;
     }
-    
+
     internal GroupLayoutBuilder WithLabel(string label)
     {
         _label = label;

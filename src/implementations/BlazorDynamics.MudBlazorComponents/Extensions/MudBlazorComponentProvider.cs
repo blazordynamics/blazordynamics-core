@@ -1,10 +1,10 @@
-﻿using BlazorDynamics.MudBlazorComponents.Actions;
+﻿using BlazorDynamics.Common.Enums;
+using BlazorDynamics.Core.Contracts;
+using BlazorDynamics.Core.Models;
+using BlazorDynamics.MudBlazorComponents.Actions;
 using BlazorDynamics.MudBlazorComponents.Content;
 using BlazorDynamics.MudBlazorComponents.Input;
 using BlazorDynamics.MudBlazorComponents.Layout;
-using BlazorDynamics.Common.Enums;
-using BlazorDynamics.Core.Contracts;
-using BlazorDynamics.Core.Models;
 
 namespace BlazorDynamics.MudBlazorComponents.Extensions
 {
@@ -29,7 +29,7 @@ namespace BlazorDynamics.MudBlazorComponents.Extensions
                 {new ComponentSelectionKey(TypeName.SubmitAction), typeof(SubmitAction) },
                 {new ComponentSelectionKey(TypeName.NumberDisplay), typeof(NumberDisplay) },
                 {new ComponentSelectionKey(TypeName.StringDisplay), typeof(StringDisplay) }
-    
+
             };
         }
     }

@@ -1,12 +1,12 @@
-﻿using BlazorDynamics.Forms.Commons.Utillities;
-using BlazorDynamics.Common.Enums;
-using Microsoft.AspNetCore.Components;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json;
+﻿using BlazorDynamics.Common.Enums;
 using BlazorDynamics.Core.Models;
 using BlazorDynamics.Core.Models.ParameterModels;
 using BlazorDynamics.Forms.Commons.DataHandlers;
+using BlazorDynamics.Forms.Commons.Utillities;
+using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 
 
 namespace BlazorDynamics.Forms.Commons.Components
@@ -129,8 +129,8 @@ namespace BlazorDynamics.Forms.Commons.Components
             foreach (var item in FormModel.Rules)
             {
                 var ruleEvaluationResult = EvaluateRule(item);
-                if(result == RuleEffect.SHOW && ruleEvaluationResult == RuleEffect.DISABLE) {  result = RuleEffect.DISABLE; }
-                if(ruleEvaluationResult == RuleEffect.HIDE) { result = RuleEffect.HIDE; break; }
+                if (result == RuleEffect.SHOW && ruleEvaluationResult == RuleEffect.DISABLE) { result = RuleEffect.DISABLE; }
+                if (ruleEvaluationResult == RuleEffect.HIDE) { result = RuleEffect.HIDE; break; }
             }
             RuleEffect = result;
         }
@@ -140,7 +140,7 @@ namespace BlazorDynamics.Forms.Commons.Components
             var dataJson = JsonConvert.SerializeObject(Value);
             var jsonObject = JObject.Parse(dataJson);
             var value = jsonObject.SelectToken(JsonSchemaPathHelpers.ConvertSchemaPathToJsonPath(rule.Condition.Scope));
-            if(value == null) { return RuleEffect.SHOW; }
+            if (value == null) { return RuleEffect.SHOW; }
             var isValid = value.IsValid(JSchema.Parse(rule.Condition.Schema.ToString()), out IList<string> errors);
             if (!isValid)
             {
@@ -187,7 +187,7 @@ namespace BlazorDynamics.Forms.Commons.Components
             }
             return Components[newKey];
         }
-    
+
 
         protected override void OnAfterRender(bool firstRender)
         {

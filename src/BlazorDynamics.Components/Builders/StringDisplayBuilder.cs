@@ -1,7 +1,7 @@
-﻿using BlazorDynamics.Forms.Components.Content;
-using BlazorDynamics.Common.Enums;
+﻿using BlazorDynamics.Common.Enums;
 using BlazorDynamics.Core.Models;
 using BlazorDynamics.Core.Models.ParameterModels;
+using BlazorDynamics.Forms.Components.Content;
 
 namespace BlazorDynamics.Forms.Components.Builders
 {

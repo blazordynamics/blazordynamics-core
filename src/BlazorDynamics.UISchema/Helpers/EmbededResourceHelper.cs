@@ -1,5 +1,5 @@
-using System.Reflection;
 using Newtonsoft.Json.Schema;
+using System.Reflection;
 
 namespace BlazorDynamics.UISchema.Helpers;
 

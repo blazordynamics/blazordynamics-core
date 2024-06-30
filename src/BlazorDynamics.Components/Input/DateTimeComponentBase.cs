@@ -21,11 +21,11 @@ namespace BlazorDynamics.Forms.Components.Input
 
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 
-       
+
 
         protected override void OnParametersSet()
         {
-           
+
             try
             {
                 _localDate = Convert.ToDateTime(GetValue());

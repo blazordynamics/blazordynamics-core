@@ -9,7 +9,7 @@ namespace MudBlazorServerApp.Pages
 {
     public partial class Index : ComponentBase
     {
-    private string result = string.Empty;
+        private string result = string.Empty;
 
         private void update()
         {
@@ -44,8 +44,8 @@ namespace MudBlazorServerApp.Pages
         private static DynamicFormModel ReadForm()
         {
             return FormFactory.HorizontalLayout(
-                FormFactory.StringDisplay( "$.name"),
-                FormFactory.StringDisplay( "$.city")
+                FormFactory.StringDisplay("$.name"),
+                FormFactory.StringDisplay("$.city")
                 );
         }
     }

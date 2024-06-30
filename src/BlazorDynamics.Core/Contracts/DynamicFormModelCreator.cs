@@ -143,7 +143,7 @@ public class DynamicFormModelCreator : IDynamicFormModelCreator
 
     private void HandleVerticalLayout(List<DynamicFormModel> result, VerticalLayoutDescriptionItem? verticalLayout)
     {
-        if(verticalLayout == null) { return; }
+        if (verticalLayout == null) { return; }
         var dynamicFormModel = new DynamicFormModel
         {
             DynamicType = new ComponentSelectionKey(TypeName.VerticalLayout),
@@ -151,9 +151,9 @@ public class DynamicFormModelCreator : IDynamicFormModelCreator
             Rules = new List<DynamicFormModelRule> { new DynamicFormModelRule(verticalLayout.Rule?.Effect,
                         new DynamicFormModelRuleCondition(verticalLayout.Rule.Condition.Scope, verticalLayout.Rule.Condition.Schema)) }
         };
-        HandleItemRules(verticalLayout,dynamicFormModel);
+        HandleItemRules(verticalLayout, dynamicFormModel);
         result.Add(dynamicFormModel);
-     
+
     }
 
     private void HandleHorizontalLayout(List<DynamicFormModel> result, ILayoutDescriptionItem item)
@@ -166,7 +166,7 @@ public class DynamicFormModelCreator : IDynamicFormModelCreator
             SubElements = GenerateModelsInternal(currentItem.Elements, new List<DynamicFormModel>()),
         };
 
-        HandleItemRules(item,dynamicFormModel);
+        HandleItemRules(item, dynamicFormModel);
 
         result.Add(dynamicFormModel);
     }

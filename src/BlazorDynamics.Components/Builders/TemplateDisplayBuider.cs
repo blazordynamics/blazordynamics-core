@@ -1,6 +1,6 @@
-﻿using BlazorDynamics.Forms.Components.Content;
-using BlazorDynamics.Common.Enums;
+﻿using BlazorDynamics.Common.Enums;
 using BlazorDynamics.Core.Models;
+using BlazorDynamics.Forms.Components.Content;
 
 namespace BlazorDynamics.Forms.Components.Builders
 {
@@ -15,7 +15,7 @@ namespace BlazorDynamics.Forms.Components.Builders
         public new DynamicFormModel Build()
         {
             var model = base.Build();
-            model.DynamicType = new ComponentSelectionKey(TypeName.TemplateContent,typeDefinitionName);
+            model.DynamicType = new ComponentSelectionKey(TypeName.TemplateContent, typeDefinitionName);
             return model;
         }
     }

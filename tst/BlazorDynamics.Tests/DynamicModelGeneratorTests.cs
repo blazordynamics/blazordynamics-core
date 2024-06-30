@@ -1,6 +1,6 @@
+using BlazorDynamics.Core.Contracts;
 using BlazorDynamics.DynamicUI.JsonSchema.Implementations;
 using BlazorDynamics.UISchema.Implementations;
-using BlazorDynamics.Core.Contracts;
 using Newtonsoft.Json.Linq;
 
 namespace BlazorDynamics.Tests

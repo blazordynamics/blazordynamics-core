@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorDynamics.Forms.Components.Content
 {
-    public class StringDisplayBase: DisplayFormComponent
+    public class StringDisplayBase : DisplayFormComponent
     {
         [Parameter]
         public string Label { get; set; }

@@ -1,7 +1,7 @@
-﻿using BlazorDynamics.Forms.Components.Input;
-using BlazorDynamics.Common.Enums;
+﻿using BlazorDynamics.Common.Enums;
 using BlazorDynamics.Core.Models;
 using BlazorDynamics.Core.Models.ParameterModels;
+using BlazorDynamics.Forms.Components.Input;
 
 namespace BlazorDynamics.Forms.Components.Builders
 {

@@ -46,7 +46,7 @@ namespace SharedDemos.Samples.Typed
         {
             public string name { get; set; }
 
-            public int age { get; set; } 
+            public int age { get; set; }
             public DateTime birthDate { get; set; }
             public Address second { get; set; } = new Address();
         }

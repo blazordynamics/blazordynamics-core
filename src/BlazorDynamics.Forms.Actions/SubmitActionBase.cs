@@ -8,7 +8,7 @@ namespace BlazorDynamics.Forms.Actions
     {
         [Parameter]
         public string Label { get; set; }
-      
+
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 
         public void Submit()

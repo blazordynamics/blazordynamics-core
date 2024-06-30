@@ -1,12 +1,12 @@
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using MudBlazor.Services;
-using MudBlazor;
-using WasmSampleApp;
-using SharedDemos.Shared;
+using BlazorDynamics.Core;
 using BlazorDynamics.MudBlazorComponents.Extensions;
 using BlazorDynamics.RadzenComponents.Extensions;
-using BlazorDynamics.Core;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor;
+using MudBlazor.Services;
+using SharedDemos.Shared;
+using WasmSampleApp;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

@@ -146,7 +146,7 @@ namespace BlazorDynamics.Tests.DataHandlersTests
             foreach (var key in expectedParameters.Keys)
             {
                 Assert.That(result.ContainsKey(key), Is.True);
-                Assert.That(expectedParameters[key], Is.EqualTo( result[key]));
+                Assert.That(expectedParameters[key], Is.EqualTo(result[key]));
             }
         }
         private class TestComponent
@@ -205,8 +205,8 @@ namespace BlazorDynamics.Tests.DataHandlersTests
             _handler.AddValue("List", obj, "Second");
 
             // Assert
-            Assert.That(2,Is.EqualTo( obj.List.Length));
-            Assert.That("Second", Is.EqualTo( obj.List[1]));
+            Assert.That(2, Is.EqualTo(obj.List.Length));
+            Assert.That("Second", Is.EqualTo(obj.List[1]));
         }
 
         private class TestClassArray

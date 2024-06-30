@@ -1,25 +1,25 @@
-using System.Reflection;
 using BlazorDynamics.Common.Enums;
+using System.Reflection;
 
 namespace BlazorDynamics.DynamicUI.JsonSchema.Models;
 
 public abstract class SchemaItem : ISchemaItem
 {
     public TypeName Type { get; }
-    
+
     public string Path { get; }
-    
+
     public string PropertyName { get; }
-    
+
     public Dictionary<string, object> ItemMetadata => GetPublicPropertiesAsDictionary(this);
-    
+
     protected SchemaItem(TypeName type, string path)
     {
         Type = type;
-        Path = ("$." + path).Replace(".properties",""); //todo fix this!
+        Path = ("$." + path).Replace(".properties", ""); //todo fix this!
         PropertyName = GetPropertyName(Path);
     }
-    
+
     private Dictionary<string, object> GetPublicPropertiesAsDictionary(object obj)
     {
         var dictionary = new Dictionary<string, object>();
@@ -35,7 +35,7 @@ public abstract class SchemaItem : ISchemaItem
 
         return dictionary;
     }
-    
+
     static string GetPropertyName(string jsonPath)
     {
         if (string.IsNullOrEmpty(jsonPath))

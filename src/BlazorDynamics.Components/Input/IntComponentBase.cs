@@ -27,7 +27,7 @@ namespace BlazorDynamics.Forms.Components.Input
             }
             catch (Exception)
             {
-                _numberValue =0;
+                _numberValue = 0;
                 IsValid = false;
             }
         }

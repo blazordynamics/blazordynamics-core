@@ -16,7 +16,7 @@ namespace BlazorDynamics.Forms.Components.Input
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 
         public bool? _booleanValue = false;
-        public bool? BooleanValue { get { return _booleanValue; } set { _booleanValue = value; ValueHandler.UpdateValue(this,_booleanValue); } }
+        public bool? BooleanValue { get { return _booleanValue; } set { _booleanValue = value; ValueHandler.UpdateValue(this, _booleanValue); } }
         protected override void OnParametersSet()
         {
             try
@@ -30,11 +30,11 @@ namespace BlazorDynamics.Forms.Components.Input
             }
         }
 
-      
+
         public override void Validate()
         {
 
-            if (!_booleanValue?? false && (NeedsToBeChecked ?? false))
+            if (!_booleanValue ?? false && (NeedsToBeChecked ?? false))
             {
                 IsValid = false;
 

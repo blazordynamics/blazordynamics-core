@@ -10,7 +10,7 @@ namespace BlazorDynamics.UISchema.Builders
         private bool _showLabel;
         private Dictionary<string, object> _scopeMetadata;
         private RuleItem? _ruleItem;
-        
+
         internal ControlDescriptionItem Build()
         {
 
@@ -46,7 +46,7 @@ namespace BlazorDynamics.UISchema.Builders
             _scope = scope;
             return this;
         }
-        
+
         internal ControlItemBuilder WithLabel(string? label, bool showLabel = true)
         {
             _label = label;
@@ -59,8 +59,8 @@ namespace BlazorDynamics.UISchema.Builders
             _options = options;
             return this;
         }
-        
-        internal ControlItemBuilder WithScopeMetadata(Dictionary<string,object> scopeMetadata)
+
+        internal ControlItemBuilder WithScopeMetadata(Dictionary<string, object> scopeMetadata)
         {
             _scopeMetadata = scopeMetadata;
             return this;

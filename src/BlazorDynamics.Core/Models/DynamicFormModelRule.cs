@@ -10,7 +10,7 @@ public class DynamicFormModelRule
 
     public DynamicFormModelRule(RuleEffect? effect, DynamicFormModelRuleCondition condition)
     {
-        Effect = effect?? RuleEffect.SHOW;
+        Effect = effect ?? RuleEffect.SHOW;
         Condition = condition;
     }
 }
