@@ -15,7 +15,7 @@ namespace BlazorDynamics.Forms.Components.Builders
         private readonly ParameterList _customParameters = new ParameterList();
         public TBuilder WithComponentDefinitions(ComponentsList components)
         {
-            if (components == null) throw new ArgumentNullException(nameof(components));
+            ArgumentNullException.ThrowIfNull(components, nameof(components));
             _component.SetComponents(components);
             return GetBuilderToReturn();
 
@@ -86,7 +86,7 @@ namespace BlazorDynamics.Forms.Components.Builders
             if (_component?.ValueChanged != null)
             {
                 _component.SetValueChanged(valueChanged);
-            };
+            }
             return GetBuilderToReturn();
         }
 
