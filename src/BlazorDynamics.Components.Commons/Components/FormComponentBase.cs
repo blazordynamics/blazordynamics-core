@@ -16,7 +16,7 @@ namespace BlazorDynamics.Forms.Commons.Components
         public RuleEffect RuleEffect { get; private set; } = RuleEffect.SHOW;
 
         [Parameter]
-        public ComponentsList? Components { get; set; } = new ComponentsList();
+        public ComponentsList? Components { get;  set; } = [];
 
         [Parameter] public bool EditMode { get; set; } = false;
 
@@ -24,13 +24,13 @@ namespace BlazorDynamics.Forms.Commons.Components
         public bool AllowElements { get; set; } = false;
 
         [Parameter]
-        public string Path { get; set; }
+        public string Path { get; set; } = string.Empty;
 
         [Parameter]
-        public object? Value { get; set; }
+        public object? Value { get;  set; }
 
         [Parameter]
-        public string IteratorPath { get; set; }
+        public string IteratorPath { get; set; } = string.Empty;
 
         [Parameter]
         public FormComponentBase? Parent { get; set; }
@@ -42,7 +42,7 @@ namespace BlazorDynamics.Forms.Commons.Components
         public string? Style { get; set; }
 
         [Parameter]
-        public string? Class { get; set; }
+        public string? ClassName { get; set; }
 
         [Parameter]
         public EventCallback<object?> OnSubmitted { get; set; }
@@ -75,7 +75,17 @@ namespace BlazorDynamics.Forms.Commons.Components
             base.OnParametersSet();
         }
 
-        public object GetValue()
+        public void SetComponents(ComponentsList components)
+        {
+            Components = components;
+        }
+
+        public void SetPath(string path)
+        {
+            Path = path;
+        }
+
+        public object? GetValue()
         {
             if (Value == null || string.IsNullOrEmpty(Path))
             {
@@ -193,6 +203,31 @@ namespace BlazorDynamics.Forms.Commons.Components
         {
             EvaluateRules();
             base.OnAfterRender(firstRender);
+        }
+
+        public void SetInvalidMessage(string invalidMessage)
+        {
+            InvalidMessage = invalidMessage;
+        }
+
+        public void SetStyle(string style)
+        {
+            Style = style;
+        }
+
+        public void SetClass(string className)
+        {
+            ClassName = className;
+        }
+
+        public void SetValueChanged(EventCallback<object?> valueChanged)
+        {
+           ValueChanged = valueChanged;
+        }
+
+        public void SetFormModel(DynamicFormModel formModel)
+        {
+            FormModel = formModel;
         }
     }
 }

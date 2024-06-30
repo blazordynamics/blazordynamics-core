@@ -185,7 +185,7 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
             // Check if the value is a collection and return its count
             if (pathValue is List<object> currentList)
             {
-                return currentList.Count();
+                return currentList.Count;
             }
             // Handle Array
             else if (pathValue.GetType().IsArray)

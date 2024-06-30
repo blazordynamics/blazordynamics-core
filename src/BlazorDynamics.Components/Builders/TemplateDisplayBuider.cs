@@ -8,7 +8,7 @@ namespace BlazorDynamics.Forms.Components.Builders
     {
         public TemplateDisplayBuider Path(string path)
         {
-            _component.Path = path;
+            _component.SetPath(path);
             return this;
         }
 
