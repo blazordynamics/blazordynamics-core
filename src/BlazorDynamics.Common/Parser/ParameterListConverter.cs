@@ -15,7 +15,7 @@ namespace BlazorDynamics.Common.Parser
 
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
-            if(value == null) { writer.WriteNull(); return; }
+            if (value == null) { writer.WriteNull(); return; }
             var parameterList = value as ParameterList;
             if (parameterList != null && parameterList.Entries != null && parameterList.Entries.Count != 0)
             {
@@ -50,7 +50,7 @@ namespace BlazorDynamics.Common.Parser
                 }
                 else
                 {
-                    parameters.Add(propertyName, property?.Value?.ToObject<object>(serializer)?? string.Empty);
+                    parameters.Add(propertyName, property?.Value?.ToObject<object>(serializer) ?? string.Empty);
                 }
             }
 
@@ -88,7 +88,7 @@ namespace BlazorDynamics.Common.Parser
 
         public static object? ConvertJTokenToExpando(JToken? token)
         {
-            if(token == null) return null;
+            if (token == null) return null;
             if (token.Type == JTokenType.Object)
             {
                 var expando = new ExpandoObject() as IDictionary<string, object>;

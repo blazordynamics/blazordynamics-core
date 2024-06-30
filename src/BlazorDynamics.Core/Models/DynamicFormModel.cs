@@ -27,10 +27,10 @@ public class DynamicFormModel
         DynamicType = componentSelectionKey;
     }
 
-   
+
     public ComponentSelectionKey DynamicType { get; set; } = new ComponentSelectionKey(TypeName.Default);
 
-   
+
     public ParameterList Parameters { get; set; } = new();
 
     public List<DynamicFormModel> SubElements { get; set; } = new();

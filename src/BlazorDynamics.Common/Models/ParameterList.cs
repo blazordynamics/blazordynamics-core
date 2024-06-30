@@ -1,11 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.ObjectModel;
 
 namespace BlazorDynamics.Common.Models
 {
     public class ParameterList : IEnumerable<KeyValuePair<string, object>>
     {
-        readonly Dictionary<string, object>  parameters = new Dictionary<string, object>();
+        readonly Dictionary<string, object> parameters = new Dictionary<string, object>();
         public ParameterList(Dictionary<string, object> parameters)
         {
             foreach (var item in parameters)

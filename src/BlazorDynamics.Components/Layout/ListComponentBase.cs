@@ -7,21 +7,21 @@ using System.Collections;
 
 namespace BlazorDynamics.Forms.Components.Layout
 {
-    public class ListComponentBase :  LayoutFormComponent
+    public class ListComponentBase : LayoutFormComponent
     {
 
         [Parameter]
         public string Label { get; set; }
 
         public List<object> _listValue = new List<object>();
-        public List<object> ListValue { get { return _listValue; } set { _listValue = value; ValueHandler.UpdateValue(this,_listValue); } }
+        public List<object> ListValue { get { return _listValue; } set { _listValue = value; ValueHandler.UpdateValue(this, _listValue); } }
 
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 
         protected override Task OnInitializedAsync()
         {
 
-            return base.OnInitializedAsync();   
+            return base.OnInitializedAsync();
         }
         protected override void OnParametersSet()
         {
@@ -40,10 +40,10 @@ namespace BlazorDynamics.Forms.Components.Layout
 
                 }
             }
-            else 
+            else
             {
                 // If not a list, consider it as a single item.
-            //    _listValue = new List<object> { value };
+                //    _listValue = new List<object> { value };
             }
         }
 

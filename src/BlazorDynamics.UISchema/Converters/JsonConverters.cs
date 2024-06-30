@@ -31,7 +31,7 @@ namespace BlazorDynamics.UISchema.Converters
             return (jToken.ToObject<string>(), true);
         }
 
-        private static TType? GetControlProperty<TType>(string name,JToken jtoken)
+        private static TType? GetControlProperty<TType>(string name, JToken jtoken)
         {
             if (jtoken[name] == null) { return default; }
             return jtoken[name].ToObject<TType>();

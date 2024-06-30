@@ -4,7 +4,7 @@
     {
         internal bool Success { get; private set; }
         internal List<string> Errors { get; private set; }
-      
+
         private ValidationResult(bool success, List<string> errors)
         {
             Success = success;
@@ -18,7 +18,7 @@
 
         internal static ValidationResult InvalidResult(string message)
         {
-            return new ValidationResult(false, new List<string> { message});
+            return new ValidationResult(false, new List<string> { message });
         }
 
         internal ValidationResult InvalidateResult(string message)

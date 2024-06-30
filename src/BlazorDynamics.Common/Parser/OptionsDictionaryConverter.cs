@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BlazorDynamics.Common.Parser;
 
@@ -13,12 +13,12 @@ public class OptionsDictionaryConverter : JsonConverter
 
     public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
-        if(value == null) { writer.WriteNull(); return; }
+        if (value == null) { writer.WriteNull(); return; }
         var dictionary = (Dictionary<object, string>)value;
         var jObject = new JObject();
         foreach (var kvp in dictionary)
         {
-            jObject.Add(kvp.Key.ToString()?? "unknown", JToken.FromObject(kvp.Value, serializer));
+            jObject.Add(kvp.Key.ToString() ?? "unknown", JToken.FromObject(kvp.Value, serializer));
         }
         jObject.WriteTo(writer);
     }
@@ -29,7 +29,7 @@ public class OptionsDictionaryConverter : JsonConverter
         var dictionary = new Dictionary<object, string>();
         foreach (var property in jObject.Properties())
         {
-            dictionary[property.Name] = property?.Value?.ToObject<string>() ?? string.Empty;
+            dictionary[property.Name] = property.Value?.ToObject<string>() ?? string.Empty;
         }
         return dictionary;
     }

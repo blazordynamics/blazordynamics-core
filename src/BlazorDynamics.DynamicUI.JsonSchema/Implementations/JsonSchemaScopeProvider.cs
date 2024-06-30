@@ -14,7 +14,7 @@ public class JsonSchemaScopeProvider : IScopeProvider
         _schemaReader = schemaReader;
         _schema = schema;
     }
-    
+
     public Dictionary<string, object> GetDataFromScope(string scope)
     {
         return _schemaReader.GetTypeFromPath(_schema, scope).ItemMetadata;

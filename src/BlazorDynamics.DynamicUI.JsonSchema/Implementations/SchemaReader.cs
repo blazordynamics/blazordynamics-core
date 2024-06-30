@@ -1,8 +1,8 @@
-using System.Text.RegularExpressions;
 using BlazorDynamics.DynamicUI.JsonSchema.Contracts;
 using BlazorDynamics.DynamicUI.JsonSchema.Helpers;
 using BlazorDynamics.DynamicUI.JsonSchema.Models;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace BlazorDynamics.DynamicUI.JsonSchema.Implementations;
 
@@ -19,7 +19,7 @@ public class SchemaReader : ISchemaReader
 
         return currentToken != null ? JsonSchemaHelper.ExtractSchemaInfo(currentToken) : null;
     }
-    
+
     private string[] SplitSchemaPath(string schemaPath)
     {
         return schemaPath.Substring(2).Split('/');
@@ -50,7 +50,7 @@ public class SchemaReader : ISchemaReader
             }
 
             if (currentToken == null)
-                return null;
+                return new JArray();
         }
 
         return currentToken;
@@ -58,26 +58,26 @@ public class SchemaReader : ISchemaReader
 
     private JToken NavigatePropertyPath(JToken currentToken, string part)
     {
-        JToken token = currentToken["properties"]?[part];
-        return token;
+        JToken? token = currentToken["properties"]?[part];
+        return token?? JValue.CreateNull();
     }
 
     private JToken NavigateArrayPath(JToken currentToken, string part)
     {
         string propertyName = part.Substring(0, part.IndexOf('['));
         currentToken = currentToken["properties"]?[propertyName] ?? JValue.CreateNull();
-      
-        if (currentToken.Type.Equals(JTokenType.Null )) { return JValue.CreateNull(); }
+
+        if (currentToken.Type.Equals(JTokenType.Null)) { return JValue.CreateNull(); }
 
         int index = ExtractArrayIndex(part);
 
         if (currentToken["items"]?.Type == JTokenType.Array)  // Handle tuple scenario
         {
-            return currentToken["items"]?[index] ?? JValue.CreateNull(); 
+            return currentToken["items"]?[index] ?? JValue.CreateNull();
         }
         else  // Handle standard array of single type scenario
         {
-            return currentToken["items"] ??  JValue.CreateNull(); 
+            return currentToken["items"] ?? JValue.CreateNull();
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿using BlazorDynamics.Common.Enums;
-using BlazorDynamics.Forms.Components.Input;
 using BlazorDynamics.Core.Models;
 using BlazorDynamics.Core.Models.ParameterModels;
+using BlazorDynamics.Forms.Components.Input;
 
 namespace BlazorDynamics.Forms.Components.Builders
 {
@@ -13,7 +13,8 @@ namespace BlazorDynamics.Forms.Components.Builders
             return this;
         }
 
-        public DateTimeComponentBuilder WithFormat(string format) {
+        public DateTimeComponentBuilder WithFormat(string format)
+        {
             _component.Format = format;
             return this;
         }

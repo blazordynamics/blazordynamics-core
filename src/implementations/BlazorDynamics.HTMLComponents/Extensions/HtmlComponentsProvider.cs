@@ -1,16 +1,16 @@
-﻿using BlazorDynamics.HTMLComponents.Input;
-using BlazorDynamics.HTMLComponents.Layout;
-using BlazorDynamics.HTMLComponents.Actions;
-using BlazorDynamics.HTMLComponents.Content;
-using BlazorDynamics.Common.Enums;
+﻿using BlazorDynamics.Common.Enums;
 using BlazorDynamics.Core.Contracts;
 using BlazorDynamics.Core.Models;
+using BlazorDynamics.HTMLComponents.Actions;
+using BlazorDynamics.HTMLComponents.Content;
+using BlazorDynamics.HTMLComponents.Input;
+using BlazorDynamics.HTMLComponents.Layout;
 
 namespace BlazorDynamics.HTMLComponents.Extensions
 {
     public class HtmlComponentsProvider : IComponentProvider
     {
-        
+
 
         public ComponentsList GetComponents()
         {

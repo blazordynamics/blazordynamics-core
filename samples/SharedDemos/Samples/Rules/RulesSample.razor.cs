@@ -1,7 +1,7 @@
-﻿using BlazorDynamics.Forms.Components.Factories;
-using System.Dynamic;
+﻿using BlazorDynamics.Common.Enums;
 using BlazorDynamics.Core.Models;
-using BlazorDynamics.Common.Enums;
+using BlazorDynamics.Forms.Components.Factories;
+using System.Dynamic;
 
 namespace SharedDemos.Samples.Rules
 {

@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorDynamics.Forms.Components.Content
 {
-    public class NumberDisplayBase: DisplayFormComponent
+    public class NumberDisplayBase : DisplayFormComponent
     {
         [Parameter]
         public string Label { get; set; }
 
-       // public int _numberValue = 0;
+        // public int _numberValue = 0;
         public int NumberValue { get { return CalculateCounter(); } }
 
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);

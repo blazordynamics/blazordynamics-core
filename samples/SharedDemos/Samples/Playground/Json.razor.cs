@@ -47,12 +47,12 @@ namespace SharedDemos.Samples.Playground
             StateHasChanged();
         }
 
-        private  void loadModel()
+        private void loadModel()
         {
             var newmodel = new ModelParser<DynamicFormModel>().Deserialize(modelJson);
-            if(newmodel == null)
+            if (newmodel == null)
             {
-             hasError = true;
+                hasError = true;
             }
             else
             {

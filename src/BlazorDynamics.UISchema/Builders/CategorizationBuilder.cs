@@ -23,11 +23,11 @@ internal class CategorizationBuilder
     private ValidationResult ValidateBuild()
     {
         var result = ValidationResult.ValidResult();
-       if(_items == null)
+        if (_items == null)
         {
             result.InvalidateResult("No items are provided");
         }
-       return result;
+        return result;
     }
 
     public CategorizationBuilder WithElements(IEnumerable<CategoryDescriptionItem> items)

@@ -1,8 +1,8 @@
-﻿using BlazorDynamics.Forms.Components.Builders;
-using BlazorDynamics.Common.Enums;
-using Newtonsoft.Json.Linq;
-using BlazorDynamics.Core.Models.ParameterModels;
+﻿using BlazorDynamics.Common.Enums;
 using BlazorDynamics.Core.Models;
+using BlazorDynamics.Core.Models.ParameterModels;
+using BlazorDynamics.Forms.Components.Builders;
+using Newtonsoft.Json.Linq;
 
 namespace BlazorDynamics.Forms.Components.Factories
 {
@@ -129,7 +129,7 @@ namespace BlazorDynamics.Forms.Components.Factories
 
         public static DynamicFormModel AddSchemaRule(this DynamicFormModel model, RuleEffect ruleEffect, string scope, JToken jsonSchema)
         {
-            if(model.Rules == null) { model.Rules = new List<DynamicFormModelRule>();  }
+            if (model.Rules == null) { model.Rules = new List<DynamicFormModelRule>(); }
             model.Rules.Add(new DynamicFormModelRule(ruleEffect, new DynamicFormModelRuleCondition(scope, jsonSchema)));
             return model;
         }
@@ -247,7 +247,7 @@ namespace BlazorDynamics.Forms.Components.Factories
         {
             return new DynamicFormModel(TypeName.DateTime, variationName);
         }
-              
+
         public static DynamicFormModel DateTimeComponent(string label, string path, Action<DateTimeComponentBuilder>? configure = null)
         {
             var builder = new DateTimeComponentBuilder();

@@ -11,7 +11,7 @@ namespace SharedDemos.Samples.Typed
             StateHasChanged();
         }
 
- 
+
         private DynamicFormModel model = FormFactory.GroupLayout(gr => gr
                 .WithLabel("List sample")
                 ,

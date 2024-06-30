@@ -1,7 +1,7 @@
-﻿using SharedDemos.Samples.Models;
-using BlazorDynamics.Forms.Components.Factories;
+﻿using BlazorDynamics.Common.Enums;
 using BlazorDynamics.Core.Models;
-using BlazorDynamics.Common.Enums;
+using BlazorDynamics.Forms.Components.Factories;
+using SharedDemos.Samples.Models;
 
 namespace SharedDemos.Samples.Typed
 {
@@ -37,7 +37,7 @@ namespace SharedDemos.Samples.Typed
             )).AddSchemaRule(RuleEffect.HIDE, "#/properties/Address/properties/IsActive", "{ const: false }");
         }
 
-      
+
 
         private DynamicFormModel CreateCarsForm()
         {
@@ -63,7 +63,7 @@ namespace SharedDemos.Samples.Typed
 
         private DynamicFormModel CreateCommentsForm()
         {
-            return               
+            return
                 FormFactory.ListComponent("Comments", "@.Comments",
                 FormFactory.HorizontalLayout(
                     FormFactory.StringComponent("Comment Text", "@.Text"),

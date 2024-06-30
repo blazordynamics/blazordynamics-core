@@ -21,7 +21,7 @@ namespace SharedDemos.Samples
         }
         private async void OnSettingsChangedHandler()
         {
-             await InvokeAsync(StateHasChanged);
+            await InvokeAsync(StateHasChanged);
         }
     }
 }

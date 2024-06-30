@@ -17,23 +17,23 @@ namespace SharedDemos.Shared.Components
         private NavigationManager navigationManager { get; set; }
 
         [Inject]
-        private UserSettingsService userSettingsService { get; set; }   
+        private UserSettingsService userSettingsService { get; set; }
 
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-      
+
         [Parameter]
         public Object Data { get; set; } = string.Empty;
 
         [Parameter]
         public DynamicFormModel FormModel { get; set; }
 
-     
+
 
         protected override async Task OnParametersSetAsync()
         {
-            await base.OnParametersSetAsync();    
+            await base.OnParametersSetAsync();
 
             var settings = new JsonSerializerSettings
             {
