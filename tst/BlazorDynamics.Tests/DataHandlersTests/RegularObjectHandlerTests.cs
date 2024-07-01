@@ -93,7 +93,7 @@ namespace BlazorDynamics.Tests.DataHandlersTests
 
         private class TestClass
         {
-            public string Property { get; set; }
+            public string Property { get; set; } = string.Empty;    
             public List<string> List { get; set; } = new List<string>();
         }
 
@@ -211,20 +211,20 @@ namespace BlazorDynamics.Tests.DataHandlersTests
 
         private class TestClassArray
         {
-            public string Property { get; set; }
+            public string Property { get; set; } = string.Empty;
             public string[] List { get; set; } = new List<string>().ToArray();
         }
 
 
         private class TestObject
         {
-            public string Property { get; set; }
+            public string Property { get; set; } = string.Empty;
             public NestedObject Nested { get; set; }
         }
 
         private class NestedObject
         {
-            public string InnerProperty { get; set; }
+            public string InnerProperty { get; set; } = string.Empty;   
         }
     }
 }

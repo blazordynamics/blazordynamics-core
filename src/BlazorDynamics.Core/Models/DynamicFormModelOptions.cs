@@ -2,14 +2,14 @@ namespace BlazorDynamics.Core.Models;
 
 public class DynamicFormModelOptions
 {
-    public string Label { get; set; } = default!;
+    public string Label { get; set; } = string.Empty;
 
     /// <summary>
     /// defines the way the items in the array are gonna be presented as Radio, 
     /// </summary>
-    public bool RadioGroup { get; set; } = default!;
+    public bool RadioGroup { get; set; } = false;
 
-    public bool Readonly { get; set; }
+    public bool Readonly { get; set; } = false;
 
     /// <summary>
     /// toggle additional buttons that allow chaging the order of the items in the array

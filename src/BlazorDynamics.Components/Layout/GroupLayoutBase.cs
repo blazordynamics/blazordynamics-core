@@ -7,7 +7,7 @@ namespace BlazorDynamics.Forms.Components.Layout
     public class GroupLayoutBase : LayoutFormComponent
     {
         [Parameter]
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;
 
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 

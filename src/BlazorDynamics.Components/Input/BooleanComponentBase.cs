@@ -8,7 +8,7 @@ namespace BlazorDynamics.Forms.Components.Input
     public class BooleanComponentBase : InputFormComponent
     {
         [Parameter]
-        public string Label { get; set; }
+        public string Label { get; set; }  = String.Empty;
 
         [Parameter]
         public bool? NeedsToBeChecked { get; set; }

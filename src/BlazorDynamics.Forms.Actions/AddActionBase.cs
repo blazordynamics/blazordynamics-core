@@ -9,7 +9,7 @@ namespace BlazorDynamics.Forms.Actions
     public class AddActionBase : InputFormComponent
     {
         [Parameter]
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;
 
         [Parameter]
         public object DefaultValue { get; set; }

@@ -8,7 +8,7 @@ namespace BlazorDynamics.Forms.Components.Content
     public class NumberDisplayBase : DisplayFormComponent
     {
         [Parameter]
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;
 
         // public int _numberValue = 0;
         public int NumberValue { get { return CalculateCounter(); } }

@@ -7,12 +7,12 @@ namespace BlazorDynamics.Forms.Components.Input
     public class DropDownComponentBase : InputFormComponent
     {
         [Parameter]
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;
 
         [Parameter]
         public Dictionary<object, string> Options { get; set; } = new Dictionary<object, string>();
 
-        private Dictionary<string, object> _mapping = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> _mapping = new Dictionary<string, object>();
         private string _selectedValueId = string.Empty;
 
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);

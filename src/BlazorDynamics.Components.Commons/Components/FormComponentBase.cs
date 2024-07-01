@@ -63,7 +63,7 @@ namespace BlazorDynamics.Forms.Commons.Components
         }
 
         public bool IsValid { get; set; } = true;
-
+        public bool IsNotValid { get { return !IsValid; } } 
         public abstract string ValidationString { get; }
 
         protected override void OnParametersSet()

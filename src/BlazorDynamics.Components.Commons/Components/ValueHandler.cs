@@ -4,8 +4,19 @@ namespace BlazorDynamics.Forms.Commons.Components
 {
     public class ValueHandler
     {
-        public static void UpdateValue(FormComponentBase component, object propertyValue)
+        protected ValueHandler()
         {
+            
+        }
+
+        public static void UpdateValue(FormComponentBase component, object? propertyValue)
+        {
+            if(component == null) return;   
+
+            if(propertyValue == null) {
+                DataObjectHelper.SetValue(component.GetInstancePath(component.Path), component.Value, null);
+            }
+
             if (propertyValue != DataObjectHelper.GetValue(component.Path, component.Value))
             {
                 DataObjectHelper.SetValue(component.GetInstancePath(component.Path), component.Value, propertyValue);

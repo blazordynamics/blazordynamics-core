@@ -7,7 +7,7 @@ namespace BlazorDynamics.Forms.Components.Input
     public class NumberComponentBase : InputFormComponent
     {
         [Parameter]
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;
 
 
         [Parameter]

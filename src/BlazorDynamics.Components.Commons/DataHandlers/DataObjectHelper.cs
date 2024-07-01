@@ -12,14 +12,16 @@ namespace BlazorDynamics.Forms.Commons.DataHandlers
                 return new RegularObjectHandler();
         }
 
-        public static object GetValue(string path, object obj)
+        public static object GetValue(string path, object? obj)
         {
+            if (obj is null) { return null; }   
             var handler = GetHandler(obj);
             return handler.GetValue(path, obj);
         }
 
-        public static void SetValue(string path, object obj, object value)
+        public static void SetValue(string path, object? obj, object? value)
         {
+            if(obj == null) { return; }
             var handler = GetHandler(obj);
             handler.SetValue(path, obj, value);
         }

@@ -8,8 +8,8 @@
     {
         @ChildContent
     }
-    @if (ShowValidation && (!FormComponent?.IsValid ?? true))
+    @if (ShowValidation && (FormComponent?.IsNotValid ?? false))
     {
-        <div class="bd-validation">@(FormComponent?.ValidationString??"")</div>
+        <div class="bd-validation">@(FormComponent.ValidationString??"")</div>
     }
 </div>

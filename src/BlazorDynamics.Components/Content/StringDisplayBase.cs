@@ -7,11 +7,10 @@ namespace BlazorDynamics.Forms.Components.Content
     public class StringDisplayBase : DisplayFormComponent
     {
         [Parameter]
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;   
 
         public override string ValidationString => TokenReplacer.ReplaceTokens(InvalidMessage, this);
 
-
-        public string StringValue { get { return Convert.ToString(GetValue() ?? ""); } }
+        public string StringValue { get { return Convert.ToString(GetValue() ?? "") ?? string.Empty; } }
     }
 }

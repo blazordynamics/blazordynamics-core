@@ -7,7 +7,7 @@ namespace BlazorDynamics.Forms.Components.Input
     public class StringComponentBase : InputFormComponent
     {
         [Parameter]
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;
 
         [Parameter]
         public long? MinimumLength { get; set; }

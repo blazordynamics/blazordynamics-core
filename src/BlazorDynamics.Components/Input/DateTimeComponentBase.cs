@@ -7,7 +7,7 @@ namespace BlazorDynamics.Forms.Components.Input
     public class DateTimeComponentBase : InputFormComponent
     {
         [Parameter]
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;
         [Parameter]
         public DateTime? MinimumDateTime { get; set; } = DateTime.MinValue;
         [Parameter]

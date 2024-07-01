@@ -4,8 +4,8 @@ namespace BlazorDynamics.UISchema.Models;
 
 public class ControlDescriptionItem : ILayoutDescriptionItem
 {
-    public string Scope { get; set; }
-    public string Label { get; set; }
+    public string Scope { get; set; } = string.Empty;   
+    public string Label { get; set; } = string.Empty;
     public bool ShowLabel { get; set; } = true;
     public ControlOptions? Options { get; set; }
     public LayoutType Type => LayoutType.Control;
