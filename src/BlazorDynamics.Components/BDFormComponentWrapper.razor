@@ -3,8 +3,8 @@
 @using BlazorDynamics.Common.Enums
 @namespace BlazorDynamics.Forms.Components
 
-<div class="@($"{Class} {FormComponent.ClassName}")">
-    @if (FormComponent.RuleEffect != RuleEffect.HIDE)
+<div class="@($"{Class} {FormComponent?.ClassName ?? ""}")">
+    @if ((FormComponent?.RuleEffect?? RuleEffect.HIDE) != RuleEffect.HIDE)
     {
         @ChildContent
     }
